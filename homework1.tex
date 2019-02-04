@@ -158,5 +158,114 @@ P(w_1 = 9.3, w_2 = 8.8, w_3 = 9.8| L = B) \approx 0.322 \times 0.266 \times 0.32
 
 \noindent Given the weights of the rocks, the Gaussian distributions for $L = A$ and $L = B$, and ignoring the priors, we have that
 the ML hypothesis is $L = B$ maximizes $P(w_1 = 9.3, w_2 = 8.8, w_3 = 9.8| L = x)$.
-  
+
+\section*{Question 2}
+
+\noindent \textbf{(a)} Let $D$ be a random variable that indicates whether the person has the disease,
+such that $D$ takes on values $\{+, -\}$. Moreover, let $R1$ be a variable that indicates the
+result of method 1, and $R2$ be a variable that indicates the result of method 2. Both $R1$ and
+$R2$ take on values $\{+, -\}$. Using a Bayesian approach, we have that, if a randomly selected
+person tests positive with method 1, her probability of actually having the disease is
+given by:
+
+\begin{equation*}
+P(D = +|R1 = +) = \frac{P(R1 = +|D = +) \times P(D = +)}{P(R1 = +)}
+\end{equation*}  
+
+\noindent The MAP hypothesis is the value $x$ that maximizes $P(R1 = +|D = x) \times P(D = x)$.
+Note that $x$ is either $+$ or $-$. If $x = +$, i.e., if the person does have the disease,
+we have that, given the information in the question,
+\begin{equation*}
+\begin{split}  
+&P(D = +) = 0.0002
+\\
+&P(R1 = +|D = +) = 0.9
+\\
+&P(R1 = +|D = +) \times P(D = +) = 0.9 \times 0.0002 = 0.00018
+\end{split}  
+\end{equation*}
+
+\noindent Note that $P(R1 = +|D = +)$ corresponds to $1 - 0.1$, where $0.1$ is the false negative
+rate of method 1.
+
+\noindent If $x = -$, that is, if the person does not have the disease, we have that
+\begin{equation*}
+\begin{split}  
+&P(D = -) = 0.998
+\\
+&P(R1 = +|D = -) = 0.15
+\\
+&P(R1 = +|D = -) \times P(D = -) = 0.15 \times 0.998 = 0.1497
+\end{split}  
+\end{equation*}
+\noindent Note that $P(R1 = +|D = -)$ is the false positive rate of method 1.
+
+\noindent The MAP hypothesis then is $D = -$, i.e., it is more likely that the person does
+not have the disease.
+
+\hfill
+
+\noindent \textbf{(b)} The ML hypothesis ignores the priors, so we just have to compare
+$P(R1 = +|D = -)$ with $P(R1 = +|D = +)$. Given that $P(R1 = +|D = -) = 0.15$ and
+$P(R1 = +|D = +)$ = 0.9, the ML hypothesis is $D = +$. In other words, if we do not consider
+the rate of the disease as a prior, the conclusion changes: we believe that the person has
+the disease if she tests positive with method 1.
+
+\hfill
+
+\noindent \textbf{(c)} Using a Bayesian approach, we want to compute the following
+posterior probability:
+\begin{equation*}
+\begin{split}
+&P(D = +| R1 = +, R2 = +) = \frac{P(R1 = +, R2 = +| D = +) \times P(D = +)}{P(R1 = +, R2 = +)}
+\end{split}  
+\end{equation*}  
+As the results of the methods are independent, we have that
+\begin{equation}
+\begin{split}
+&P(D = +| R1 = +, R2 = +) = \frac{P(R1 = +|D = +) \times P(R2 = +| D = +) \times P(D = +)}{P(R1 = +, R2 = +)}
+\end{split}
+\label{eq2}
+\end{equation}  
+
+\noindent Let us calculate the numerator in the right side of Equation~\ref{eq2} first. From
+the data in the question, we have that
+\begin{equation*}
+\begin{split}
+&P(R1 = +, R2 = +| D = +) \times P(D = +) = P(R1 = +|D = +) \times P(R2 = +| D = +) \times P(D = +)
+\\
+&P(R1 = +, R2 = +| D = +) \times P(D = +) = 0.9 \times 0.97 \times 0.0002
+\\
+&P(R1 = +, R2 = +| D = +) \times P(D = +) = 0.0001746
+\end{split}  
+\end{equation*}  
+Note that $P(R2 = +| D = +) = 0.97$ because the false negative rate of method 2 is 3\%. Now, let us
+compute the denominator of Equation~\ref{eq2}, which corresponds to the following marginal
+probability:
+\begin{equation*}
+\begin{split}
+&P(R1 = +, R2 = +) = [(P(R1 = +|D = +) \times P(D = +)) + (P(R1 = +|D = -) \times P(D = -))] \times
+\\
+&[(P(R2 = +|D = +) \times P(D = +)) + (P(R2 = +|D = -) \times P(D = -))]
+\\
+\\
+&P(R1 = +, R2 = +) = [(0.9 \times 0.0002) + (0.15 \times 0.998)] \times [(0.97 \times 0.0002) + (0.05 \times 0.998)]
+\\
+&P(R1 = +, R2 = +) = [0.00018 + 0.1497] \times [0.000194 + 0.0499]
+\\
+&P(R1 = +, R2 = +) = 0.14988 \times 0.050094
+\\
+&P(R1 = +, R2 = +) = 0.007508089
+\end{split}  
+\end{equation*}
+By combining the numerator and the denominator, we have that
+\begin{equation*}
+\begin{split}
+&P(D = +| R1 = +, R2 = +) = \frac{0.0001746}{0.007508089}
+\\
+&P(D = +| R1 = +, R2 = +) \approx 0.0233
+\end{split}  
+\end{equation*}
+Given this posterior probability, we conclude that even if the person tests positive for both methods, the probability of having the
+disease is still very low: a bit above 2\%. \textbf{CHECK THE CALCULATIONS (AND THE MARGINAL FORMAT)!}
 \end{document}
