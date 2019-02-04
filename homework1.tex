@@ -1,0 +1,142 @@
+%This is my super simple Real Analysis Homework template
+
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage[]{amsthm} %lets us use \begin{proof}
+\usepackage{amsmath}
+\usepackage[]{amssymb} %gives us the character \varnothing
+
+\title{Homework 1}
+\author{Aline Bessa -- N19183671}
+\date\today
+%This information doesn't actually show up on your document unless you use the maketitle command below
+
+\begin{document}
+\maketitle %This command prints the title based on information entered above
+
+%Section and subsection automatically number unless you put the asterisk next to them.
+\section*{Question 1}
+
+\subsection*{(a)}
+
+Let $L$ be a random variable that denotes the location where the rocks were collected, taking on values $\{A, B\}$. We then have that:
+
+\begin{equation*}
+P(L = B) = 4 \times P(L = A)
+\end{equation*}
+and
+\begin{equation*}
+P(L = A) + P(L = B) = 1 
+\end{equation*}
+
+Consequently, 
+
+\begin{equation*}
+\begin{split}
+P(L = A) + 4 \times P(L = A) = 1
+\\
+5 \times P(L = A) = 1
+\\
+P(L = A) = 0.2
+\end{split}
+\end{equation*}
+and
+\begin{equation*}
+\begin{split}
+P(L = B) = 4 \times P(L = A) 
+\\
+P(L = B) = 4 \times 0.2 
+\\
+P(L = B) = 0.8
+\end{split}
+\end{equation*}
+
+\subsection*{(b)} 
+
+Let $w$ be a random variable that represents the weight of rocks. We then have to compute the \textit{posterior probability} that the rocks are from 
+location A, i.e., $P(L = A| w_1 = 9.3, w_2 = 8.8, w_3 = 9.8)$, where $w_1, w_2$ and $w_3$ simply indicate 3 samples from $w$. Applying Bayes' theorem, we have that:
+
+\begin{equation}
+P(L = A| w_1 = 9.3, w_2 = 8.8, w_3 = 9.8) = \frac{P(w_1 = 9.3, w_2 = 8.8, w_3 = 9.8| L = A) \times P(L = A)}{P(w_1 = 9.3, w_2 = 8.8, w_3 = 9.8)}
+\label{eq1}
+\end{equation}
+
+Assuming that the weights of the rocks ($w_1$, $w_2$, $w_3$) are conditionally independent, we can rewrite the numerator in Equation \ref{eq1} as
+
+\begin{equation*}
+\begin{split}
+P(w_1 = 9.3 | L = A) \times P(w_2 = 8.8 | L = A) \times P(w_3 = 9.8| L = A) \times P(L = A)
+\end{split}
+\end{equation*}
+
+Let us tackle this numerator first. Previously, we calculated that $P(L = A) = 0.2$. To compute the other factors, we use the probability density~\footnote{I created a python function to automate the calculation of pdfs, and its code is in the appendix of this homework.} of the 
+Gaussian distribution of rock weights in Location A ($L = A$), i.e., we use $\mu_1 = 9.2$ and $\sigma_1 = 1.6$.
+
+\begin{equation*}
+\begin{split}
+P(w_1 = 9.3 | L = A) = P(w_1 = 9.3 | \mu_1 = 9.2, \sigma_1 = 1.6) = \frac{1}{\sqrt{2\pi(1.6)^2}}e^{-\frac{(9.3 - 9.2)^2}{2(1.6)^2}} \approx 0.246 
+\\
+P(w_1 = 8.8 | L = A) = P(w_1 = 8.8 | \mu_1 = 9.2, \sigma_1 = 1.6) = \frac{1}{\sqrt{2\pi(1.6)^2}}e^{-\frac{(8.8 - 9.2)^2}{2(1.6)^2}} \approx 0.203
+\\
+P(w_1 = 9.8 | L = A) = P(w_1 = 9.8 | \mu_1 = 9.2, \sigma_1 = 1.6) = \frac{1}{\sqrt{2\pi(1.6)^2}}e^{-\frac{(9.8 - 9.2)^2}{2(1.6)^2}} \approx 0.232
+\end{split}
+\end{equation*}
+  
+Combining these values with the prior, we have the following value for the numerator in Equation~\ref{eq1}:
+
+\begin{equation*}
+\begin{split}
+P(w_1 = 9.3, w_2 = 8.8, w_3 = 9.8| L = A) \times P(L = A) \approx 0.246 \times 0.203 \times 0.232 \times 0.2
+\\
+P(w_1 = 9.3, w_2 = 8.8, w_3 = 9.8| L = A) \times P(L = A) \approx 0.000232
+\end{split} 
+\end{equation*}
+
+As for the denominator in Equation~\ref{eq1}, it can be rewritten as:
+
+\begin{equation*}
+P(w_1 = 9.3, w_2 = 8.8, w_3 = 9.8| L = A) \times P(L = A) + P(w_1 = 9.3, w_2 = 8.8, w_3 = 9.8| L = B) \times P(L = B) 
+\end{equation*}
+
+Now, we just have to compute the terms that involve $L = B$. In this case, we also assume conditional independency and use the probability density of the 
+Gaussian distribution of rock weights in Location B, i.e., we use $\mu_2 = 9.6$ and $\sigma_2 = 1.2$.
+
+\begin{equation*}
+\begin{split}
+P(w_1 = 9.3 | L = B) = P(w_1 = 9.3 | \mu_2 = 9.6, \sigma_2 = 1.2) = \frac{1}{\sqrt{2\pi(1.2)^2}}e^{-\frac{(9.3 - 9.6)^2}{2(1.2)^2}} \approx 0.322 
+\\
+P(w_1 = 8.8 | L = B) = P(w_1 = 8.8 | \mu_2 = 9.6, \sigma_2 = 1.2) = \frac{1}{\sqrt{2\pi(1.2)^2}}e^{-\frac{(8.8 - 9.6)^2}{2(1.2)^2}} \approx 0.266
+\\
+P(w_1 = 9.8 | L = B) = P(w_1 = 9.8 | \mu_2 = 9.6, \sigma_2 = 1.2) = \frac{1}{\sqrt{2\pi(1.2)^2}}e^{-\frac{(9.8 - 9.6)^2}{2(1.2)^2}} \approx 0.328
+\end{split}
+\end{equation*}
+
+Combining these terms with what was already computed for $L = A$, we can rewrite the denominator of Equation~\ref{eq1} as:
+
+\begin{equation*}
+\begin{split}
+P(w_1 = 9.3, w_2 = 8.8, w_3 = 9.8) \approx 0.000232 + P(w_1 = 9.3, w_2 = 8.8, w_3 = 9.8| L = B) \times P(L = B)
+\\
+P(w_1 = 9.3, w_2 = 8.8, w_3 = 9.8) \approx 0.000232 +  0.322 \times 0.266 \times 0.328 \times 0.8
+\\
+P(w_1 = 9.3, w_2 = 8.8, w_3 = 9.8) \approx 0.000232 + 0.0225 
+\\
+P(w_1 = 9.3, w_2 = 8.8, w_3 = 9.8) \approx 0.0227
+\end{split}
+\end{equation*}
+
+Combining the values computed for numerator and denominator, we have that
+\begin{equation*}
+\begin{split}
+P(L = A| w_1 = 9.3, w_2 = 8.8, w_3 = 9.8) \approx \frac{0.000232}{0.0227}
+\\
+P(L = A| w_1 = 9.3, w_2 = 8.8, w_3 = 9.8) \approx 0.010
+\end{split}
+\end{equation*}
+
+This posterior probability indicates that, given the prior and the evidence, it is not likely that the rocks were collected in Location A.
+
+\subsection*{(c)}
+  
+\end{document}
