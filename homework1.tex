@@ -70,9 +70,9 @@ Gaussian distribution of rock weights in Location A, i.e., we use $\mu_1 = 9.2$ 
 
 \begin{equation*}
 \begin{split}
-P(w_1 = 9.3 | L = A) = P(w_1 = 9.3 | \mu_1 = 9.2, \sigma_1 = 1.6) = \frac{1}{\sqrt{2\pi(1.6)^2}}e^{-\frac{(9.3 - 9.2)^2}{2(1.6)^2}} \approx 0.246 
+P(w_1 = 9.3 | L = A) = P(w_1 = 9.3 | \mu_1 = 9.2, \sigma_1 = 1.6) = \frac{1}{\sqrt{2\pi(1.6)^2}}e^{-\frac{(9.3 - 9.2)^2}{2(1.6)^2}} \approx 0.249 
 \\
-P(w_1 = 8.8 | L = A) = P(w_1 = 8.8 | \mu_1 = 9.2, \sigma_1 = 1.6) = \frac{1}{\sqrt{2\pi(1.6)^2}}e^{-\frac{(8.8 - 9.2)^2}{2(1.6)^2}} \approx 0.203
+P(w_1 = 8.8 | L = A) = P(w_1 = 8.8 | \mu_1 = 9.2, \sigma_1 = 1.6) = \frac{1}{\sqrt{2\pi(1.6)^2}}e^{-\frac{(8.8 - 9.2)^2}{2(1.6)^2}} \approx 0.242
 \\
 P(w_1 = 9.8 | L = A) = P(w_1 = 9.8 | \mu_1 = 9.2, \sigma_1 = 1.6) = \frac{1}{\sqrt{2\pi(1.6)^2}}e^{-\frac{(9.8 - 9.2)^2}{2(1.6)^2}} \approx 0.232
 \end{split}
@@ -82,9 +82,9 @@ P(w_1 = 9.8 | L = A) = P(w_1 = 9.8 | \mu_1 = 9.2, \sigma_1 = 1.6) = \frac{1}{\sq
 
 \begin{equation*}
 \begin{split}
-&P(w_1 = 9.3, w_2 = 8.8, w_3 = 9.8| L = A) \times P(L = A) \approx 0.246 \times 0.203 \times 0.232 \times 0.2
+&P(w_1 = 9.3, w_2 = 8.8, w_3 = 9.8| L = A) \times P(L = A) \approx 0.249 \times 0.242 \times 0.232 \times 0.2
 \\
-&P(w_1 = 9.3, w_2 = 8.8, w_3 = 9.8| L = A) \times P(L = A) \approx 0.000232
+&P(w_1 = 9.3, w_2 = 8.8, w_3 = 9.8| L = A) \times P(L = A) \approx 0.00280
 \end{split} 
 \end{equation*}
 
@@ -123,35 +123,32 @@ P(w_1 = 9.8 | L = B) = P(w_1 = 9.8 | \mu_2 = 9.6, \sigma_2 = 1.2) = \frac{1}{\sq
 &P(w_1 = 9.3, w_2 = 8.8, w_3 = 9.8| L = B) \times P(L = B)
 \\
 \\
-&P(w_1 = 9.3, w_2 = 8.8, w_3 = 9.8) \approx 0.000232 + P(w_1 = 9.3, w_2 = 8.8, w_3 = 9.8| L = B) \times P(L = B)
+&P(w_1 = 9.3, w_2 = 8.8, w_3 = 9.8) \approx 0.00280 + P(w_1 = 9.3, w_2 = 8.8, w_3 = 9.8| L = B) \times P(L = B)
 \\
-%% &P(w_1 = 9.3, w_2 = 8.8, w_3 = 9.8) \approx 0.000232 + (P(w_1 = 9.3 | L = B) \times P(w_2 = 8.8 | L = B) \times P(w_3 = 9.8| L = B) \times P(L = B))
-%% \\
-&P(w_1 = 9.3, w_2 = 8.8, w_3 = 9.8) \approx 0.000232 +  (0.322 \times 0.266 \times 0.328 \times 0.8)
+&P(w_1 = 9.3, w_2 = 8.8, w_3 = 9.8) \approx 0.00280 +  (0.322 \times 0.266 \times 0.328 \times 0.8)
 \\
-&P(w_1 = 9.3, w_2 = 8.8, w_3 = 9.8) \approx 0.000232 + 0.0225 
+&P(w_1 = 9.3, w_2 = 8.8, w_3 = 9.8) \approx 0.00280 + 0.0225 
 \\
-&P(w_1 = 9.3, w_2 = 8.8, w_3 = 9.8) \approx 0.0227
+&P(w_1 = 9.3, w_2 = 8.8, w_3 = 9.8) \approx 0.0253
 \end{split}
 \end{equation*}
 
 \noindent Combining the values computed for numerator and denominator, we have that
 \begin{equation*}
 \begin{split}
-&P(L = A| w_1 = 9.3, w_2 = 8.8, w_3 = 9.8) \approx \frac{0.000232}{0.0227}
+&P(L = A| w_1 = 9.3, w_2 = 8.8, w_3 = 9.8) \approx \frac{0.00280}{0.0253}
 \\
-&P(L = A| w_1 = 9.3, w_2 = 8.8, w_3 = 9.8) \approx 0.010
+&P(L = A| w_1 = 9.3, w_2 = 8.8, w_3 = 9.8) \approx 0.111
 \end{split}
 \end{equation*}
 
-\noindent This posterior probability indicates that, given the prior and the evidence, it is not very likely that the rocks were collected in Location A.
-\textbf{RE-CHECK PDF VALUES!}
+\noindent This posterior probability indicates that, given the prior and the evidence, the probability that the rocks were collected in Location A is a little above 10\%.
 
 \noindent \textbf{(c)} The ML hypothesis is the value $x$ of variable $L$, that maximizes $P(w_1 = 9.3, w_2 = 8.8, w_3 = 9.8| L = x)$. Using the results in
 \textbf{(b)}, we have that:
 
 \begin{equation*}
-P(w_1 = 9.3, w_2 = 8.8, w_3 = 9.8| L = A) \approx 0.246 \times 0.203 \times 0.232 \approx 0.012
+P(w_1 = 9.3, w_2 = 8.8, w_3 = 9.8| L = A) \approx 0.249 \times 0.242 \times 0.232 \approx 0.014
 \end{equation*}
 and
 
@@ -160,6 +157,6 @@ P(w_1 = 9.3, w_2 = 8.8, w_3 = 9.8| L = B) \approx 0.322 \times 0.266 \times 0.32
 \end{equation*}
 
 \noindent Given the weights of the rocks, the Gaussian distributions for $L = A$ and $L = B$, and ignoring the priors, we have that
-the ML hypothesis is $L = B$, i.e., Location $x = B$ maximizes $P(w_1 = 9.3, w_2 = 8.8, w_3 = 9.8| L = x)$. \textbf{CHECK PDF VALUES}
+the ML hypothesis is $L = B$ maximizes $P(w_1 = 9.3, w_2 = 8.8, w_3 = 9.8| L = x)$.
   
 \end{document}
