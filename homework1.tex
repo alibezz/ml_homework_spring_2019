@@ -268,4 +268,67 @@ By combining the numerator and the denominator, we have that
 \end{equation*}
 Given this posterior probability, we conclude that even if the person tests positive for both methods, the probability of having the
 disease is still very low: a bit above 2\%. \textbf{CHECK THE CALCULATIONS (AND THE MARGINAL FORMAT)!}
+
+\section*{Question 3}
+
+\noindent \textbf{(a)} Assuming that the coin tosses are independent, \textbf{CAN I ASSUME THIS INDEPENDENCY?}
+we have that
+\begin{equation*}
+\begin{split}
+&P(TTHTTH|\theta) = P(T|\theta) \times P(T|\theta) \times P(H|\theta) \times P(T|\theta) \times P(T|\theta) \times P(H|\theta)
+\\
+&P(TTHTTH|\theta) = (1 - \theta) \times (1 - \theta) \times \theta \times (1 - \theta) \times (1 - \theta) \times \theta
+\\
+&P(TTHTTH|\theta) = (1 - \theta)^4 \times \theta^2
+\end{split}  
+\end{equation*}
+
+\hfill
+
+\noindent \textbf{(b)} Given the result calculated in \textbf{(a)}, we have that
+\begin{equation*}
+\begin{split}
+&\log P(TTHTTH|\theta) = \log ((1 - \theta)^4 \times \theta^2)
+\\
+&\log P(TTHTTH|\theta) = \log ((1 - \theta)^4) + \log (\theta^2)
+\\
+&\log P(TTHTTH|\theta) = 4 \times \log (1 - \theta) + 2 \times \log (\theta)
+\end{split}  
+\end{equation*}
+
+\noindent That is, if the answer has to be in the form $a \times \log (\theta) + b \times \log (1 - \theta)$, $a = 2$ and $b = 4$.
+
+\hfill 
+
+\noindent \textbf{(c)} The value $\theta$ that maximizes $argmax_{\theta}P(TTHTTH|\theta)$ is the same that maximizes $argmax_{\theta}\log P(TTHTTH|\theta)$, 
+ because $\log$ is a monotone transformation that preserves the location of maximum (and minimum) values. To find it, we just need to take 
+ the derivative of $\log P(TTHTTH|\theta)$ with respect to $\theta$ and calculate the critical points. Without loss of generality, let $\log = \ln$. We then have that:
+\begin{equation*}
+\begin{split}
+&\frac{d}{d\theta}\ln P(TTHTTH|\theta) = \frac{d}{d\theta}[4 \times \ln (1 - \theta) + 2 \times \ln (\theta)]
+\\
+&\frac{d}{d\theta}\ln P(TTHTTH|\theta) = \frac{4}{1 - \theta} \times -1 + \frac{2}{\theta}
+\\
+&\frac{d}{d\theta}\ln P(TTHTTH|\theta) = \frac{-4}{1 - \theta} + \frac{2}{\theta}
+\end{split}  
+\end{equation*} 
+
+\noindent The critical point is the value of $\theta$ that makes $\frac{d}{d\theta}\ln P(TTHTTH|\theta) = 0$, that is
+\begin{equation*}
+\begin{split}
+&\frac{-4}{1 - \theta} + \frac{2}{\theta} = 0
+\\
+&-4 \times \theta + 2 \times (1 - \theta) = 0
+\\
+&-4 \times \theta + 2 - 2 \times \theta = 0
+\\
+&-6 \times \theta + 2 = 0
+\\
+&-6 \times \theta = -2
+\\
+& \theta = \frac{1}{3}
+\end{split}  
+\end{equation*} 
+
+\noindent The \textit{maximum likelihood estimate} of $\theta$ given the results of the coin tosses is $\theta = \frac{1}{3}$.
 \end{document}
