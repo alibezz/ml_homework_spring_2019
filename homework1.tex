@@ -268,4 +268,71 @@ By combining the numerator and the denominator, we have that
 \end{equation*}
 Given this posterior probability, we conclude that even if the person tests positive for both methods, the probability of having the
 disease is still very low: a bit above 2\%. \textbf{CHECK THE CALCULATIONS (AND THE MARGINAL FORMAT)!}
+
+
+\section*{Question 5}
+
+%% In [1]: p_xlow_plus = 1.3/(2+0.3*3)
+
+%% In [2]: p_xlow_minus = 1.3/(3+0.3*3)
+
+%% In [3]: p_xyes_plus = .3/(2+0.3*2)
+
+%% In [4]: p_xyes_minus = 2.3/(3+0.3*2)
+
+%% In [5]: p_xgreen_plus = 1.3/(2+0.3*2)
+
+%% In [6]: p_xgreen_minus = 2.3/(3+0.3*2)
+
+%% In [7]: p_xlow_plus
+%% Out[7]: 0.4482758620689655
+
+%% In [8]: p_xlow_minus
+%% Out[8]: 0.33333333333333337
+
+%% In [9]: p_xyes_plus
+%% Out[9]: 0.11538461538461538
+
+%% In [10]: p_xyes_minus
+%% Out[10]: 0.6388888888888888
+
+%% In [11]: p_xgreen_plus
+%% Out[11]: 0.5
+
+%% In [12]: p_xgreen_minus
+%% Out[12]: 0.6388888888888888
+
+%% In [13]: p_xplus = p_xlow_plus * p_xgreen_plus * p_xyes_plus
+
+%% In [14]: p_xminus = p_xlow_minus * p_xgreen_minus * p_xyes_minus
+
+%% In [15]: p_xplus
+%% Out[15]: 0.02586206896551724
+
+%% In [16]: p_xminus
+%% Out[16]: 0.136059670781893
+
+%% In [17]: ml_estimate = 'plus'
+
+%% In [18]: p_map_xplus = p_xplus * (2/5)
+
+%% In [19]: p_map_xminus = p_xminus * (3/5)
+
+%% In [20]: p_map_xplus
+%% Out[20]: 0.0
+
+%% In [21]: p_map_xplus = p_xplus * (2./5)
+
+%% In [22]: p_map_xminus = p_xminus * (3./5)
+
+%% In [23]: p_map_xplus
+%% Out[23]: 0.010344827586206896
+
+%% In [24]: p_map_xminus
+%% Out[24]: 0.0816358024691358
+
+%% In [25]: ml_estimate = 'minus'
+
+%% In [26]: map_estimate = 'minus'
+
 \end{document}
