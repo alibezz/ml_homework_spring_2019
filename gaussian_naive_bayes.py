@@ -13,7 +13,7 @@ def get_parameters(examples):
     parameters = []
     for attribute in examples.T:
         mean = np.mean(attribute)
-        var = np.sum([(i - mean) ** 2 for i in attribute])/(len(attribute) - 1)
+        var = np.var(attribute, ddof = 1) #equals to sum([(i - mean) ** 2 for i in attribute])/(len(attribute) - 1)
         parameters.append((mean, var))
     return parameters
 
@@ -67,6 +67,9 @@ def classify_example(example, priors, non_spam_parameters, spam_parameters):
     else:
         return '1'
 
+def classify_example_zero_r():
+    return '0' #class with most examples in training data
+
 def test_time(priors, non_spam_parameters, spam_parameters, filename):
     with open(filename, 'r') as f:
         correctly_classified = 0
@@ -75,7 +78,8 @@ def test_time(priors, non_spam_parameters, spam_parameters, filename):
             fields = line.strip().split(SEPARATOR)
             true_label = fields[CLASS_LABEL_FIELD]
             example = [float(i) for i in fields[:-1]]
-            predicted_label = classify_example(example, priors, non_spam_parameters, spam_parameters) 
+            predicted_label = classify_example(example, priors, non_spam_parameters, spam_parameters)
+            #predicted_label = classify_example_zero_r()
             print 'Predicted class for example %d: %s' % (index+1, predicted_label)
             if true_label == predicted_label:
                 correctly_classified += 1
