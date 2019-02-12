@@ -56,7 +56,6 @@ def classify_example(example, priors, non_spam_parameters, spam_parameters):
     #Calculating a posteriori hypothesis of example being non-spam
     estimate_non_spam = np.log(priors[NONSPAM])
     for i, value in enumerate(example):
-        print value, non_spam_parameters[i], compute_pdf(value, non_spam_parameters[i])
         estimate_non_spam += np.log(compute_pdf(value, non_spam_parameters[i]))
 
     #Calculating a posteriori hypothesis of example being spam
@@ -87,8 +86,8 @@ def test_time(priors, non_spam_parameters, spam_parameters, filename):
         print '============================='
         print 'Total number of test examples classified incorrectly: %d' % incorrectly_classified
         print '============================='
-        fraction = (1. * incorrectly_classified)/(incorrectly_classified + correctly_classified)
-        print 'Percentage error on the test examples: %lf' % fraction 
+        percentage = 100 * (1. * incorrectly_classified)/(incorrectly_classified + correctly_classified)
+        print 'Percentage error on the test examples: %d%%' % percentage
 
 if __name__ == '__main__':
     
