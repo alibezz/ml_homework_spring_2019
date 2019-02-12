@@ -46,6 +46,8 @@ and
 \end{split}
 \end{equation*}
 
+\hfill
+
 \noindent \textbf{(b)} Let $w$ be a random variable that represents the weight of rocks. We then have to compute the \textit{posterior probability} that the rocks are from 
 location A, i.e., $P(L = A| w_1 = 9.3, w_2 = 8.8, w_3 = 9.8)$, where $w_1, w_2$ and $w_3$ simply indicate 3 samples from $w$. Applying Bayes' theorem, we have that:
 
@@ -144,20 +146,20 @@ P(w_1 = 9.8 | L = B) = P(w_1 = 9.8 | \mu_2 = 9.6, \sigma_2 = 1.2) = \frac{1}{\sq
 
 \noindent This posterior probability indicates that, given the prior and the evidence, the probability that the rocks were collected in Location A is a little above 10\%.
 
+\hfill
+
 \noindent \textbf{(c)} The ML hypothesis is the value $x$ of variable $L$, that maximizes $P(w_1 = 9.3, w_2 = 8.8, w_3 = 9.8| L = x)$. Using the results in
 \textbf{(b)}, we have that:
-
 \begin{equation*}
 P(w_1 = 9.3, w_2 = 8.8, w_3 = 9.8| L = A) \approx 0.249 \times 0.242 \times 0.232 \approx 0.014
 \end{equation*}
 and
-
 \begin{equation*}
 P(w_1 = 9.3, w_2 = 8.8, w_3 = 9.8| L = B) \approx 0.322 \times 0.266 \times 0.328 \approx 0.028
 \end{equation*}
 
 \noindent Given the weights of the rocks, the Gaussian distributions for $L = A$ and $L = B$, and ignoring the priors, we have that
-the ML hypothesis is $L = B$ maximizes $P(w_1 = 9.3, w_2 = 8.8, w_3 = 9.8| L = x)$.
+the ML hypothesis is $L = B$, as $P(w_1 = 9.3, w_2 = 8.8, w_3 = 9.8| L = B) > P(w_1 = 9.3, w_2 = 8.8, w_3 = 9.8| L = A)$.
 
 \section*{Question 2}
 
@@ -179,35 +181,32 @@ we have that, given the information in the question,
 \begin{split}  
 &P(D = +) = 0.0002
 \\
-&P(R1 = +|D = +) = 0.9
+&P(R1 = +|D = +) = 0.85
 \\
-&P(R1 = +|D = +) \times P(D = +) = 0.9 \times 0.0002 = 0.00018
+&P(R1 = +|D = +) \times P(D = +) = 0.85 \times 0.0002 = 0.00017
 \end{split}  
 \end{equation*}
-
-\noindent Note that $P(R1 = +|D = +)$ corresponds to $1 - 0.1$, where $0.1$ is the false negative
-rate of method 1.
+\noindent Note that $P(R1 = +|D = +)$ corresponds to $1 - 0.15$, where $0.15$ is the false positive 
+rate of method 1 ($P(R1 = +|D = -)$).
 
 \noindent If $x = -$, that is, if the person does not have the disease, we have that
 \begin{equation*}
 \begin{split}  
-&P(D = -) = 0.998
+&P(D = -) = 0.9998
 \\
 &P(R1 = +|D = -) = 0.15
 \\
-&P(R1 = +|D = -) \times P(D = -) = 0.15 \times 0.998 = 0.1497
+&P(R1 = +|D = -) \times P(D = -) = 0.15 \times 0.9998 = 0.14997
 \end{split}  
 \end{equation*}
-\noindent Note that $P(R1 = +|D = -)$ is the false positive rate of method 1.
-
-\noindent The MAP hypothesis then is $D = -$, i.e., it is more likely that the person does
+\noindent The MAP hypothesis then is $D = -$ because $P(R1 = + | D = -) > P(R1 = + | D = +)$, i.e., it is more likely that the person does
 not have the disease.
 
 \hfill
 
 \noindent \textbf{(b)} The ML hypothesis ignores the priors, so we just have to compare
 $P(R1 = +|D = -)$ with $P(R1 = +|D = +)$. Given that $P(R1 = +|D = -) = 0.15$ and
-$P(R1 = +|D = +)$ = 0.9, the ML hypothesis is $D = +$. In other words, if we do not consider
+$P(R1 = +|D = +)$ = 0.85, the ML hypothesis is $D = +$. In other words, if we do not consider
 the rate of the disease as a prior, the conclusion changes: we believe that the person has
 the disease if she tests positive with method 1.
 
@@ -223,7 +222,7 @@ posterior probability:
 As the results of the methods are independent, we have that
 \begin{equation}
 \begin{split}
-&P(D = +| R1 = +, R2 = +) = \frac{P(R1 = +|D = +) \times P(R2 = +| D = +) \times P(D = +)}{P(R1 = +, R2 = +)}
+&P(D = +| R1 = +, R2 = +) = \frac{P(R1 = +|D = +) \times P(R2 = +| D = +) \times P(D = +)}{P(R1 = +) \times P(R2 = +)}
 \end{split}
 \label{eq2}
 \end{equation}  
@@ -232,47 +231,47 @@ As the results of the methods are independent, we have that
 the data in the question, we have that
 \begin{equation*}
 \begin{split}
-&P(R1 = +, R2 = +| D = +) \times P(D = +) = P(R1 = +|D = +) \times P(R2 = +| D = +) \times P(D = +)
+%&P(R1 = +, R2 = +| D = +) \times P(D = +) = P(R1 = +|D = +) \times P(R2 = +| D = +) \times P(D = +)
+%\\
+&P(R1 = +|D = +) \times P(R2 = +| D = +) \times P(D = +) = 0.85 \times 0.95 \times 0.0002
 \\
-&P(R1 = +, R2 = +| D = +) \times P(D = +) = 0.9 \times 0.97 \times 0.0002
-\\
-&P(R1 = +, R2 = +| D = +) \times P(D = +) = 0.0001746
+&P(R1 = +|D = +) \times P(R2 = +| D = +) \times P(D = +) = 0.0001615
 \end{split}  
 \end{equation*}  
-Note that $P(R2 = +| D = +) = 0.97$ because the false negative rate of method 2 is 3\%. Now, let us
+Note that $P(R2 = +| D = +) = 0.95$ because the false negative rate of method 2 is 5\%. Now, let us
 compute the denominator of Equation~\ref{eq2}, which corresponds to the following marginal
 probability:
 \begin{equation*}
 \begin{split}
-&P(R1 = +, R2 = +) = [(P(R1 = +|D = +) \times P(D = +)) + (P(R1 = +|D = -) \times P(D = -))] \times
+&P(R1 = +) \times P(R2 = +) = [P(R1 = +|D = +) \times P(D = +) + P(R1 = +|D = -) \times P(D = -)] \times
 \\
-&[(P(R2 = +|D = +) \times P(D = +)) + (P(R2 = +|D = -) \times P(D = -))]
+&[P(R2 = +|D = +) \times P(D = +) + P(R2 = +|D = -) \times P(D = -)]
 \\
 \\
-&P(R1 = +, R2 = +) = [(0.9 \times 0.0002) + (0.15 \times 0.998)] \times [(0.97 \times 0.0002) + (0.05 \times 0.998)]
+&P(R1 = +) \times P(R2 = +) \approx [0.85 \times 0.0002 + 0.15 \times 0.9998] \times [0.95 \times 0.0002 + 0.05 \times 0.9998]
 \\
-&P(R1 = +, R2 = +) = [0.00018 + 0.1497] \times [0.000194 + 0.0499]
+&P(R1 = +) \times P(R2 = +) \approx [0.00017 + 0.14997] \times [0.00019 + 0.04999]
 \\
-&P(R1 = +, R2 = +) = 0.14988 \times 0.050094
+&P(R1 = +) \times P(R2 = +) \approx 0.15014 \times 0.05018
 \\
-&P(R1 = +, R2 = +) = 0.007508089
+&P(R1 = +) \times P(R2 = +) \approx 0.0075340252
 \end{split}  
 \end{equation*}
 By combining the numerator and the denominator, we have that
 \begin{equation*}
 \begin{split}
-&P(D = +| R1 = +, R2 = +) = \frac{0.0001746}{0.007508089}
+&P(D = +| R1 = +, R2 = +) \approx \frac{0.0001615}{0.0075340252}
 \\
-&P(D = +| R1 = +, R2 = +) \approx 0.0233
+&P(D = +| R1 = +, R2 = +) \approx 0.0214
 \end{split}  
 \end{equation*}
 Given this posterior probability, we conclude that even if the person tests positive for both methods, the probability of having the
-disease is still very low: a bit above 2\%. \textbf{CHECK THE CALCULATIONS (AND THE MARGINAL FORMAT)!}
+disease is still very low: a bit above 2\%. %\textbf{CHECK THE CALCULATIONS (AND THE MARGINAL FORMAT)!}
 
 
 \section*{Question 3}
 
-\noindent \textbf{(a)} Assuming that the coin tosses are independent, \textbf{CAN I ASSUME THIS INDEPENDENCY?}
+\noindent \textbf{(a)} Assuming that the coin tosses are independent, %\textbf{CAN I ASSUME THIS INDEPENDENCY?}
 we have that
 \begin{equation*}
 \begin{split}
@@ -301,7 +300,7 @@ we have that
 
 \hfill 
 
-\noindent \textbf{(c)} The value $\theta$ that maximizes $argmax_{\theta}P(TTHTTH|\theta)$ is the same that maximizes $argmax_{\theta}\log P(TTHTTH|\theta)$, 
+\noindent \textbf{(c)} The value $\theta$ that maximizes $argmax_{\theta}P(TTHTTH|\theta)$ is the same that maximizes $argmax_{\theta}\log P(TTHTTH|\theta)$  
  because $\log$ is a monotone transformation that preserves the location of maximum (and minimum) values. To find it, we just need to take 
  the derivative of $\log P(TTHTTH|\theta)$ with respect to $\theta$ and calculate the critical points. Without loss of generality, let $\log = \ln$. We then have that:
 \begin{equation*}
@@ -350,15 +349,16 @@ we have that
 \begin{equation*}
 \begin{split}
 &\frac{t + 1}{N + s} = \frac{2 + 1}{5 + 3} = \frac{3}{8}
-\\
-&\frac{t + 1}{N + s} = \frac{3}{8}
+%\\
+%&\frac{t + 1}{N + s} = \frac{3}{8}
 \end{split}  
 \end{equation*} 
 
 \hfill
 
 \noindent \textbf{(c)} Given the $\chi$ described in the question, the MAP estimate of $\theta_1$ is the value that maximizes 
- $argmax_{\theta_1} P(\chi|\theta_1) \times p(\theta_1)$. If $s = 2$ and $\chi$ has $t$ one's, we have that
+ $argmax_{\theta_1} P(\chi|\theta_1) \times p(\theta_1)$. If $s = 2$ and $\chi$ has $t$ one's, and given that $p(\theta_1) = 6\theta_1(1 - \theta_1)$, 
+we have that
 \begin{equation*}
 \begin{split}
 &P(\chi|\theta_1) \times p(\theta_1) = \theta_1^t \times (1 - \theta_1)^{N - t} \times 6\theta_1(1 - \theta_1)
@@ -371,7 +371,7 @@ We then do
 \begin{split}
 &\ln P(\chi|\theta_1) \times p(\theta_1) = \ln[\theta_1^t \times (1 - \theta_1)^{N - t} \times 6\theta_1(1 - \theta_1)]
 \\
-&\ln P(\chi|\theta_1) \times p(\theta_1) = t\ln \theta_1 + (N - t) \ln (1 - \theta_1) + \ln 6\theta_1(1 - \theta_1)
+&\ln P(\chi|\theta_1) \times p(\theta_1) = t\ln \theta_1 + (N - t) \ln (1 - \theta_1) + \ln (6\theta_1(1 - \theta_1))
 \\
 &\frac{d}{d\theta_1}\ln P(\chi|\theta_1) \times p(\theta_1) = \frac{t}{\theta_1} + \frac{(N - t) \times -1}{1 - \theta_1} + \frac{6 - 12\theta_1}{6\theta_1(1 - \theta_1)}
 \\
