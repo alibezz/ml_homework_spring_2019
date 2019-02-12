@@ -269,6 +269,7 @@ By combining the numerator and the denominator, we have that
 Given this posterior probability, we conclude that even if the person tests positive for both methods, the probability of having the
 disease is still very low: a bit above 2\%. \textbf{CHECK THE CALCULATIONS (AND THE MARGINAL FORMAT)!}
 
+
 \section*{Question 3}
 
 \noindent \textbf{(a)} Assuming that the coin tosses are independent, \textbf{CAN I ASSUME THIS INDEPENDENCY?}
@@ -397,4 +398,76 @@ To find the critical point, we do
 \end{equation*} 
 
 The MAP estimate of $\theta_1$ is thus $\frac{t + 1}{N + 2}$, which indeed corresponds to \textit{add-m smoothing} with $m = 1$.  
+
+
+\section*{Question 5}
+
+\noindent \textbf{(a)} Using add-$m$ smoothing with $m = 0.3$, we have that
+\begin{equation*}
+\begin{split}
+&P(x_1 = Low|+) = \frac{1 + 0.3}{2 + 0.3\times3} \approx 0.448
+\\
+&P(x_2 = Yes|+) = \frac{0 + 0.3}{2 + 0.3\times2} \approx 0.115
+\\
+&P(x_3 = Green|+) = \frac{1 + 0.3}{2 + 0.3\times2} \approx 0.5
+\\
+&P(x_1 = Low|-) = \frac{1 + 0.3}{3 + 0.3\times3} \approx 0.333
+\\
+&P(x_2 = Yes|-) = \frac{2 + 0.3}{3 + 0.3\times2} \approx 0.639
+\\
+&P(x_3 = Green|-) = \frac{2 + 0.3}{3 + 0.3\times2} \approx 0.639
+\end{split}
+\end{equation*}
+
+\hfill
+
+\noindent \textbf{(b)} Using the Naive Bayes assumption, we have that
+\begin{equation*}
+\begin{split}
+&P(x|+) = P(x_1 = Low|+) \times P(x_2 = Yes|+) \times P(x_3 = Green|+)
+\\
+&P(x|+) \approx 0.448 \times 0.115 \times 0.5
+\\
+&P(x|+) \approx 0.0259
+\end{split}
+\end{equation*}
+and
+\begin{equation*}
+\begin{split}
+&P(x|-) = P(x_1 = Low|-) \times P(x_2 = Yes|-) \times P(x_3 = Green|-)
+\\
+&P(x|-) \approx 0.333 \times 0.639 \times 0.639
+\\
+&P(x|-) \approx 0.136
+\end{split}
+\end{equation*}
+
+
+\hfill
+
+\noindent \textbf{(c)} The ML label for the example $x$ is the class $C$ that
+maximizes $P(x|C)$. From (b), $C = -$.
+
+\hfill
+
+\noindent \textbf{(d)} The MAP label for the example $x$ is the class $C$
+that maximizes $P(x|C) \times P(C)$. Given the priors $P(+) = 0.4$ and
+$P(-) = 0.6$, we have that
+\begin{equation*}
+\begin{split}
+&P(x|+) \times P(+) \approx 0.0259 \times 0.4
+\\
+&P(x|+) \times P(+) \approx 0.010
+\end{split}
+\end{equation*}  
+and
+\begin{equation*}
+\begin{split}
+&P(x|-) \times P(-) \approx 0.136 \times 0.6
+\\
+&P(x|-) \times P(-) \approx 0.082
+\end{split}
+\end{equation*}
+Thus, the MAP label for $x$ is $C = -$.
+
 \end{document}
