@@ -4,6 +4,22 @@
 \usepackage[]{amsthm} %lets us use \begin{proof}
 \usepackage{amsmath}
 \usepackage[]{amssymb} %gives us the character \varnothing
+\usepackage{hyperref}
+\usepackage{booktabs} % For formal tables
+\usepackage[ruled,linesnumbered]{algorithm2e}
+\usepackage{url}
+%\usepackage{natbib}
+\usepackage{xcolor}
+\usepackage{subfig}
+\let\proof\relax
+\let\endproof\relax
+\usepackage{enumitem}
+\usepackage{xspace}
+\usepackage{graphicx}
+\usepackage{subfig}
+\usepackage{tablefootnote}
+\usepackage{balance}
+\usepackage{bibunits}
 
 \title{Answers for Programming Part}
 \author{Aline Bessa -- N19183671}
@@ -47,6 +63,23 @@ class 0 are: $\mu$ = 0.048426 and $\sigma^2$  = 0.088306.
 
 \section*{Question 8} The accuracy attained with Zero-R is of 59\%, whereas the accuracy attained with the Gaussian Naive Bayes is 80\%.
 
-\section*{Question 9}
+\section*{Question 9} To analyze if the conditional independence assumption is reasonable, I separated the training data between spam and non-spam and, within
+each group, computed the Pearson correlation for every pair of features (given that there are nine features, I computed 72 correlations for each group). The intuition behind it is that the correlations are likely to be close to zero if the features are independent. If the features were categorical, I would have used the chi-squared independence test, but they are numerical, so I used correlation as a commonsensical proxy. It turns out that the features seem mostly uncorrelated for both groups (or the correlation p-value was too high for a proper conclusion). The exceptions are:
+\begin{itemize}
+\item features $capital\_run\_length\_average$ and $capital\_run\_length\_longest$ (high positive correlation with low p-value for both groups);
+\item features $capital\_run\_length\_longest$ and $capital\_run\_length\_total$ (high positive correlation with low p-value for both groups).  
+\end{itemize}  
+Since the features seem uncorrelated most of the time, it is probably ok to work with the conditional independence assumption.
+
+As for the assumption that the pdfs are Gaussian, I also separated the training data between spam and non-spam and then, for each feature in a group, plotted
+its histogram. The features are not symmetric around the mean, nor do they have a shape close to a Gaussian's. In fact, it looks like their distributions are closer
+to a Poisson. The plot below, for example, shows the distribution for feature $capital\_run\_length\_total$ across spam examples.
+
+
+\begin{figure}[h!]
+\centering
+\includegraphics[width=0.45\columnwidth]{hist_spam_8.png}
+\end{figure}
+
 
 \end{document}

@@ -24,7 +24,7 @@ def learn_model(filename):
     with open(filename, 'r') as f:
         for line in f:
             fields = line.strip().split(SEPARATOR)
-            if int(fields[CLASS_LABEL_FIELD]) == 0:
+            if fields[CLASS_LABEL_FIELD] == '0':
                 examples_non_spam.append(np.array([float(i) for i in fields[:-1]]))
             else:
                 examples_spam.append(np.array([float(i) for i in fields[:-1]]))
