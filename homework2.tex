@@ -1,0 +1,82 @@
+%This is my super simple Real Analysis Homework template
+
+\documentclass[leqno]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage[]{amsthm} %lets us use \begin{proof}
+\usepackage{amsmath}
+\usepackage[]{amssymb} %gives us the character \varnothing
+
+\title{Homework 2}
+\author{Aline Bessa \textbf{and Li Rao}}
+\date\today
+%This information doesn't actually show up on your document unless you use the maketitle command below
+
+\begin{document}
+\maketitle %This command prints the title based on information entered above
+
+%Section and subsection automatically number unless you put the asterisk next to them.
+\section*{Question 1}
+
+\textbf{(a)} Let $v$, $a$, and $t$ denote variables for cancer volume, age, and cancer type respectively. We then have that:
+\begin{equation*}
+\hat{y} = w^1_0 + w^1_1 \times v
+\end{equation*}
+where $w^1_0$ and $w^1_1$ are the parameters of model 1 and
+\begin{equation*}
+\hat{y} = w^2_0 + w^2_1 \times v + w^2_2 \times a
+\end{equation*}
+where $w^2_0$, $w^2_1$, and $w^2_2$ are the parameters of model 2.
+
+\hfill
+
+\textbf{(b)} Instead of using $t$, which is a categorical variable, we use one-hot encoding and generate variable $x_3$, where 1 stands for cancer type I and 
+0 stands for cancer type II. We then have that:
+\begin{equation*}
+\hat{y} = w^3_0 + w^3_1 \times v + w^3_2 \times a + w^3_3 \times x_3
+\end{equation*}
+where $w^3_0$, $w^3_1$, $w^3_2$, and $w^3_3$ are the parameters of model 3. \textbf{check}
+
+\hfill
+
+\textbf{(c)} Model 1 has 2 parameters and model 2 has 3 parameters. Model 2 is more complex because it has more parameters.
+
+\hfill
+
+\textbf{(d)} For model 1, the matrix $X'$ that corresponds to $X$'s first three rows is
+\[
+X'=
+  \begin{bmatrix}
+    0.7 \\
+    1.3 \\
+    1.6
+  \end{bmatrix}
+\]
+where the values correspond to cancer volumes.
+
+For model 2, the matrix $X'$ that corresponds to $X$'s first three rows is
+\[
+X'=
+  \begin{bmatrix}
+    0.7 & 55 \\
+    1.3 & 65 \\
+    1.6 & 70
+  \end{bmatrix}
+\]
+where the first column corresponds to cancer volumes and the second column corresponds to ages.
+
+For model 3, and considering the one-hot encoding suggested in the question, the matrix $X'$ that corresponds to $X$'s first three rows is
+\[
+X'=
+  \begin{bmatrix}
+    0.7 & 55 & 1\\
+    1.3 & 65 & 0 \\
+    1.6 & 70 & 0
+  \end{bmatrix}
+\]
+where the first column corresponds to cancer volumes, the second column corresponds to ages, and the third column corresponds to the one-hot encoding 
+of the cancer types.
+
+\textbf{(e)} Model 3 should be selected because both its training and test MSE are the lowest.
+
+\end{document}
