@@ -136,4 +136,29 @@ we have that $w_0 = -1.97639231$ and $w_1 = 0.07571859$~\footnote{We used numpy 
 
 \textbf{(b)} By using this function, we get that $g(475) = 33.98993693$, a.k.a., the predicted number of stories is 34.
 
+\hfill
+
+\section*{Question 4} \textbf{(a)} For attribute $X_2$ we have that $x^{min} = 1$ and $x^{max} = 51$. The denominator is 
+$x^{max} - x^{min} = 51 - (-1) = 52$So
+\begin{equation*}
+\begin{split}
+&x2^0 = \frac{42 - (-1)}{52} = \frac{43}{52} \approx 0.83 \\
+&x2^1 = \frac{51 - (-1)}{52} = \frac{52}{52} = 1.00\\
+&x2^2 = \frac{-1 - (-1)}{52} = 0.00\\
+&x2^3 = \frac{3 - (-1)}{52} = \frac{4}{52} \approx 0.08\\
+&x2^4 = \frac{26 - (-1)}{52} = \frac{27}{52} \approx 0.52\\
+&x2^5 = \frac{41 - (-1)}{52} = \frac{42}{52} \approx 0.81\\ 
+\end{split}
+\end{equation*} 
+
+\hfill
+
+\textbf{(b)} In the example, the value for attribute $x1$ is 3.9; for $x2$, it is 4. The normalized example is then
+\begin{equation*}
+\begin{split}
+&x1_{norm} = \frac{3.9 - (-0.3)}{3.8 - (-0.3)} = \frac{4.2}{4.1} \approx 1.02\\
+&x2_{norm} = \frac{4 - (-1)}{52} = \frac{5}{52} \approx 0.10
+\end{split}
+\end{equation*} 
+where -0.3 is $x^{min}$ for attribute $x1$ and 3.8 is $x^{max}$ for attribute $x1$.
 \end{document}
