@@ -92,4 +92,48 @@ crop yield respectively. Then we have that
 where $k_1$, $k_2$, $k_3$, and $k_4$ are greater than zero. If all of them are equal to 1, the regression is linear; otherwise, it's polynomial.
 \textbf{check with Linda}
 
+\section*{Question 3} \textbf{(a)} To get the final function $g(x) = w_1x + w_0$, we need to calculate coefficients $w_0$ and $w_1$. Using the closed 
+formula
+\begin{equation*}
+\textbf{w} = (X^TX)^-1X^T\textbf{y}
+\end{equation*}
+where 
+\[
+X=
+  \begin{bmatrix}
+    1 & 1050\\
+    1 & 428\\
+    1 & 362\\
+    1 & 529\\
+    1 & 790\\
+    1 & 401\\
+    1 & 380\\
+    1 & 1454\\
+    1 & 1127\\
+    1 & 700
+  \end{bmatrix}
+\]
+and
+\[
+\textbf{y}=
+  \begin{bmatrix}
+     57\\
+     28\\
+     26\\
+     40\\
+     60\\
+     22\\
+     38\\
+     110\\
+     100\\
+     46
+  \end{bmatrix}
+\]
+we have that $w_0 = -1.97639231$ and $w_1 = 0.07571859$~\footnote{We used numpy to multiply the matrices and compute the inverse.}.
+ Consequently, we have that $g(x) = 0.07571859x + -1.97639231$.
+
+\hfill
+
+\textbf{(b)} By using this function, we get that $g(475) = 33.98993693$, a.k.a., the predicted number of stories is 34.
+
 \end{document}
