@@ -30,7 +30,7 @@ where $w'_0$, $w'_1$, and $w'_2$ are the parameters of model 2.
 
 \hfill
 
-\textbf{(b)} Instead of using $t$, which is a categorical variable, we use one-hot encoding and generate variable $x_3$, where 1 stands for cancer type I and 
+\noindent \textbf{(b)} Instead of using $t$, which is a categorical variable, we use one-hot encoding and generate variable $x_3$, where 1 stands for cancer type I and 
 0 stands for cancer type II. We then have that:
 \begin{equation*}
 \hat{y} = w''_0 + x_3 \times w''_1 \times v + (1 - x_3) \times w''_2 \times v  + w''_3 \times a 
@@ -39,11 +39,11 @@ where $w''_0$, $w''_1$, $w''_2$, and $w''_3$ are the parameters of model 3.
 
 \hfill
 
-\textbf{(c)} Model 1 has 2 parameters and model 2 has 3 parameters. Model 2 is more complex because it has more parameters.
+\noindent \textbf{(c)} Model 1 has 2 parameters and model 2 has 3 parameters. Model 2 is more complex because it has more parameters.
 
 \hfill
 
-\textbf{(d)} For model 1, the matrix $X'$ that corresponds to $X$'s first three rows is
+\noindent \textbf{(d)} For model 1, the matrix $X'$ that corresponds to $X$'s first three rows is
 \[
 X'=
   \begin{bmatrix}
@@ -54,7 +54,7 @@ X'=
 \]
 where the values correspond to cancer volumes.
 
-For model 2, the matrix $X'$ that corresponds to $X$'s first three rows is
+\noindent For model 2, the matrix $X'$ that corresponds to $X$'s first three rows is
 \[
 X'=
   \begin{bmatrix}
@@ -65,7 +65,7 @@ X'=
 \]
 where the first column corresponds to cancer volumes and the second column corresponds to ages.
 
-For model 3, and considering the one-hot encoding suggested in the question, the matrix $X'$ that corresponds to $X$'s first three rows is
+\noindent For model 3, and considering the one-hot encoding suggested in the question, the matrix $X'$ that corresponds to $X$'s first three rows is
 \[
 X'=
   \begin{bmatrix}
@@ -79,7 +79,7 @@ of the cancer types.
 
 \hfill
 
-\textbf{(e)} Model 3 should be selected because both its training and test MSE are the lowest.
+\noindent \textbf{(e)} Model 3 should be selected because both its training and test MSE are the lowest.
 
 
 \hfill
@@ -129,17 +129,17 @@ and
      46
   \end{bmatrix}
 \]
-we have that $w_0 = -1.97639231$ and $w_1 = 0.07571859$~\footnote{We used numpy to multiply the matrices and compute the inverse.}.
- Consequently, we have that $g(x) = 0.07571859x + -1.97639231$.
+we have that $w_0 = -1.97639231$ and $w_1 = 0.07571859$~\footnote{We used numpy to multiply the matrices and compute the inverse.}. Consequently,
+we have that $g(x) = 0.07571859x + -1.97639231$.
 
 \hfill
 
-\textbf{(b)} By using this function, we get that $g(475) = 33.98993693$, a.k.a., the predicted number of stories is 34.
+\noindent \textbf{(b)} By using this function, we get that $g(475) = 33.98993693$, a.k.a., the predicted number of stories is 34.
 
 \hfill
 
 \section*{Question 4} \textbf{(a)} For attribute $X_2$ we have that $x^{min} = 1$ and $x^{max} = 51$. The denominator is 
-$x^{max} - x^{min} = 51 - (-1) = 52$So
+$x^{max} - x^{min} = 51 - (-1) = 52$, so
 \begin{equation*}
 \begin{split}
 &x2^0 = \frac{42 - (-1)}{52} = \frac{43}{52} \approx 0.83 \\
@@ -153,7 +153,7 @@ $x^{max} - x^{min} = 51 - (-1) = 52$So
 
 \hfill
 
-\textbf{(b)} In the example, the value for attribute $x1$ is 3.9; for $x2$, it is 4. The normalized example is then
+\noindent \textbf{(b)} In the example, the value for attribute $x1$ is 3.9; for $x2$, it is 4. The normalized example is then
 \begin{equation*}
 \begin{split}
 &x1_{norm} = \frac{3.9 - (-0.3)}{3.8 - (-0.3)} = \frac{4.2}{4.1} \approx 1.02\\
@@ -167,10 +167,32 @@ where -0.3 is $x^{min}$ for attribute $x1$ and 3.8 is $x^{max}$ for attribute $x
 \section*{Question 5} \textbf{(a)} 
 \begin{equation*}
 \begin{split}
-RSS(\textbf{w}) = \sum_{i=1}^{N}(y^{(i)} - wx^{(i)})^2
+RSS(\textbf{w}) = \sum_{i=1}^{N}(y^{(i)} - \textbf{w}x^{(i)})^2
 \end{split}
 \end{equation*} 
 where $N$ is the number of samples.
+
+\hfill
+
+\noindent \textbf{(b)} To find the \textbf{w} that minimizes RSS(\textbf{w}), we start by deriving RSS(\textbf{w}) with respect to \textbf{w}:
+\begin{equation*}
+\begin{split}
+&\frac{dRSS(\textbf{w})}{d\textbf{w}} = \frac{d\sum_{i=1}^{N}(y^{(i)} - \textbf{w}x^{(i)})^2}{d\textbf{w}}\\
+&\frac{dRSS(\textbf{w})}{d\textbf{w}} = \sum_{i=1}^{N}2(y^{(i)} - \textbf{w}x^{(i)})(-x^{(i)})\\
+&\frac{dRSS(\textbf{w})}{d\textbf{w}} = -2\sum_{i=1}^{N}(y^{(i)}x^{(i)} - \textbf{w}(x^{(i)})^2)\\
+&\frac{dRSS(\textbf{w})}{d\textbf{w}} = -2\sum_{i=1}^{N}y^{(i)}x^{(i)} + 2\sum_{i=1}^{N}\textbf{w}(x^{(i)})^2\\
+&\frac{dRSS(\textbf{w})}{d\textbf{w}} = -2\sum_{i=1}^{N}y^{(i)}x^{(i)} + 2\textbf{w}\sum_{i=1}^{N}(x^{(i)})^2\\  
+\end{split}
+\end{equation*}   
+Then we verify which \textbf{w} makes $\frac{dRSS(\textbf{w})}{d\textbf{w}} = 0$:
+\begin{equation*}
+\begin{split}
+&\frac{dRSS(\textbf{w})}{d\textbf{w}} = -2\sum_{i=1}^{N}y^{(i)}x^{(i)} + 2\textbf{w}\sum_{i=1}^{N}(x^{(i)})^2\\\\
+&-2\sum_{i=1}^{N}y^{(i)}x^{(i)} + 2\textbf{w}\sum_{i=1}^{N}(x^{(i)})^2 = 0\\
+&2\textbf{w}\sum_{i=1}^{N}(x^{(i)})^2 = 2\sum_{i=1}^{N}y^{(i)}x^{(i)}\\
+&\textbf{w} = \frac{\sum_{i=1}^{N}y^{(i)}x^{(i)}}{\sum_{i=1}^{N}(x^{(i)})^2}\\  
+\end{split}
+\end{equation*}   
 
 %\section*{Question 6}
 
@@ -186,7 +208,7 @@ where TPR stands for \textit{True Positive Rate}.
 
 \hfill
 
-\textbf{(b)} The false positive rate for Table 2 is
+\noindent \textbf{(b)} The false positive rate for Table 2 is
 \begin{equation*}
 \begin{split}
 FPR = \frac{1}{3} \approx 0.33
@@ -196,7 +218,7 @@ where FPR stands for \textit{False Positive Rate}.
 
 \hfill
 
-\textbf{(c)} The accuracy ($A$) is given by
+\noindent \textbf{(c)} The accuracy ($A$) is given by
 \begin{equation*}
 \begin{split}
 A = \frac{TP + TN}{P + N}
