@@ -194,9 +194,9 @@ Then we verify which \textbf{w} makes $\frac{dRSS(\textbf{w})}{d\textbf{w}} = 0$
 \end{split}
 \end{equation*}   
 
-%\section*{Question 6}
+\section*{Question 6}
 
-%\hfill
+\hfill
 
 \section*{Question 7} \textbf{(a)} The true positive rate for Table 1 is
 \begin{equation*}
@@ -231,6 +231,36 @@ the total of negatives. The accuracy for Table 4 then is
 A = \frac{56 + 41}{58 + 42} = \frac{97}{100} = 0.97 
 \end{split}
 \end{equation*} 
+
+\section*{Question 8} \textbf{Doubt: The expected cost of predicting negative should be: (cost of false negative * prob of false negative) + 
+ (cost of true negative * prob of true negative). Given that the cost of a true negative is zero, the expected cost of predicting negative is $a \times P(C = - | x)$, no? }
+
+\noindent \textbf{(a)} According to the data in the question, \textit{spam} is the positive class (+) and \textit{non-spam} is the negative class. Given that a false negative 
+prediction costs 5 units, and that a false positive prediction costs 2, we have that
+\begin{equation*}
+\begin{split}
+&E[predicting\mbox{ }spam] = 2 \times P(non-spam|x1, x2)\\
+&E[predicting\mbox{ }spam] = 2 \times (1 - P(spam|x1, x2))\\
+&E[predicting\mbox{ }spam] = 2 \times (1 - \frac{1}{e^{-(3x_2 - 2x_1 + 1)}})\\
+&E[predicting\mbox{ }spam] = 2 \times (1 - \frac{1}{e^{-(3 \times 2 - 2 \times 3 + 1)}})\\
+&E[predicting\mbox{ }spam] = 2 \times (1 - \frac{1}{e})\\
+&E[predicting\mbox{ }spam] = 2 \times (1 - \frac{1}{e})\\
+&E[predicting\mbox{ }spam] \approx 2 \times 0.63\\
+&E[predicting\mbox{ }spam] \approx 1.26
+\end{split}
+\end{equation*} 
+and
+\begin{equation*}
+\begin{split}
+&E[predicting\mbox{ }non-spam] = 5 \times P(spam|x1, x2)\\
+&E[predicting\mbox{ }non-spam] = 5 \times \frac{1}{e^{-(3x_2 - 2x_1 + 1)}}\\
+&E[predicting\mbox{ }non-spam] = 5 \times \frac{1}{e^{-(3 \times 2 - 2 \times 3 + 1)}}\\
+&E[predicting\mbox{ }non-spam] = 5 \times \frac{1}{e}\\
+&E[predicting\mbox{ }non-spam] \approx 1.84
+\end{split}
+\end{equation*} 
+That is, classifying as \textit{spam} has smaller expected risk.
+
 
 \end{document}
 
