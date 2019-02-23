@@ -557,5 +557,90 @@ Thus
 \end{split}
 \end{gather*}
 
+\hfill
+
+\noindent \textbf{(b)} Given that $d = 2$, the pdf is
+\begin{equation*}
+\begin{split}
+&p(\textbf{x}) = \frac{1}{2\pi|\Sigma|^{1/2}}e^{-\frac{1}{2}(\textbf{x} - \mu)^T\Sigma^{-1}(\textbf{x} - \mu)}\\
+&\log p(\textbf{x}) = \frac{-\frac{1}{2}(\textbf{x} - \mu)^T\Sigma^{-1}(\textbf{x} - \mu)}{2\pi|\Sigma|^{1/2}} 
+\end{split}
+\end{equation*}
+We then use $\hat{\mu}_+$ and $\hat{\Sigma}_+$ to compute $\log p(\textbf{x}|+)$:
+\begin{gather*}
+\begin{split}
+&\log p(\textbf{x}|+) = 
+\frac{-\frac{1}{2}(\begin{bmatrix}
+   1.6\\
+   2.3 
+\end{bmatrix} - \begin{bmatrix}
+   1.8\\
+   3.2 
+\end{bmatrix})^T\begin{bmatrix}
+   2.54 & 3.93\\
+   3.93 & 6.14 
+\end{bmatrix}^{-1}(\begin{bmatrix}
+   1.6\\
+   2.3 
+\end{bmatrix} - \begin{bmatrix}
+   1.8\\
+   3.2 
+\end{bmatrix})}{2\pi\det{\begin{bmatrix}
+   2.54 & 3.93\\
+   3.93 & 6.14 
+\end{bmatrix}}^{1/2}}\\
+&\log p(\textbf{x}|+) = 
+\frac{-\frac{1}{2}\begin{bmatrix}
+   -0.2\\
+   -0.9 
+\end{bmatrix}^T\begin{bmatrix}
+   2.54 & 3.93\\
+   3.93 & 6.14 
+\end{bmatrix}^{-1}\begin{bmatrix}
+   -0.2\\
+   -0.9 
+\end{bmatrix}}{2\pi\det{\begin{bmatrix}
+   2.54 & 3.93\\
+   3.93 & 6.14 
+\end{bmatrix}}^{1/2}}\\
+&\log p(\textbf{x}|+) = 
+\frac{-\frac{1}{2}\begin{bmatrix}
+   -0.2 & -0.9 
+\end{bmatrix}\begin{bmatrix}
+   40.74 & -26.08\\
+   -26.08 & 16.85 
+\end{bmatrix}\begin{bmatrix}
+   -0.2\\
+   -0.9 
+\end{bmatrix}}{2\pi\det{\begin{bmatrix}
+   2.54 & 3.93\\
+   3.93 & 6.14 
+\end{bmatrix}}^{1/2}}\\
+&\log p(\textbf{x}|+) = 
+\frac{-\frac{1}{2}\begin{bmatrix}
+   15.32 & -9.95\\ 
+\end{bmatrix}\begin{bmatrix}
+   -0.2\\
+   -0.9 
+\end{bmatrix}}{2\pi\det{\begin{bmatrix}
+   2.54 & 3.93\\
+   3.93 & 6.14 
+\end{bmatrix}}^{1/2}}\\
+&\log p(\textbf{x}|+) = 
+\frac{-\frac{1}{2}\begin{bmatrix}
+   5.891\\ 
+\end{bmatrix}}{2\pi\det{\begin{bmatrix}
+   2.54 & 3.93\\
+   3.93 & 6.14 
+\end{bmatrix}}^{1/2}}\\
+&\log p(\textbf{x}|+) = 
+\frac{-\frac{1}{2}\begin{bmatrix}
+   5.891\\ 
+\end{bmatrix}}{2\pi \times \sqrt{0.15}}\\
+&\log p(\textbf{x}|+) = 
+\frac{-2.95}{2.44}\\
+& \log p(\textbf{x}|+) \approx -1.21
+\end{split}
+\end{gather*}
 \end{document}
 
