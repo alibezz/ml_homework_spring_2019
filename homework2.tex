@@ -638,9 +638,96 @@ We then use $\hat{\mu}_+$ and $\hat{\Sigma}_+$ to compute $\log p(\textbf{x}|+)$
    5.891\\ 
 \end{bmatrix}}{2\pi \times \sqrt{0.15}}\\
 &\log p(\textbf{x}|+) = 
-\frac{-2.95}{2.44}\\
-& \log p(\textbf{x}|+) \approx -1.21
+\frac{-2.95}{2.44}  \approx -1.21
 \end{split}
 \end{gather*}
+
+As for $\log p(\textbf{x}|-)$, we use $\hat{\mu}_-$ and $\hat{\Sigma}_-$:
+\begin{gather*}
+\begin{split}
+&\log p(\textbf{x}|-) = 
+\frac{-\frac{1}{2}(\begin{bmatrix}
+   1.6\\
+   2.3 
+\end{bmatrix} - \begin{bmatrix}
+   1.5\\
+   2.5 
+\end{bmatrix})^T\begin{bmatrix}
+   0.42 & 0.99\\
+   0.99 & 2.44 
+\end{bmatrix}^{-1}(\begin{bmatrix}
+   1.6\\
+   2.3 
+\end{bmatrix} - \begin{bmatrix}
+   1.5\\
+   2.5
+\end{bmatrix})}{2\pi\det{\begin{bmatrix}
+   0.42 & 0.99\\
+   0.99 & 2.44 
+\end{bmatrix}}^{1/2}}\\
+&\log p(\textbf{x}|-) = 
+\frac{-\frac{1}{2}\begin{bmatrix}
+   0.1\\
+  -0.2 
+\end{bmatrix}^T\begin{bmatrix}
+   0.42 & 0.99\\
+   0.99 & 2.44 
+\end{bmatrix}^{-1}\begin{bmatrix}
+   0.1\\
+  -0.2 
+\end{bmatrix}}{2\pi\det{\begin{bmatrix}
+   0.42 & 0.99\\
+   0.99 & 2.44 
+\end{bmatrix}}^{1/2}}\\
+&\log p(\textbf{x}|-) = 
+\frac{-\frac{1}{2}\begin{bmatrix}
+   0.1 & -0.2 
+\end{bmatrix}\begin{bmatrix}
+   54.59 & -22.15\\
+   -22.15 & 9.40 
+\end{bmatrix}\begin{bmatrix}
+   0.1\\
+   -0.2 
+\end{bmatrix}}{2\pi\det{\begin{bmatrix}
+   0.42 & 0.99\\
+   0.99 & 2.44 
+\end{bmatrix}}^{1/2}}\\
+&\log p(\textbf{x}|-) = 
+\frac{-\frac{1}{2}\begin{bmatrix}
+   9.89 & -4.09\\ 
+\end{bmatrix}\begin{bmatrix}
+   0.1\\
+  -0.2 
+\end{bmatrix}}{2\pi\det{\begin{bmatrix}
+   0.42 & 0.99\\
+   0.99 & 2.44 
+\end{bmatrix}}^{1/2}}\\
+&\log p(\textbf{x}|-) = 
+\frac{-\frac{1}{2}\begin{bmatrix}
+   1.81\\ 
+\end{bmatrix}}{2\pi\det{\begin{bmatrix}
+   0.42 & 0.99\\
+   0.99 & 2.44 
+\end{bmatrix}}^{1/2}}\\
+&\log p(\textbf{x}|-) = 
+\frac{-\frac{1}{2}\begin{bmatrix}
+   1.81\\ 
+\end{bmatrix}}{2\pi \times \sqrt{0.045}}\\
+&\log p(\textbf{x}|-) = 
+\frac{-0.90}{1.33}\\
+& \log p(\textbf{x}|-) \approx -0.68
+\end{split}
+\end{gather*}
+Using the ML hypothesis, \textbf{x} is predicted as $-$ because $\log p(\textbf{x}|-) > \log p(\textbf{x}|+)$. \textbf{check calculations}
+
+\hfill
+
+\noindent \textbf{(c)} A good reason to use a single covariance matrix is that it requires the estimation of fewer parameters (if a lot of 
+data is not available, this is particularly useful). On the other hand, if the values for different 
+classes vary in significantly different ways, this information gets lost when one uses a single covariance matrix, and may  affect predictions negatively. 
+If there is a lot of data available for all classes, it is probably a good idea to use different covariance matrices; otherwise, it is probably more useful 
+to have a shared matrix.
+
+
 \end{document}
 
