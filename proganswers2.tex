@@ -1,0 +1,105 @@
+\documentclass[leqno]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage[]{amsthm} %lets us use \begin{proof}
+\usepackage{amsmath}
+\usepackage[]{amssymb} %gives us the character \varnothing
+\usepackage{hyperref}
+\usepackage{booktabs} % For formal tables
+\usepackage[ruled,linesnumbered]{algorithm2e}
+\usepackage{url}
+%\usepackage{natbib}
+\usepackage{xcolor}
+\usepackage{subfig}
+\let\proof\relax
+\let\endproof\relax
+\usepackage{enumitem}
+\usepackage{xspace}
+\usepackage{graphicx}
+\usepackage{subfig}
+\usepackage{tablefootnote}
+\usepackage{balance}
+\usepackage{bibunits}
+
+\title{Answers for Programming Part}
+\author{Aline Bessa and Li Rao}
+\date\today
+%This information doesn't actually show up on your document unless you use the maketitle command below
+
+\begin{document}
+\maketitle %This command prints the title based on information entered above
+
+%Section and subsection automatically number unless you put the asterisk next to them.
+\section*{Programming question 1} \textbf{Waiting on Rao}
+
+
+\hfill
+
+\section*{Programming question 2}
+
+\subsection*{1a} The answers for items in question 1a are:
+
+\noindent (i) The predicted label is 1.
+
+\hfill
+
+\noindent (ii) The confusion matrix on the test set for $k = 1$ is:
+
+\begin{tabular}{l|l|c|c|}
+\multicolumn{2}{c}{}&\multicolumn{1}{c}{predicted \textit{(y)}}\\
+\cline{3-4}
+\multicolumn{2}{c|}{}&+&-\\
+\cline{2-4}
+\multirow{correct \textit{(r)}}& + & 209 & 64\\
+\cline{2-4}
+& - & 134 & 93 \\
+\cline{2-4}
+\end{tabular}
+
+\hfill\hfill
+
+\noindent (iii) For $k = 1$, we have Accuracy = $\frac{TP + TN}{TP + TN + FP + FN} = \frac{209 + 93}{500} = 0.604$, true positive rate = $\frac{TP}{TP + FN} = \frac{209}{209 + 64} = 0.76556776556$, and false positive rate = $\frac{FP}{FP + TN} = \frac{134}{134 + 93} = 0.59030837004$.
+
+\hfill
+
+\noindent (iv) The predicted label is 1.
+
+\hfill
+
+\noindent (v) The confusion matrix on the test set for $k = 5$ is:
+
+\begin{tabular}{l|l|c|c|}
+\multicolumn{2}{c}{}&\multicolumn{1}{c}{predicted \textit{(y)}}\\
+\cline{3-4}
+\multicolumn{2}{c|}{}&+&-\\
+\cline{2-4}
+\multirow{correct \textit{(r)}}& + & 212 & 61\\
+\cline{2-4}
+& - & 136 & 91 \\
+\cline{2-4}
+\end{tabular}
+
+\hfill\hfill
+
+\noindent (vi) For $k = 5$, we have Accuracy = $\frac{TP + TN}{TP + TN + FP + FN} = \frac{212 + 91}{500} = 0.606$, true positive rate = $\frac{TP}{TP + FN} = \frac{212}{212 + 61} = 0.77655677655$, and false positive rate = $\frac{FP}{FP + TN} = \frac{136}{136 + 91} = 0.59911894273$.
+
+\hfill
+
+\noindent (vii) For $k = 5$, the accuracy is 0.606, as computed above. \textbf{Am I missing something or is this question redundant given the above?}
+
+\hfill
+
+\noindent (viii) The confusion matrix on the test set with Zero-R is:
+
+\begin{tabular}{l|l|c|c|}
+\multicolumn{2}{c}{}&\multicolumn{1}{c}{predicted \textit{(y)}}\\
+\cline{3-4}
+\multicolumn{2}{c|}{}&+&-\\
+\cline{2-4}
+\multirow{correct \textit{(r)}}& + & 273 & 0\\
+\cline{2-4}
+& - & 227 & 0 \\
+\cline{2-4}
+\end{tabular} 
+
+\end{document}

@@ -47,7 +47,7 @@ def  predict_common_among_closest(distances, training_classes, k):
     additional_distances = []
     i = 0
     while True:
-        if distances[k + i][1] == initial_distances[-1][1]:
+        if (k + i) < len(distances) and distances[k + i][1] == initial_distances[-1][1]:
             additional_distances.append(distances[k + i])
             i += 1
         else:
@@ -83,6 +83,8 @@ def test_model(filename, training_data, training_classes, vocab, k):
     with open(filename, 'r') as test_file:
         true_labels = []
         predicted_labels = []
+        #zero_r_prediction = max(set(training_classes), key=training_classes.count)
+        #print 'zero-r', zero_r_prediction
         for line in test_file:
             fields = line.strip().split(SEPARATOR)
             true_labels.append(fields[0])
@@ -94,8 +96,9 @@ def test_model(filename, training_data, training_classes, vocab, k):
                 distances.append((index, dist))
             distances.sort(key=operator.itemgetter(1))
             predicted_labels.append(predict_common_among_closest(distances, training_classes, k))
+            #predicted_labels.append(zero_r_prediction)
         tp, fp, tn, fn = compute_data_for_confusion_matrix(true_labels, predicted_labels)
-            
+        print 'tp', tp, 'fp', fp, 'tn', tn, 'fn', fn    
 
 if __name__ == '__main__':
 
