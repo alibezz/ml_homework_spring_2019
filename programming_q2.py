@@ -29,7 +29,7 @@ def get_training_data(filename):
                 indices.append(index)
                 data.append(1)
             indptr.append(len(indices))  
-        return csr_matrix((data, indices, indptr), dtype=int).toarray(), classes, vocab 
+        return csr_matrix((data, indices, indptr), dtype=int), classes, vocab 
 
 def indices_test_document(document, vocabulary):
     document_indexes = list(set([vocabulary[term] for term in document if vocabulary.has_key(term)]))
@@ -91,7 +91,7 @@ def test_model(filename, training_data, training_classes, vocab, k):
             doc_indices = indices_test_document(fields[1:], vocab) 
             distances = []
             for index, train_doc in enumerate(training_data):
-                train_doc_indices = train_doc.nonzero()[0]
+                train_doc_indices = train_doc.nonzero()[1]
                 dist = inverse_intersection_distance(doc_indices, train_doc_indices)
                 distances.append((index, dist))
             distances.sort(key=operator.itemgetter(1))
@@ -100,11 +100,17 @@ def test_model(filename, training_data, training_classes, vocab, k):
         tp, fp, tn, fn = compute_data_for_confusion_matrix(true_labels, predicted_labels)
         print 'tp', tp, 'fp', fp, 'tn', tn, 'fn', fn    
 
+def cross_validation(filename, k):
+    training_data, training_classes, vocab = get_training_data(filename)
+    #slice the data in 5 parts
+    print training_data[1:5].todense()#.todense()#[1:5]
+
 if __name__ == '__main__':
 
     #Not normalizing the attributes because I believe it's ok to assume that the frequency of the tokens are on the same scale
     training_filename = sys.argv[1]
     test_filename = sys.argv[2]
     k = int(sys.argv[3])
-    training_data, training_classes, vocab = get_training_data(training_filename)
-    test_model(test_filename, training_data, training_classes, vocab, k)
+    cross_validation(training_filename, k)
+    #training_data, training_classes, vocab = get_training_data(training_filename)
+    #test_model(test_filename, training_data, training_classes, vocab, k)
