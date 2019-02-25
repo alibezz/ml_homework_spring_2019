@@ -56,7 +56,9 @@
 \cline{2-4}
 \end{tabular}
 
-\hfill\hfill
+\hfill
+
+\hfill
 
 \noindent (iii) For $k = 1$, we have Accuracy = $\frac{TP + TN}{TP + TN + FP + FN} = \frac{209 + 93}{500} = 0.604$, true positive rate = $\frac{TP}{TP + FN} = \frac{209}{209 + 64} = 0.76556776556$, and false positive rate = $\frac{FP}{FP + TN} = \frac{134}{134 + 93} = 0.59030837004$.
 
@@ -79,7 +81,9 @@
 \cline{2-4}
 \end{tabular}
 
-\hfill\hfill
+\hfill
+
+\hfill
 
 \noindent (vi) For $k = 5$, we have Accuracy = $\frac{TP + TN}{TP + TN + FP + FN} = \frac{212 + 91}{500} = 0.606$, true positive rate = $\frac{TP}{TP + FN} = \frac{212}{212 + 61} = 0.77655677655$, and false positive rate = $\frac{FP}{FP + TN} = \frac{136}{136 + 91} = 0.59911894273$.
 
@@ -102,11 +106,94 @@
 \cline{2-4}
 \end{tabular} 
 
+\subsection*{1b} If the documents have radically different sizes, most (or all) tokens of a small document can be in a much larger document. As a consequence, their distance is 
+going to be very low, even if most tokens in the larger document do not appear in the smaller one, e.g., if the larger document focuses on a very different subject (and 
+uses many  unrelated words). In other words, if the documents are out of scale, small documents are simply very likely to be close to longer documents, and the actual 
+use of words in the documents (that is, their subjects) stops being relevant in the distance metric. In such cases, it is probably better to sample longer documents, or pick 
+its most relevant words somehow (maybe with tf-idf), and use that when computing distances with respect to much smaller documents.
 
-\hfill \hfill
 
-\subsection*{1b} \textbf{do at home}
 
-\subsection*{1c} 
+\subsection*{1c} The answers for items in question 1c are:
+
+\noindent (i) When $k = 3$, the cross-validation accuracy is 0.66; when $k = 7$, it is 0.658; when $k = 99$, it is 0.612. The best value is then $k = 3$.
+
+\hfill
+
+\noindent (ii) The confusion matrix on the test set with $k = 3$ is:
+
+\begin{tabular}{l|l|c|c|}
+\multicolumn{2}{c}{}&\multicolumn{1}{c}{predicted \textit{(y)}}\\
+\cline{3-4}
+\multicolumn{2}{c|}{}&+&-\\
+\cline{2-4}
+\multirow{correct \textit{(r)}}& + & 212 & 61\\
+\cline{2-4}
+& - & 144 & 83 \\
+\cline{2-4}
+\end{tabular}  
+
+\hfill 
+
+\hfill
+
+and the accuracy is $\frac{TP + TN}{TP + TN + FP + FN} = \frac{212 + 83}{500} = 0.59$.
+
+\subsection*{1d} 
+
+\noindent (i) The distance function we propose works in two steps: first, punctuation and the 100 most common stopwords in English are removed; then, 
+the documents are represented as two vectors whose sizes correspond to the total of different tokens across them and the cosine distance is computed. Say that 
+we want to compute the distance between \textit{``park slope is an incredible neighborhood''} and \textit{``the park in my neighborhood is not far.''}. After 
+ removing punctuation and stopwords, we have  \textit{``park slope incredible neighborhood''} and \textit{``park neighborhood far''}. The unique tokens are
+\textit{``park, slope, incredible, neighborhood, far''}, leading to word-count vectors $[1, 1, 1, 1, 0]$ and $[1, 0, 0, 1, 1]$ for the two documents 
+respectively. The cosine distance between these two vectors is approximately 0.42. 
+
+\hfill
+
+\noindent (ii) The documents are short and many of their tokens are very common, occurring in most examples. By removing common tokens, whatever is left can 
+increase the discrimination power between examples. Moreover, the cosine distance seems more robust than the metric proposed in the question, as it takes the 
+number of token occurrences in a document into account, instead of simply using intersections.
+
+\noindent (iii) The confusion matrix on the test set for $k = 1$ with our new function is:
+\begin{tabular}{l|l|c|c|}
+\multicolumn{2}{c}{}&\multicolumn{1}{c}{predicted \textit{(y)}}\\
+\cline{3-4}
+\multicolumn{2}{c|}{}&+&-\\
+\cline{2-4}
+\multirow{correct \textit{(r)}}& + & 204 & 69\\
+\cline{2-4}
+& - & 97 & 130 \\
+\cline{2-4}
+\end{tabular}  
+
+\hfill 
+
+\hfill
+
+\noindent (iv) For $k = 1$, we have Accuracy = $\frac{TP + TN}{TP + TN + FP + FN} = \frac{204 + 130}{500} = 0.668$, true positive rate = $\frac{TP}{TP + FN} = \frac{204}{204 + 69} =  0.74725274725$, and false positive rate = $\frac{FP}{FP + TN} = \frac{97}{97 + 130} = 0.74725274725$. 
+
+\hfill
+
+\noindent (v) The confusion matrix on the test set for $k = 5$ with our new function is:
+\begin{tabular}{l|l|c|c|}
+\multicolumn{2}{c}{}&\multicolumn{1}{c}{predicted \textit{(y)}}\\
+\cline{3-4}
+\multicolumn{2}{c|}{}&+&-\\
+\cline{2-4}
+\multirow{correct \textit{(r)}}& + & 218 & 55\\
+\cline{2-4}
+& - & 89 & 138 \\
+\cline{2-4}
+\end{tabular}  
+
+\hfill 
+
+\hfill
+
+\noindent (vi) For $k = 5$, we have Accuracy = $\frac{TP + TN}{TP + TN + FP + FN} = \frac{218 + 138}{500} = 0.712$, true positive rate = $\frac{TP}{TP + FN} = \frac{218}{218 + 55} = 0.79853479853$, and false positive rate = $\frac{FP}{FP + TN} = \frac{89}{89 + 138} = 0.39207048458$. 
+
+\hfill
+
+\noindent (vii) Our distance function achieves higher accuracy for both $k = 1$ and $k = 5$.
 
 \end{document}
