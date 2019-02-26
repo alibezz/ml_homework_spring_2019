@@ -194,7 +194,47 @@ Then we verify which \textbf{w} makes $\frac{dRSS(\textbf{w})}{d\textbf{w}} = 0$
 \end{split}
 \end{equation*}   
 
-\section*{Question 6}
+\section*{Question 6} The error for ridge regression, $E_{ridge}(\textbf{w})$, is given by
+\begin{equation*}
+\begin{split}
+& E_{ridge}(\textbf{w}) = E_{in}(\textbf{w}) + \lambda\textbf{w}^T\textbf{w} 
+\end{split}
+\end{equation*}    
+where \textbf{w} is a column vector with the parameters for the regression and $\lambda$ is a non-negative 
+parameter that penalizes complex models. To find the closed form solution of ridge regression, we do the following:
+\begin{equation*}
+\begin{split}
+& \frac{dE_{ridge}(\textbf{w})}{d\textbf{w}} = \frac{d[E_{in}(\textbf{w}) + \lambda\textbf{w}^T\textbf{w}]}{d\textbf{w}}\\
+& \frac{dE_{ridge}(\textbf{w})}{d\textbf{w}} = \frac{d[E_{in}(\textbf{w}) + \textbf{w}^T\lambda\textbf{I}\textbf{w}]}{d\textbf{w}}\\
+& \frac{dE_{ridge}(\textbf{w})}{d\textbf{w}} = \frac{dE_{in}(\textbf{w})}{d\textbf{w}} + \frac{d\textbf{w}^T\lambda\textbf{I}\textbf{w}}{d\textbf{w}}\\
+& \frac{dE_{ridge}(\textbf{w})}{d\textbf{w}} = \frac{d}{d\textbf{w}}[\frac{1}{N}||X\textbf{w} - y||^2_2] + \frac{d\textbf{w}^T\lambda\textbf{I}\textbf{w}}{d\textbf{w}}\\
+\end{split}
+\end{equation*}
+where \textbf{I} is the identity, important to guarantee that the $\lambda$ term is compatible, dimension-wise, with the derivative of $E_{in}$. As seen in class, 
+we then have that
+\begin{equation*}
+\begin{split}
+& \frac{dE_{ridge}(\textbf{w})}{d\textbf{w}} = \frac{2}{N}(X^TX\textbf{w} - X^Ty) + \frac{d\textbf{w}^T\lambda\textbf{I}\textbf{w}}{d\textbf{w}}\\
+\end{split}
+\end{equation*}
+Finally, we have that
+\begin{equation*}
+\begin{split}
+& \frac{dE_{ridge}(\textbf{w})}{d\textbf{w}} = \frac{2}{N}(X^TX\textbf{w} - X^Ty) + 2\lambda\textbf{I}\textbf{w}\\
+\end{split}
+\end{equation*}
+To get the parameters \textbf{w} that minimize $E_{ridge}$, we set the equation above to zero:
+\begin{equation*}
+\begin{split}
+& \frac{2}{N}(X^TX\textbf{w} - X^Ty) + 2\lambda\textbf{I}\textbf{w} = 0\\
+& \frac{2}{N}X^TX\textbf{w} - \frac{2}{N}X^Ty + 2\lambda\textbf{I}\textbf{w} = 0\\
+& \frac{X^TX\textbf{w}}{N} - \frac{X^Ty}{N} + \lambda\textbf{I}\textbf{w} = 0\\
+& X^TX\textbf{w} - X^Ty + \lambda N\textbf{I}\textbf{w} = 0\\
+& X^TX\textbf{w} + \lambda N\textbf{I}\textbf{w} = X^Ty\\
+& (X^TX + \lambda N\textbf{I})\textbf{w} = X^Ty\\
+& \textbf{w} = (X^TX + \lambda N\textbf{I})^{-1}X^Ty
+\end{split}
+\end{equation*}
 
 \hfill
 
