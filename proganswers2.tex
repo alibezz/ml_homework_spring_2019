@@ -22,7 +22,7 @@
 \usepackage{bibunits}
 
 \title{Answers for Programming Part}
-\author{Aline Bessa and Li Rao}
+\author{Aline Bessa and Rao Li}
 \date\today
 %This information doesn't actually show up on your document unless you use the maketitle command below
 
@@ -30,8 +30,52 @@
 \maketitle %This command prints the title based on information entered above
 
 %Section and subsection automatically number unless you put the asterisk next to them.
-\section*{Programming question 1} \textbf{Waiting on Rao}
+\section*{Programming question 1} 
 
+\subsection*{1a} Using linear regression without regularization, we have
+
+\begin{itemize}
+\item RSS = 2479.76554683
+\item TSS = 7480.04588235
+\item $R^2$ = 0.668482575397
+\end{itemize}
+
+\subsection*{1b} Using ridge regression and 5-fold cross-validation to find the best $\lambda$, we have
+
+\begin{itemize}
+\item RSS = 2479.76554683
+\item TSS = 7480.04588235
+\item $R^2$ = 0.668482575397
+\item $\lambda$ = 0
+\end{itemize}
+That is, it coincides with the linear model without regularization.
+
+\subsection*{2a} Using the model with the degree 2 polynomial transformation, without regularization, we have
+\begin{itemize}
+\item RSS = 6.5689787408e+27
+\item TSS = 7480.04588235
+\item $R^2$ = -8.78200327126e+23
+\end{itemize}
+
+\subsection*{2b} Using ridge regression coupled with the degree 2 polynomial transformation, and applying 
+5-fold cross-validation to find the best $\lambda$, we have
+\begin{itemize}
+\item RSS = 1460.74019233
+\item TSS = 7480.04588235
+\item $R^2$: 0.804715075909
+\item $\lambda$ = 0.046
+\end{itemize}
+
+\subsection*{3} The model that performed best was the ridge regression with the degree 2 polynomial transformation because its 
+$R^2$ is the highest and its RSS is the lowest. The parameters are $\lambda = 0.046$ and
+
+\noindent \textbf{w} = [-1.97867462e-02, -8.97547715e-02, -1.53146491e-01, -1.45649024e-01,  2.77229152e-02,  1.68356085e-02,  2.56533897e-01,  2.89271164e-01, -1.67949815e-01,  3.45162259e-01, -8.14598220e-02, -4.29040159e-01,  1.18979807e-01, -4.95938477e-01,  5.92249116e-04,  1.51317467e-02,  1.58857136e-01,  1.96936418e+00, -5.99860342e-01,  1.62908056e-01, -2.12193946e-03, -2.94054467e-02,  9.64861257e-02, -1.11524077e-02,  7.37808706e-02, -3.60680878e-04,  2.09230048e-02,  6.14691769e-04,  4.09745227e-04, -1.06336525e-02,  9.46744755e-02, -7.01902994e-03,  6.67357999e-04, -1.60640689e-02, -1.18761468e-02,  4.08356879e-04,  9.67220315e-03, -1.61577360e-05, -9.25743296e-03,  2.54904930e-02, -1.07423444e-01,  1.68473573e-01,  4.79096157e-03,  5.39907613e-03,  1.66349486e-02, -1.83884866e-03,  1.22284653e-03, -7.14587029e-02,  4.84328815e-04, -2.68033777e-02,  2.77229152e-02, -9.77781354e-02, -1.37647122e+00,  2.80719477e-02, -1.83095023e-01, -4.19786687e-02, -1.87658107e-02,  5.09222201e-01,  2.06047463e-02, -2.53315484e-01,  1.24260212e-02,  1.20063768e-01, -2.74140507e-02,  2.84691674e-01, -2.49694747e-01, -4.08037857e-02,  9.14187977e-02,  4.03121009e-03,  4.80349760e-01,  1.28851869e+00, -2.88994224e-02,  1.38559169e-01, -3.76462102e-01, -3.94775590e-04, -3.26845864e-01, -3.55132037e-03,  3.68329344e-02, -9.45802006e-05,  8.13794084e-03,  8.35839532e-03, -2.52944117e-04,  4.22596669e-03, -5.25602843e-04, -6.02135002e-03,  2.99513460e-01, -5.66891070e-03, -3.91811836e-06, -1.28370558e-01, -8.42492339e-03,  4.45704994e-02, -1.64646307e-01,  6.95380057e-03,  9.25838844e-02,  1.39105095e-03, -3.47144833e-02, -1.88910975e-05,  7.07921652e-03, -1.43278051e-04, -2.97164331e-04, -1.90179423e-02,  1.98937001e-03,  8.61437910e-04, -1.98140878e-05, -2.91567255e-04,  2.49943488e-02]
+
+\noindent The price of a house with the features in the question is predicted as 106.12172948.
+
+\subsection*{4} We would choose ridge regression with the degree 2 polynomial transformation because this model 
+performed best among the 4 models we attempted, as its RSS is the lowest and its $R^2$ is the highest. So it
+means that our predicted function is the most likely to properly predict new housing prices, out of the tested possibilities. 
 
 \hfill
 

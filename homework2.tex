@@ -8,7 +8,7 @@
 \usepackage[]{amssymb} %gives us the character \varnothing
 
 \title{Homework 2}
-\author{Aline Bessa and Li Rao}
+\author{Aline Bessa and Rao Li}
 \date\today
 %This information doesn't actually show up on your document unless you use the maketitle command below
 
@@ -329,21 +329,32 @@ That is, classifying as \textit{non-spam} has smaller expected risk.
 &\hat{\theta} = \frac{\sum_{x \in X}x}{N + 1}
 \end{split}
 \end{equation*} 
-and its bias be
+Moreover, let $\theta = \mu$ be the actual mean of the Gaussian distribution $D$. The bias of $\hat{\theta}$ is 
 \begin{equation*}
 \begin{split}
-&Bias_{\theta}[\hat{\theta}] = E_{D|\theta}[\hat{\theta} - \theta] =  E_{D|\theta}[\hat{\theta}] - E_{D|\theta}[\theta]\\
-&Bias_{\theta}[\hat{\theta}] = E_{D|\theta}[\hat{\theta}] - \frac{\sum_{x \in X}x}{N}\\
-&Bias_{\theta}[\hat{\theta}] = \frac{\sum_{x \in X}x}{N + 1} -  \frac{\sum_{x \in X}x}{N}\\
-&Bias_{\theta}[\hat{\theta}] = \frac{N\sum_{x \in X}x - (N + 1)\sum_{x \in X}x}{N(N + 1)}\\
-&Bias_{\theta}[\hat{\theta}] = \frac{-\sum_{x \in X}x}{N(N + 1)}\\
+&Bias_{\theta}[\hat{\theta}] =  E[\hat{\theta}] - \mu\\
+&Bias_{\theta}[\hat{\theta}] =  E[\frac{\sum_{x \in X}x}{N + 1}] - \mu\\
+&Bias_{\theta}[\hat{\theta}] = \frac{E[\sum_{x \in X}x]}{N + 1} - \mu\\
+&Bias_{\theta}[\hat{\theta}] = \frac{E[x_1] + \ldots + E[x_N]}{N + 1} - \mu\\
+\end{split}
+\end{equation*}  
+Given that $D$ is Gaussian, $E[x_i] = \mu$. Consequently,
+\begin{equation*}
+\begin{split}
+&Bias_{\theta}[\hat{\theta}] = \frac{\mu + \ldots + \mu}{N + 1} - \mu\\
+&Bias_{\theta}[\hat{\theta}] = \frac{N\mu}{N + 1} - \mu\\
+&Bias_{\theta}[\hat{\theta}] = \frac{N\mu - (N + 1)\mu}{N + 1}\\
+&Bias_{\theta}[\hat{\theta}] = \frac{-\mu}{N + 1}\\
 \end{split}
 \end{equation*}  
 The estimator $\hat{\theta}$ is thus biased, as long as the numerator of $Bias_{\theta}[\hat{\theta}]$ is different from zero.
 
 \hfill
 
-\section*{Question 10} \textbf{(a)} Given the dataset, we have the following positive examples:
+\section*{Question 10}  \textbf{Important note: in this question, we work with two decimal places for simplicity, as a specific precision is not specified in the question. 
+Results would change if we had used a different precision}. 
+
+\noindent \textbf{(a)} Given the dataset, we have the following positive examples:
 \begin{gather*}
 \begin{split}
 &\textbf{x}_+^1 = 
@@ -390,12 +401,12 @@ Consequently,
    \end{bmatrix}}{3}\\
 &\hat{\mu}_+ \approx 
 \begin{bmatrix}
-   1.8\\
-   3.2 
+   1.83\\
+   3.20 
    \end{bmatrix}
 \end{split}
 \end{gather*}
-where $\hat{\mu}_+[1][1] = 1.8$ and $\hat{\mu}_+[2][1] = 3.2$ are the estimated means for attributes $x1$ and $x2$ respectively, when labels are positive.
+where $\hat{\mu}_+[1][1] \approx 1.83$ and $\hat{\mu}_+[2][1] \approx 3.20$ are the estimated means for attributes $x1$ and $x2$ respectively, when labels are positive.
 
 \noindent Analogously, the negative examples are
 \begin{gather*}
@@ -443,12 +454,12 @@ Consequently,
    \end{bmatrix}}{3}\\
 &\hat{\mu}_- \approx 
 \begin{bmatrix}
-   1.5\\
-   2.5 
+   1.50\\
+   2.53 
    \end{bmatrix}
 \end{split}
 \end{gather*}
-where $\hat{\mu}_+[1][1] = 1.5$ and $\hat{\mu}_+[2][1] = 2.5$ are the estimated means for attributes $x1$ and $x2$ respectively, when labels are negative.
+where $\hat{\mu}_+[1][1] \approx 1.50$ and $\hat{\mu}_+[2][1] \approx 2.53$ are the estimated means for attributes $x1$ and $x2$ respectively, when labels are negative.
 
 \noindent Given the positive examples and $\hat{\mu}_+$, we compute
 \begin{gather*}
@@ -459,12 +470,12 @@ where $\hat{\mu}_+[1][1] = 1.5$ and $\hat{\mu}_+[2][1] = 2.5$ are the estimated 
    4.8 
 \end{bmatrix} - 
 \begin{bmatrix}
-   1.8\\
-   3.2 
+   1.83\\
+   3.20 
 \end{bmatrix} = 
 \begin{bmatrix}
-   0.9\\
-   1.6 
+   0.87\\
+   1.60 
 \end{bmatrix}\\
 &\textbf{x}_+^2 - \hat{\mu}_+ = 
 \begin{bmatrix}
@@ -472,12 +483,12 @@ where $\hat{\mu}_+[1][1] = 1.5$ and $\hat{\mu}_+[2][1] = 2.5$ are the estimated 
    5.1 
 \end{bmatrix} - 
 \begin{bmatrix}
-   1.8\\
-   3.2 
+   1.83\\
+   3.20 
 \end{bmatrix} = 
 \begin{bmatrix}
-   1.4\\
-   1.9 
+   1.37\\
+   1.90 
 \end{bmatrix}\\
 &\textbf{x}_+^3 - \hat{\mu}_+ = 
 \begin{bmatrix}
@@ -485,12 +496,12 @@ where $\hat{\mu}_+[1][1] = 1.5$ and $\hat{\mu}_+[2][1] = 2.5$ are the estimated 
    -0.3 
 \end{bmatrix} - 
 \begin{bmatrix}
-   1.8\\
-   3.2 
+   1.83\\
+   3.20 
 \end{bmatrix} = 
 \begin{bmatrix}
-   -2.2\\
-   -3.5 
+   -2.23\\
+   -3.50 
 \end{bmatrix}\\
 \end{split}
 \end{gather*}
@@ -499,35 +510,35 @@ Thus
 \begin{split}
 &\hat{\Sigma}_+ = 
 \frac{\begin{bmatrix}
-   0.9\\
-   1.6 
+   0.87\\
+   1.60 
 \end{bmatrix} \times \begin{bmatrix}
-   0.9 & 1.6\\
+   0.87 & 1.60\\
 \end{bmatrix} + 
 \begin{bmatrix}
-   1.4\\
-   1.9 
+   1.37\\
+   1.90 
 \end{bmatrix} \times \begin{bmatrix}
-   1.4 & 1.9\\
+   1.37 & 1.90\\
 \end{bmatrix} +
 \begin{bmatrix}
-   -2.2\\
-   -3.5 
+   -2.23\\
+   -3.50 
 \end{bmatrix} \times \begin{bmatrix}
-   -2.2 & -3.5\\
+   -2.23 & -3.50\\
 \end{bmatrix}}{3}\\ 
 &\hat{\Sigma}_+ = 
 \frac{\begin{bmatrix}
-   0.81 & 1.44\\
-   1.44 & 2.56 
+   0.76 & 1.39\\
+   1.39 & 2.56 
 \end{bmatrix} + 
 \begin{bmatrix}
-   1.96 & 2.66\\
-   2.66 & 3.61 
+   1.88 & 2.60\\
+   2.60 & 3.61 
 \end{bmatrix} +
 \begin{bmatrix}
-   4.84 & 7.7\\
-   7.7 & 12.25 
+   4.97 & 7.81\\
+   7.81 & 12.25 
 \end{bmatrix}
  }{3}\\
 &\hat{\Sigma}_+ = 
@@ -552,12 +563,12 @@ Thus
    0.5 
 \end{bmatrix} - 
 \begin{bmatrix}
-   1.5\\
-   2.5 
+   1.50\\
+   2.53 
 \end{bmatrix} = 
 \begin{bmatrix}
-   -0.9\\
-   -2.0 
+   -0.90\\
+   -2.03 
 \end{bmatrix}\\
 &\textbf{x}_-^2 - \hat{\mu}_- = 
 \begin{bmatrix}
@@ -565,12 +576,12 @@ Thus
    2.8 
 \end{bmatrix} - 
 \begin{bmatrix}
-   1.5\\
-   2.5 
+   1.50\\
+   2.53 
 \end{bmatrix} = 
 \begin{bmatrix}
-   0.3\\
-   0.3 
+   0.30\\
+   0.27 
 \end{bmatrix}\\
 &\textbf{x}_-^3 - \hat{\mu}_- = 
 \begin{bmatrix}
@@ -578,12 +589,12 @@ Thus
    4.3 
 \end{bmatrix} - 
 \begin{bmatrix}
-   1.5\\
-   2.5 
+   1.50\\
+   2.53 
 \end{bmatrix} = 
 \begin{bmatrix}
-   0.6\\
-   1.8 
+   0.60\\
+   1.77 
 \end{bmatrix}\\
 \end{split}
 \end{gather*}
@@ -592,35 +603,35 @@ Thus
 \begin{split}
 &\hat{\Sigma}_- = 
 \frac{\begin{bmatrix}
-   -0.9\\
-   -2.0 
+   -0.90\\
+   -2.03 
 \end{bmatrix} \times \begin{bmatrix}
-   -0.9 & -2.0\\
+   -0.90 & -2.03\\
 \end{bmatrix} + 
 \begin{bmatrix}
-   0.3\\
-   0.3 
+   0.30\\
+   0.27 
 \end{bmatrix} \times \begin{bmatrix}
-   0.3 & 0.3\\
+   0.30 & 0.27\\
 \end{bmatrix} +
 \begin{bmatrix}
-   0.6\\
-   1.8 
+   0.60\\
+   1.77 
 \end{bmatrix} \times \begin{bmatrix}
-   0.6 & 1.8\\
+   0.60 & 1.77\\
 \end{bmatrix}}{3}\\ 
 &\hat{\Sigma}_- = 
 \frac{\begin{bmatrix}
-   0.81 & 1.8\\
-   1.8 & 4.0 
+   0.81 & 1.83\\
+   1.83 & 4.12 
 \end{bmatrix} + 
 \begin{bmatrix}
-   0.09 & 0.09\\
-   0.09 & 0.09 
+   0.09 & 0.08\\
+   0.08 & 0.07 
 \end{bmatrix} +
 \begin{bmatrix}
-   0.36 & 1.08\\
-   1.08 & 3.24 
+   0.36 & 1.06\\
+   1.06 & 3.13 
 \end{bmatrix}
  }{3}\\
 &\hat{\Sigma}_- = 
