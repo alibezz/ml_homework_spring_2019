@@ -52,7 +52,7 @@ X'=
     1 & 1.6
   \end{bmatrix}
 \]
-where the values correspond to cancer volumes.
+where the values in the second column correspond to cancer volumes.
 
 \noindent For model 2, the matrix $X'$ that corresponds to $X$'s first three rows is
 \[
@@ -63,7 +63,7 @@ X'=
     1 & 1.6 & 70
   \end{bmatrix}
 \]
-where the first column corresponds to cancer volumes and the second column corresponds to ages.
+where the second column corresponds to cancer volumes and the third column corresponds to ages.
 
 \noindent For model 3, and considering the one-hot encoding suggested in the question, the matrix $X'$ that corresponds to $X$'s first three rows is
 \[
@@ -74,8 +74,11 @@ X'=
     1 & 0 & 1.6 & 70
   \end{bmatrix}
 \]
-where the first column corresponds to cancer volumes, the second column corresponds to ages, and the third column corresponds to the one-hot encoding 
-of the cancer types.
+where non-zero values in the second column correspond to cancer volumes for cancer type I, non-zero values in the third column correspond to cancer 
+volumes for cancer type II, and the fourth column corresponds to ages.   
+
+%% and third columns correspond to cancer volumesfirst column corresponds to cancer volumes, the second column corresponds to ages, and the third column corresponds to the one-hot encoding 
+%% of the cancer types.
 
 \hfill
 
@@ -85,17 +88,17 @@ of the cancer types.
 \hfill
 
 \section*{Question 2} Let $r$, $f$, $t$, $s$, and $y$ be the amount of rainfall, the amount of fertilizer, the temperature, the number of sunny days, and 
-crop yield respectively. Then we have that
+crop yield respectively. To formalize a polynomial, possibly linear regression problem with these variables, we make
 \begin{equation*}
 \hat{y} = w_0 + w_1^{k_1} \times r + w_2^{k_2} \times f + w_3^{k_3} \times t + w_4^{k_4} \times s
 \end{equation*}
 where $k_1$, $k_2$, $k_3$, and $k_4$ are greater than zero. If all of them are equal to 1, the regression is linear; otherwise, it's polynomial.
-\textbf{check with Linda}
+
 
 \section*{Question 3} \textbf{(a)} To get the final function $g(x) = w_1x + w_0$, we need to calculate coefficients $w_0$ and $w_1$. Using the closed 
 formula
 \begin{equation*}
-\textbf{w} = (X^TX)^-1X^T\textbf{y}
+\textbf{w} = (X^TX)^{-1}X^T\textbf{y}
 \end{equation*}
 where 
 \[
@@ -138,7 +141,7 @@ we have that $g(x) = 0.07571859x + -1.97639231$.
 
 \hfill
 
-\section*{Question 4} \textbf{(a)} For attribute $X_2$ we have that $x^{min} = 1$ and $x^{max} = 51$. The denominator is 
+\section*{Question 4} \textbf{(a)} For attribute $X_2$ we have that $x^{min} = -1$ and $x^{max} = 51$. The denominator is 
 $x^{max} - x^{min} = 51 - (-1) = 52$, so
 \begin{equation*}
 \begin{split}
@@ -161,6 +164,27 @@ $x^{max} - x^{min} = 51 - (-1) = 52$, so
 \end{split}
 \end{equation*} 
 where -0.3 is $x^{min}$ for attribute $x1$ and 3.8 is $x^{max}$ for attribute $x1$.
+
+\noindent To classify 
+\[
+x^{norm}=
+  \begin{bmatrix}
+     1.02\\
+     0.10\\
+  \end{bmatrix}
+\]
+we need to compute its Euclidian distance with respect to the normalized training values, that is
+\begin{equation*}
+\begin{split}
+dist(x^{norm}, (0.68, 0.83)) = \sqrt{(1.02 - 0.68)^2 + (0.10 - 0.83)^2} \approx 0.81\\
+dist(x^{norm}, (1.00, 1.00)) = \sqrt{(1.02 - 1.00)^2 + (0.10 - 1.00)^2} \approx 0.90\\
+dist(x^{norm}, (0.00, 0.00)) = \sqrt{(1.02 - 0.00)^2 + (0.10 - 0.00)^2} \approx 1.02\\
+dist(x^{norm}, (0.24, 0.08)) = \sqrt{(1.02 - 0.24)^2 + (0.10 - 0.08)^2} \approx 0.78\\
+dist(x^{norm}, (0.46, 0.52)) = \sqrt{(1.02 - 0.46)^2 + (0.10 - 0.52)^2} \approx 0.70\\
+dist(x^{norm}, (0.63, 0.81)) = \sqrt{(1.02 - 0.63)^2 + (0.10 - 0.81)^2} \approx 0.81\\ 
+\end{split}
+\end{equation*} 
+Given that the closest point is $(0.46, 0.52)$, and given that its label is $-$, the predicted label for $x^{norm}$ is $-$.
 
 \hfill
 
@@ -272,33 +296,32 @@ A = \frac{56 + 41}{58 + 42} = \frac{97}{100} = 0.97
 \end{split}
 \end{equation*} 
 
-\section*{Question 8} %% \textbf{Doubt: The expected cost of predicting negative should be: (cost of false negative * prob of false negative) + 
-%%  (cost of true negative * prob of true negative). Given that the cost of a true negative is zero, the expected cost of predicting negative is $a \times P(C = - | x)$, no? }
-\noindent \textbf{(a)} According to the data in the question, \textit{spam} is the positive class (+) and \textit{non-spam} is the negative class. Given that a false negative 
-prediction costs 5 units, and that a false positive prediction costs 2, we have that
+\section*{Question 8} \noindent \textbf{(a)} According to the data in the question, \textit{spam} is the positive class (+) and \textit{non-spam} is the negative class. 
+Given that a false negative prediction costs 5 units, and that a false positive prediction costs 2, we have that
 \begin{equation*}
 \begin{split}
 &E[predicting\mbox{ }spam] = 2 \times P(non-spam|x1, x2)\\
 &E[predicting\mbox{ }spam] = 2 \times (1 - P(spam|x1, x2))\\
-&E[predicting\mbox{ }spam] = 2 \times (1 - \frac{1}{e^{-(3x_2 - 2x_1 + 1)}})\\
-&E[predicting\mbox{ }spam] = 2 \times (1 - \frac{1}{e^{-(3 \times 2 - 2 \times 3 + 1)}})\\
-&E[predicting\mbox{ }spam] = 2 \times (1 - \frac{1}{e})\\
-&E[predicting\mbox{ }spam] = 2 \times (1 - \frac{1}{e})\\
-&E[predicting\mbox{ }spam] \approx 2 \times 0.63\\
-&E[predicting\mbox{ }spam] \approx 1.26
+&E[predicting\mbox{ }spam] = 2 \times (1 - \frac{1}{1 + e^{-(3x_2 - 2x_1 + 1)}})\\
+&E[predicting\mbox{ }spam] = 2 \times (1 - \frac{1}{1 + e^{-(3 \times 2 - 2 \times 3 + 1)}})\\
+&E[predicting\mbox{ }spam] = 2 \times (1 - \frac{1}{1 + e})\\
+&E[predicting\mbox{ }spam] \approx 2 \times (1 - 0.26894142137)\\
+&E[predicting\mbox{ }spam] \approx 2 \times 0.73105857863\\
+&E[predicting\mbox{ }spam] \approx 1.46211715726
 \end{split}
 \end{equation*} 
 and
 \begin{equation*}
 \begin{split}
 &E[predicting\mbox{ }non-spam] = 5 \times P(spam|x1, x2)\\
-&E[predicting\mbox{ }non-spam] = 5 \times \frac{1}{e^{-(3x_2 - 2x_1 + 1)}}\\
-&E[predicting\mbox{ }non-spam] = 5 \times \frac{1}{e^{-(3 \times 2 - 2 \times 3 + 1)}}\\
-&E[predicting\mbox{ }non-spam] = 5 \times \frac{1}{e}\\
-&E[predicting\mbox{ }non-spam] \approx 1.84
+&E[predicting\mbox{ }non-spam] = 5 \times \frac{1}{1 + e^{-(3x_2 - 2x_1 + 1)}}\\
+&E[predicting\mbox{ }non-spam] = 5 \times \frac{1}{1 + e^{-(3 \times 2 - 2 \times 3 + 1)}}\\
+&E[predicting\mbox{ }non-spam] = 5 \times \frac{1}{1 + e}\\
+&E[predicting\mbox{ }non-spam] \approx 5 \times 0.26894142137\\
+&E[predicting\mbox{ }non-spam] \approx 1.34470710685
 \end{split}
 \end{equation*} 
-That is, classifying as \textit{spam} has smaller expected risk.
+That is, classifying as \textit{non-spam} has smaller expected risk.
 
 \section*{Question 9} \textbf{TODO}
 
