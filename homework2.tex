@@ -323,7 +323,25 @@ and
 \end{equation*} 
 That is, classifying as \textit{non-spam} has smaller expected risk.
 
-\section*{Question 9} \textbf{TODO}
+\section*{Question 9} Let the estimator of the mean of $D$ be
+\begin{equation*}
+\begin{split}
+&\hat{\theta} = \frac{\sum_{x \in X}x}{N + 1}
+\end{split}
+\end{equation*} 
+and its bias be
+\begin{equation*}
+\begin{split}
+&Bias_{\theta}[\hat{\theta}] = E_{D|\theta}[\hat{\theta} - \theta] =  E_{D|\theta}[\hat{\theta}] - E_{D|\theta}[\theta]\\
+&Bias_{\theta}[\hat{\theta}] = E_{D|\theta}[\hat{\theta}] - \frac{\sum_{x \in X}x}{N}\\
+&Bias_{\theta}[\hat{\theta}] = \frac{\sum_{x \in X}x}{N + 1} -  \frac{\sum_{x \in X}x}{N}\\
+&Bias_{\theta}[\hat{\theta}] = \frac{N\sum_{x \in X}x - (N + 1)\sum_{x \in X}x}{N(N + 1)}\\
+&Bias_{\theta}[\hat{\theta}] = \frac{-\sum_{x \in X}x}{N(N + 1)}\\
+\end{split}
+\end{equation*}  
+The estimator $\hat{\theta}$ is thus biased, as long as the numerator of $Bias_{\theta}[\hat{\theta}]$ is different from zero.
+
+\hfill
 
 \section*{Question 10} \textbf{(a)} Given the dataset, we have the following positive examples:
 \begin{gather*}
@@ -345,7 +363,6 @@ That is, classifying as \textit{non-spam} has smaller expected risk.
  \end{bmatrix}
 \end{split}
 \end{gather*}
-
 where the first and second rows correspond, respectively, to values for attributes $x1$ and $x2$. 
 Consequently,  
 \begin{gather*}
