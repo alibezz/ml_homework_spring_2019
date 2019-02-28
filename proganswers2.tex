@@ -34,46 +34,77 @@
 
 \subsection*{1a} Using linear regression without regularization, we have
 
+For the training set:
 \begin{itemize}
-\item RSS = 2479.76554683
+\item TSS = 35096.8551485
+\item $R^2$ = 0.750883778673
+\end{itemize}
+
+For the test set:
+\begin{itemize}
+\item RSS = 2479.76554682
 \item TSS = 7480.04588235
-\item $R^2$ = 0.668482575397
+\item $R^2$ = 0.668482575398
 \end{itemize}
 
 \subsection*{1b} Using ridge regression and 5-fold cross-validation to find the best $\lambda$, we have
 
+For training set:
+\begin{itemize}
+\item TSS = 35096.8551485
+\item $R^2$ = 0.750883778673
+\end{itemize}
+
+For test set:
 \begin{itemize}
 \item RSS = 2479.76554683
 \item TSS = 7480.04588235
 \item $R^2$ = 0.668482575397
 \item $\lambda$ = 0
 \end{itemize}
-That is, it coincides with the linear model without regularization.
+That is, the best $\lambda$ we found was zero, so the ridge regression coincides with the 
+linear model without regularization.
 
 \subsection*{2a} Using the model with the degree 2 polynomial transformation, without regularization, we have
+
+For training set:
 \begin{itemize}
-\item RSS = 6.5689787408e+27
+\item TSS = 35096.8551485
+\item $R^2$ = 0.936894877363
+\end{itemize}
+
+For test set:
+\begin{itemize}
+\item RSS = 1330.37713089
 \item TSS = 7480.04588235
-\item $R^2$ = -8.78200327126e+23
+\item $R^2$ = 0.822143185775
 \end{itemize}
 
 \subsection*{2b} Using ridge regression coupled with the degree 2 polynomial transformation, and applying 
 5-fold cross-validation to find the best $\lambda$, we have
+
+For training set:
+\begin{itemize}
+\item TSS = 35096.8551485
+\item $R^2$ = 0.92707931343
+\end{itemize}
+
+For test set:
 \begin{itemize}
 \item RSS = 1460.74019233
 \item TSS = 7480.04588235
-\item $R^2$: 0.804715075909
+\item $R^2$ = 0.804715075909
 \item $\lambda$ = 0.046
 \end{itemize}
 
-\subsection*{3} The model that performed best was the ridge regression with the degree 2 polynomial transformation because its 
-$R^2$ is the highest and its RSS is the lowest. The parameters are $\lambda = 0.046$ and
+\subsection*{3} The model that performed best was the linear regression with the degree 2 
+polynomial transformation because its $R^2$ is the highest over both training and test sets and its RSS is the lowest for both sets as well. The parameters are
+ 
+\noindent \textbf{w} = [ 1.76626472e-01, -1.09328978e+01,  6.32166441e-01, -1.99036471e+00, -3.62834650e-01, -2.67607884e-01,  9.18965000e+00,  5.76236108e-01, -1.31983340e+01,  3.68757809e+00, -1.41519703e-01, -6.95003303e-01,  1.12593616e-01, -5.90040590e-01,  7.82947995e-04,  1.07238480e-01,  2.57285300e-01,  2.95831353e+00, -1.42638146e+00,  1.89522446e-01, -2.54060271e-03, -8.65280936e-02, -1.55349192e-01, -1.07956353e-03,  5.05792345e-01, -4.28887913e-04,  3.09638438e-02,  2.13294334e-04, -2.58323716e-03, -4.19134317e-02, -1.16522694e+00, -1.21535076e-02,  1.11652138e-03, -2.39047639e-02, -1.52021418e-02,  6.84239939e-04, -1.42837306e-03, -1.36803764e-05, -1.00713817e-02,  3.38488491e-02, -3.41717322e-01, -8.48792518e-02,  1.44145590e-01,  4.56318802e-03,  4.93166153e-02, -8.26983347e-02,  7.03283106e-04, -5.60402280e-02,  3.18397777e-03, -2.19000369e-02, -3.62775557e-01, -2.37519867e+00, -4.13726875e+00,  4.95118305e-02,  4.32286997e-01, -8.46039678e-01,  9.25438865e-03,  1.23472598e+00,  3.41412161e-02, -5.44958643e-01, -1.00629970e+00,  2.23053860e-01, -9.33602077e-02,  2.04329097e+01, -2.80950356e+00,  2.22805536e-01, -7.38675000e+00, -2.52743471e-02,  1.42978887e+00,  1.02702527e+00, -5.45981030e-02,  1.50093543e-02, -3.47471839e-01, -4.75685339e-03, -3.84762752e-01, -7.07761576e-03, -3.77209307e-02, -7.03466490e-05, -4.02937487e-04,  1.45757913e-02, -5.08867364e-04,  3.05327601e-03, -4.75276830e-04, -7.75137362e-03,  5.58258802e-01, -5.72302846e-02, -1.91272941e-03, -8.86877746e-02, -3.21796932e-03,  6.37305894e-02, -1.11050244e-01,  7.94070572e-03, -8.79341899e-02,  2.81185062e-03, -3.41735631e-02, -5.75953103e-05,  1.08328050e-02, -2.95897298e-04, -7.88605180e-04,  4.97528848e-02,  4.60803815e-03,  2.10932552e-02, -2.92920872e-05, -1.12958966e-04,  1.75418315e-02]
 
-\noindent \textbf{w} = [-1.97867462e-02, -8.97547715e-02, -1.53146491e-01, -1.45649024e-01,  2.77229152e-02,  1.68356085e-02,  2.56533897e-01,  2.89271164e-01, -1.67949815e-01,  3.45162259e-01, -8.14598220e-02, -4.29040159e-01,  1.18979807e-01, -4.95938477e-01,  5.92249116e-04,  1.51317467e-02,  1.58857136e-01,  1.96936418e+00, -5.99860342e-01,  1.62908056e-01, -2.12193946e-03, -2.94054467e-02,  9.64861257e-02, -1.11524077e-02,  7.37808706e-02, -3.60680878e-04,  2.09230048e-02,  6.14691769e-04,  4.09745227e-04, -1.06336525e-02,  9.46744755e-02, -7.01902994e-03,  6.67357999e-04, -1.60640689e-02, -1.18761468e-02,  4.08356879e-04,  9.67220315e-03, -1.61577360e-05, -9.25743296e-03,  2.54904930e-02, -1.07423444e-01,  1.68473573e-01,  4.79096157e-03,  5.39907613e-03,  1.66349486e-02, -1.83884866e-03,  1.22284653e-03, -7.14587029e-02,  4.84328815e-04, -2.68033777e-02,  2.77229152e-02, -9.77781354e-02, -1.37647122e+00,  2.80719477e-02, -1.83095023e-01, -4.19786687e-02, -1.87658107e-02,  5.09222201e-01,  2.06047463e-02, -2.53315484e-01,  1.24260212e-02,  1.20063768e-01, -2.74140507e-02,  2.84691674e-01, -2.49694747e-01, -4.08037857e-02,  9.14187977e-02,  4.03121009e-03,  4.80349760e-01,  1.28851869e+00, -2.88994224e-02,  1.38559169e-01, -3.76462102e-01, -3.94775590e-04, -3.26845864e-01, -3.55132037e-03,  3.68329344e-02, -9.45802006e-05,  8.13794084e-03,  8.35839532e-03, -2.52944117e-04,  4.22596669e-03, -5.25602843e-04, -6.02135002e-03,  2.99513460e-01, -5.66891070e-03, -3.91811836e-06, -1.28370558e-01, -8.42492339e-03,  4.45704994e-02, -1.64646307e-01,  6.95380057e-03,  9.25838844e-02,  1.39105095e-03, -3.47144833e-02, -1.88910975e-05,  7.07921652e-03, -1.43278051e-04, -2.97164331e-04, -1.90179423e-02,  1.98937001e-03,  8.61437910e-04, -1.98140878e-05, -2.91567255e-04,  2.49943488e-02]
+\noindent The predicted price of a house with the features in the question is 425.47739139. 
 
-\noindent The price of a house with the features in the question is predicted as 106.12172948.
-
-\subsection*{4} We would choose ridge regression with the degree 2 polynomial transformation because this model 
+\subsection*{4} We would choose linear regression with the degree 2 polynomial transformation (no regularization) because this model 
 performed best among the 4 models we attempted, as its RSS is the lowest and its $R^2$ is the highest. So it
 means that our predicted function is the most likely to properly predict new housing prices, out of the tested possibilities. 
 
