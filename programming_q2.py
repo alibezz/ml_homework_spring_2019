@@ -20,7 +20,7 @@ STOPWORDS_PUNCTUATION = ["i","me","my","myself","we","our","ours","ourselves","y
 def preprocess(terms):
     return list(filter(lambda a: a not in STOPWORDS_PUNCTUATION, terms))
     
-def get_training_data(filename, dist_function):
+def get_training_data(filename, dist_function='standard'):
     vocab = {}
     data = []
     indices = []
@@ -87,9 +87,8 @@ def compute_data_for_confusion_matrix(true_, predicted):
                 fp += 1
     return tp, fp, tn, fn
 
-def test_example(training_data, document, training_classes, k, dist_function):
+def test_example(training_data, doc_indices, training_classes, vocab, k, dist_function='standard'):
     distances = []
-    doc_indices = indices_test_document(document, vocab) 
     for index, train_doc in enumerate(training_data):
         train_doc_indices = train_doc.nonzero()[1]
         if dist_function == 'standard':
@@ -117,17 +116,18 @@ def test_model(filename, training_data, training_classes, vocab, k, dist_functio
             fields = line.strip().split(SEPARATOR)
             true_labels.append(fields[0])
             doc = fields[1:]
-            label = test_example(training_data, doc, training_classes, k, dist_function)
+            doc_indices = indices_test_document(doc, vocab)
+            label = test_example(training_data, doc_indices, training_classes, vocab, k, dist_function)
             predicted_labels.append(label)
             #predicted_labels.append(zero_r_prediction)
         tp, fp, tn, fn = compute_data_for_confusion_matrix(true_labels, predicted_labels)
         print 'tp', tp, 'fp', fp, 'tn', tn, 'fn', fn    
 
-def run_slice(training, training_classes, test, test_classes, k):
+def run_slice(training, training_classes, test, test_classes, vocab, k):
     predicted_labels = []
     for example in test:
         indices = example.nonzero()[1]
-        label = test_example(training, indices, training_classes, k)
+        label = test_example(training, indices, training_classes, vocab, k)
         predicted_labels.append(label)
     return compute_data_for_confusion_matrix(test_classes, predicted_labels)
 
@@ -141,19 +141,19 @@ def cross_validation(filename, k, size):
     data4 = training_data[size*4:size*5]; classes4 = training_classes[size*4:size*5]
 
     training0 = vstack((data1, data2, data3, data4)); training_classes0 = classes1 + classes2 + classes3 + classes4
-    tp0, fp0, tn0, fn0 = run_slice(training0, training_classes0, data0, classes0, k)
+    tp0, fp0, tn0, fn0 = run_slice(training0, training_classes0, data0, classes0, vocab, k)
 
     training1 = vstack((data0, data2, data3, data4)); training_classes1 = classes0 + classes2 + classes3 + classes4
-    tp1, fp1, tn1, fn1 = run_slice(training1, training_classes1, data1, classes1, k)
+    tp1, fp1, tn1, fn1 = run_slice(training1, training_classes1, data1, classes1, vocab, k)
 
     training2 = vstack((data0, data1, data3, data4)); training_classes2 = classes0 + classes1 + classes3 + classes4
-    tp2, fp2, tn2, fn2 = run_slice(training2, training_classes2, data2, classes2, k)
+    tp2, fp2, tn2, fn2 = run_slice(training2, training_classes2, data2, classes2,  vocab, k)
     
     training3 = vstack((data0, data1, data2, data4)); training_classes3 = classes0 + classes1 + classes2 + classes4
-    tp3, fp3, tn3, fn3 = run_slice(training3, training_classes3, data3, classes3, k)
+    tp3, fp3, tn3, fn3 = run_slice(training3, training_classes3, data3, classes3,  vocab, k)
     
     training4 = vstack((data0, data1, data2, data3)); training_classes4 = classes0 + classes1 + classes2 + classes3
-    tp4, fp4, tn4, fn4 = run_slice(training4, training_classes4, data4, classes4, k)
+    tp4, fp4, tn4, fn4 = run_slice(training4, training_classes4, data4, classes4,  vocab, k)
     
     acc = (tp0 + tn0 + tp1 + tn1 + tp2 + tn2 + tp3 + tn3 + tp4 + tn4)/1500.
     print 'cross-validation accuracy', acc, 'num', tp0 + tn0 + tp1 + tn1 + tp2 + tn2 + tp3 + tn3 + tp4 + tn4
