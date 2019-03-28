@@ -16,41 +16,253 @@
 \maketitle %This command prints the title based on information entered above
 
 %Section and subsection automatically number unless you put the asterisk next to them.
-\section*{Question 1} TBD
+\section*{Question 1} TODO
 
 \hfill
 
-\section*{Question 2} Waiting for Rao's answer
+\section*{Question 2} TODO 
 
 \hfill
 
 
-\section*{Question 3} Waiting for Rao's answer 
+\section*{Question 3} Let's start with the entropy criterion. Suppose class1 = $A$ and class0 = $B$. 
+There are then 4 $A$ and 2 $B$ training examples. If we choose feature $x_1$, we have two 
+subsets of examples: one to which $x_1 = 1$ ($S_l$) and one to which $x_1 = 0$ ($S_r$). The entropy for these 
+subsets is 
+\begin{equation*}
+\begin{split}
+&H(S_l) = -(\frac{3}{3}\log_2\frac{3}{3} + \frac{0}{3}\log_2\frac{0}{3}) \\
+&H(S_l) = -1\log_21 = 0\\
+&H(S_r) = -(\frac{2}{3}\log_2\frac{2}{3} + \frac{1}{3}\log_2\frac{1}{3}) \\
+&H(S_r) = 0.918
+\end{split}
+\end{equation*}
+Finally,
+\begin{equation*}
+\begin{split}
+&H(after) = \frac{|S_l|H(S_l) + |S_r|H(S_r)}{|S_l| + |S_r|} = \frac{3*0 + 3*0.918}{3 + 3} = 0.459
+\end{split}
+\end{equation*} 
+Analogously, for $x_2$ we have
+\begin{equation*}
+\begin{split}
+&H(S_l) = -(\frac{1}{2}\log_2\frac{1}{2} + \frac{1}{2}\log_2\frac{1}{2}) \\
+&H(S_l) = 1\\
+&H(S_r) = -(\frac{2}{2}\log_2\frac{2}{2} + \frac{0}{2}\log_2\frac{0}{2})\\
+&H(S_r) = -1\log_21 = 0\\
+&H(after) = \frac{|S_l|H(S_l) + |S_r|H(S_r)}{|S_l| + |S_r|} = \frac{4*1 + 2*0}{4 + 2} = 0.667
+\end{split}
+\end{equation*}
+Analogously, for $x_3$ we have
+\begin{equation*}
+\begin{split}
+&H(S_l) = -(\frac{3}{4}\log_2\frac{3}{4} + \frac{1}{4}\log_2\frac{1}{4}) \\
+&H(S_l) = 0.811\\
+&H(S_r) = -(\frac{1}{2}\log_2\frac{1}{2} + \frac{1}{2}\log_2\frac{1}{2})\\
+&H(S_r) = 1\\
+&H(after) = \frac{|S_l|H(S_l) + |S_r|H(S_r)}{|S_l| + |S_r|} = \frac{4*0.811 + 2*1}{4 + 2} = 0.874
+\end{split}
+\end{equation*}
+Finally,for $x_4$ we have
+\begin{equation*}
+\begin{split}
+&H(S_l) = -(\frac{1}{2}\log_2\frac{1}{2} + \frac{1}{2}\log_2\frac{1}{2}) \\
+&H(S_l) = 1\\
+&H(S_r) = -(\frac{4}{4}\log_2\frac{4}{4} + \frac{0}{4}\log_2\frac{0}{4})\\
+&H(S_r) = -1\log_21 = 0\\
+&H(after) = \frac{|S_l|H(S_l) + |S_r|H(S_r)}{|S_l| + |S_r|} = \frac{4*1 + 2*0}{4 + 2} = 0.667
+\end{split}
+\end{equation*}
+Because we want to minimize $H(after)$ to find the best split, $x_1$ will be chosen for the root.
+
+\noindent Now let's use the Gini criterion, using $S_r$ and $S_l$ as defined above for the different $x$ features. 
+For $x_1$, we have
+\begin{equation*}
+\begin{split}
+&G(S_l) = 1 - 1^2 = 0\\
+&G(S_r) = 1 - \Big(\frac{1}{3}\Big)^2 - \Big(\frac{2}{3}\Big)^2 = \frac{4}{9}\\
+&G(S) = \frac{1}{2}*0 + \frac{1}{2}*\frac{4}{9} = 0.222
+\end{split}
+\end{equation*}
+For $x_2$, we have
+\begin{equation*}
+\begin{split}
+&G(S_l) = 1 - \Big(\frac{1}{2}\Big)^2 - \Big(\frac{1}{2}\Big)^2 = \frac{1}{2}\\
+&G(S_r) = 1 - 1^2 = 0\\
+&G(S) = \frac{2}{3}*\frac{1}{2} + \frac{1}{3}*0 = 0.333
+\end{split}
+\end{equation*}
+For $x_3$, we have
+\begin{equation*}
+\begin{split}
+&G(S_l) = 1 - \Big(\frac{3}{4}\Big)^2 - \Big(\frac{1}{4}\Big)^2 = \frac{3}{8}\\
+&G(S_r) = 1 - \Big(\frac{1}{2}\Big)^2 - \Big(\frac{1}{2}\Big)^2 = \frac{1}{2}\\
+&G(S) = \frac{2}{3}*\frac{3}{8} + \frac{1}{3}*\frac{1}{2} = 0.417
+\end{split}
+\end{equation*}
+Finally, for $x_4$ we have
+\begin{equation*}
+\begin{split}
+&G(S_l) = 1 - \Big(\frac{1}{2}\Big)^2 - \Big(\frac{1}{2}\Big)^2 = \frac{1}{2}\\
+&G(S_r) = 1 - 1^2 = 0\\
+&G(S) = \frac{2}{3}*\frac{1}{2} + \frac{1}{3}*0 = 0.333
+\end{split}
+\end{equation*}
+Because the Gini criterion calculates how frequently a randomly chosen element will be wrongly identified, we want to minimize it to find the best split. 
+Consequently, $x_1$ will be chosen for the root.
+
+\noindent Now let's use the Misclassification criterion, using $S_r$ and $S_l$ as defined above for the different $x$ features. 
+For $x_1$, we have
+\begin{equation*}
+\begin{split}
+&J(S_l) = 0\\
+&J(S_r) = 1\\
+&J(S) = 0 + 1 = 1
+\end{split}
+\end{equation*}
+For $x_2$, we have
+\begin{equation*}
+\begin{split}
+&J(S_l) = 2\\
+&J(S_r) = 0\\
+&J(S) = 2 + 0 = 2
+\end{split}
+\end{equation*}
+For $x_3$, we have
+\begin{equation*}
+\begin{split}
+&J(S_l) = 1\\
+&J(S_r) = 1\\
+&J(S) = 1 + 1 = 2
+\end{split}
+\end{equation*}
+Finally, for $x_4$ we have
+\begin{equation*}
+\begin{split}
+&J(S_l) = 2\\
+&J(S_r) = 0\\
+&J(S) = 2 + 0 = 2
+\end{split}
+\end{equation*}
+Because this criterion should minimize the number of points that are incorrectly classified, $x_1$ will be chosen for the root.
 
 \hfill
 
-\section*{Question 4} \textbf{(a)} When there are two classes, the maximum entropy occurs when they are equaly likely, i.e., 
+\section*{Question 4} %% Let the discriminant functions be
+%% \begin{equation*}
+%% \begin{split}
+%% &g_1(x_1, x_2) = 5x_2 J(S_l) = 2\\
+%% &J(S_r) = 0\\
+%% &J(S) = 2 + 0 = 2
+%% \end{split}
+%% \end{equation*}
+
+
+\hfill
+
+\section*{Question 5} \textbf{(a)} When there are two classes, the maximum entropy occurs when they are equaly likely, i.e., 
 when \textit{half} of the examples are positive and \textit{half} are negative. The closer the proportions are to $\frac{1}{2}$, 
 the higher the entropy. In the first dataset, we have that the proportions for positive and negative class are, respectively, 
 $\frac{4}{9}$ and $\frac{5}{9}$. Consequently, the difference between these proportions and $\frac{1}{2}$ are the same, and can 
 be calculated as
 \begin{equation*}
 \begin{split}
-&|\frac{4}{9} - \frac{1}{2}| = \frac{|2*4 - 9*1|}{18} = \frac{1}{18}
+&|\frac{4}{9} - \frac{1}{2}| = \frac{|2*4 - 9*1|}{18} = \frac{1}{18} \\
 \end{split}
 \end{equation*}
 As for the second dataset, the proportions for positive and negative class are, respectively, $\frac{1}{3}$ and $\frac{2}{3}$. 
 The difference between these proportions and $\frac{1}{2}$ are the same, and can be calculates as 
 \begin{equation*}
 \begin{split}
-&|\frac{1}{3} - \frac{1}{2}| = \frac{|2*1 - 3*1|}{6} = \frac{1}{6}
+&|\frac{1}{3} - \frac{1}{2}| = \frac{|2*1 - 3*1|}{6} = \frac{1}{6} \\
 \end{split}
 \end{equation*}
-Given that the difference for the first dataset is smaller, its entropy is higher. In other words, the entropy for the dataset with 4 positive and 
+Given that the difference for the first dataset is smaller, its entropy is higher (this dataset has more 
+\textit{impurity}). In other words, the entropy for the dataset with 4 positive and 
 5 negative examples is higher.
 
 \hfill
 
-\noindent \textbf{(b)} 
-\end{document}
+\noindent \textbf{(b)} First, let's compute the entropy of the entire dataset, namely $S$:
+\begin{equation*}
+\begin{split}
+&Entropy(S) = -(\frac{3}{7}\log_2\frac{3}{7} + \frac{3}{7}\log_2\frac{3}{7}) \\
+&Entropy(S) = 0.98522813603425152 \\
+\end{split}
+\end{equation*}
+Now, let's compute the entropy associated to the examples where $x_1 = F$ and where $x_1 = F$.
+\begin{equation*}
+\begin{split}
+&Entropy(S_{x_1 = F}) = -(\frac{2}{4}\log_2\frac{2}{4} + \frac{2}{4}\log_2\frac{2}{4}) \\
+&Entropy(S_{x_1 = F}) = 1.0 \\
+&Entropy(S_{x_1 = T}) = -(\frac{1}{3}\log_2\frac{1}{3} + \frac{2}{3}\log_2\frac{2}{3}) \\
+&Entropy(S_{x_1 = T}) = 0.91829583405448956 \\
+\end{split}
+\end{equation*} 
+Consequently, the second term of the Information Gain formula is
+\begin{equation*}
+\begin{split}
+&Y = \sum_{v \in \{F, T\}}\frac{|S_{x_1 = v}|}{|S|}Entropy(S_{x_1 = v}) \\ 
+&Y = \frac{4}{7}1.0 + \frac{3}{7}0.91829583405448956 \\
+&Y = 0.9649839288804954 \\
+\end{split}
+\end{equation*} 
+The final value for $x_1$ is thus
+\begin{equation*}
+\begin{split}
+&Information-Gain(S) = 0.98522813603425152 - 0.9649839288804954 \\
+&Information-Gain(S) = 0.020244207153756077 \\
+\end{split}
+\end{equation*} 
 
+\hfill
+
+\noindent \textbf{(c)} WILL TYPE SOON
+
+\hfill
+
+\noindent \textbf{(d)} First, let's compute $H(Y)$. 
+\begin{equation*}
+\begin{split}
+&H(Y) = -(P[Y = +]\log_2P[Y = +] + P[Y = -]\log_2P[Y = -]) \\
+&H(Y) = -(\frac{3}{7}\log_2\frac{3}{7} + \frac{4}{7}\log_2\frac{4}{7}) \\
+&H(Y) = 0.98522813603425152 \\
+\end{split}
+\end{equation*} 
+Now, let's compute $H(Y|X)$.
+\begin{equation*}
+\begin{split}
+&H(Y|X) = \sum_xP[X = x] * \Big(\sum_y-P[Y = y| X = x]*\log_2P[Y = y| X = x]\Big) \\
+%&H(Y|X) = P[X = F]*(-P[Y = +| X = F]*\log_2P[Y = +| X = F] - P[Y = -| X = F]* \log_2P[Y = -| X = F]) + P[X = T]*(-P[Y = +| X = T]*\log_2P[Y = +| X = T] - P[Y = -| X = T]*\log_2P[Y = -| X = T]) \\
+&H(Y|X) = \frac{4}{7}(-\frac{1}{2}\log_2\frac{1}{2} - \frac{1}{2}\log_2\frac{1}{2}) + \frac{3}{7}(-\frac{1}{3}\log_2\frac{1}{3} - \frac{2}{3}\log_2\frac{2}{3})\\
+&H(Y|X) = \frac{4}{7}*1.0 + \frac{3}{7}* 0.91829583405448956\\
+&H(Y|X) = 0.9649839288804954\\
+\end{split}
+\end{equation*} 
+Finally,
+\begin{equation*}
+\begin{split}
+&H(Y) - H(Y|X) = 0.98522813603425152 - 0.9649839288804954 \\
+&H(Y) - H(Y|X) = 0.020244207153756077
+\end{split}
+\end{equation*} 
+
+\hfill
+
+\noindent \textbf{(e)} Using the entropy formula for a dataset $S$, we have that
+\begin{equation*}
+\begin{split}
+&Entropy(S) = -\sum_{i \in z}\frac{N_i}{N}\log_2\frac{N_i}{N}
+\end{split}
+\end{equation*} 
+If each label is equally likely, we can write $\frac{N_i}{N} = \frac{1}{|z|}$ for any $i$. Consequently,
+\begin{equation*}
+\begin{split}
+&Entropy(S) = -\sum_{i \in z}\frac{1}{|z|}\log_2\frac{1}{|z|}\\
+&Entropy(S) = -|z|\frac{1}{|z|}\log_2\frac{1}{|z|}\\
+&Entropy(S) = -\log_2\frac{1}{|z|}\\
+&Entropy(S) = \log_2|z|\\
+\end{split}
+\end{equation*}
+where $|z|$ is the number of different labels.  
+\end{document}
