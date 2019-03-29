@@ -148,15 +148,23 @@ Because this criterion should minimize the number of points that are incorrectly
 
 \hfill
 
-\section*{Question 4} %% Let the discriminant functions be
-%% \begin{equation*}
-%% \begin{split}
-%% &g_1(x_1, x_2) = 5x_2 J(S_l) = 2\\
-%% &J(S_r) = 0\\
-%% &J(S) = 2 + 0 = 2
-%% \end{split}
-%% \end{equation*}
-
+\section*{Question 4} Let the discriminant functions be
+\begin{equation*}
+\begin{split}
+&g_1(x_1, x_2) = 5x_2 + 3x_1 - 4\\
+&g_2(x_1, x_2) = -3x_2 + 2x_1 - 6\\
+\end{split}
+\end{equation*}
+We assign an example $(x_1, x_2)$ to class $C_1$ when $g_1(x_1, x_2) > g_2(x_1, x_2)$, that is
+\begin{equation*}
+\begin{split}
+&g_1(x_1, x_2) > g_2(x_1, x_2)\\
+&5x_2 + 3x_1 - 4 > -3x_2 + 2x_1 - 6\\
+&8x_2 - x_1 + 2 > 0\\
+&g(x_1, x_2) = 8x_2 - x_1 + 2
+\end{split}
+\end{equation*}
+So if $g(x_1, x_2) > 0$, the example is assigned to class $C_1$; otherwise, to class $C_2$. 
 
 \hfill
 
