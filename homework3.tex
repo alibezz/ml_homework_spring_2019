@@ -16,16 +16,202 @@
 \maketitle %This command prints the title based on information entered above
 
 %Section and subsection automatically number unless you put the asterisk next to them.
-\section*{Question 1} TODO
+\section*{Question 1} Before computing principal components, let's represent the points as a matrix, with each attribute as a column and 
+each row as a point:
+\[
+X=
+  \begin{bmatrix}
+    -2 & -2 \\
+     0 & 0 \\
+     2 & 2 \\
+  -0.5 & 0.5 \\
+   0.5 & -0.5 
+  \end{bmatrix}
+\]
+The mean of both columns is zero, so the data is already mean-centered. Now let's compute the covariance matrix associated to X  
+using the standard formula (denominator = $N - 1$): 
+\hfill
+\[
+Cov=
+  \begin{bmatrix}
+  \frac{-2^2 + 2^2 + (-0.5)^2 + 0.5^2}{4} & \frac{-2*-2 + 2*2 + (-0.5*0.5) + 0.5*(-0.5)}{4} \\
+  \frac{-2*-2 + 2*2 + (-0.5*0.5) + 0.5*(-0.5)}{4} & \frac{-2^2 + 2^2 + 0.5^2 + (-0.5)^2}{4}\\ 
+  \end{bmatrix}
+\]
+\[
+Cov=
+  \begin{bmatrix}
+  2.125 & 1.875 \\
+  1.875 & 2.125\\ 
+  \end{bmatrix}
+\]
+Now, let's compute the eigenvalues and eigenvectors associated to the covariance matrix:
+\[
+Cov - \lambda I=
+  \begin{bmatrix}
+  2.125 - \lambda & 1.875 \\
+  1.875 & 2.125 -\lambda\\ 
+  \end{bmatrix}
+\]
+\begin{equation*}
+\begin{split}
+&det(Cov - \lambda I)= (2.125 - \lambda)^2 - 1.875^2 \\
+&det(Cov - \lambda I)= 4.515625 - 4.25\lambda + \lambda^2 - 3.515625 \\
+&det(Cov - \lambda I)= \lambda^2 - 4.25\lambda + 1 \\
+\end{split}
+\end{equation*}
+The eigenvalues are the solutions to $det(Cov - \lambda I) = 0$:
+\begin{equation*}
+\begin{split}
+&\lambda^2 - 4.25\lambda + 1 = 0\\
+&\lambda = \frac{4.25 \pm \sqrt{(-4.25)^2 - 4*1*1)}}{2*1}\\
+&\lambda = 4\mbox{ or }\lambda = 0.25
+\end{split}
+\end{equation*} 
+To get the first eigenvactor, using $\lambda = 4$, we do
+%% \[
+%%   \begin{bmatrix}
+%%   2.125 - 4 & 1.875 \\
+%%   1.875 & 2.125 - 4\\ 
+%%   \end{bmatrix}
+%% \]
+\begin{gather*}
+\begin{split}
+&\begin{bmatrix}
+    2.125 - 4 & 1.875 \\
+    1.875 & 2.125 - 4\\  
+\end{bmatrix} \times \begin{bmatrix}
+   x_1\\
+   x_2\\
+\end{bmatrix} =
+\begin{bmatrix}
+   0\\
+   0
+\end{bmatrix}
+\\
+&\begin{bmatrix}
+    -1.875 & 1.875 \\
+    1.875 & -1.875\\  
+\end{bmatrix} \times \begin{bmatrix}
+   x_1\\
+   x_2\\
+\end{bmatrix} =
+\begin{bmatrix}
+   0\\
+   0
+\end{bmatrix}
+\\
+&\begin{bmatrix}
+    -1.875x_1 + 1.875x_2 \\
+    1.875x_1  -1.875x_2\\  
+\end{bmatrix} =
+\begin{bmatrix}
+   0\\
+   0\\
+\end{bmatrix}
+\end{split}
+\end{gather*}
+That is, $x_1 = x_2$ and they can be any value. So our first eigenvector, which is our first principal component because it is 
+associated to the largest eigenvalue, is
+\begin{gather*}
+\begin{split}
+&\begin{bmatrix}
+    x_1 \\
+    x_2  \\
+\end{bmatrix} =
+\begin{bmatrix} 
+   1\\
+   1\\
+\end{bmatrix}
+\end{split}
+\end{gather*}
+As for $\lambda = 0.25$, we have our second principal component:
+\begin{gather*}
+\begin{split}
+&\begin{bmatrix}
+    2.125 - 0.25 & 1.875 \\
+    1.875 & 2.125 - 0.25\\  
+\end{bmatrix} \times \begin{bmatrix}
+   x_1\\
+   x_2\\
+\end{bmatrix} =
+\begin{bmatrix}
+   0\\
+   0
+\end{bmatrix}
+\\
+&\begin{bmatrix}
+    1.875 & 1.875 \\
+    1.875 & 1.875\\  
+\end{bmatrix} \times \begin{bmatrix}
+   x_1\\
+   x_2\\
+\end{bmatrix} =
+\begin{bmatrix}
+   0\\
+   0
+\end{bmatrix}
+\\
+&\begin{bmatrix}
+    1.875x_1 + 1.875x_2 \\
+    1.875x_1 + 1.875x_2\\  
+\end{bmatrix} =
+\begin{bmatrix}
+   0\\
+   0\\
+\end{bmatrix}
+\end{split}
+\end{gather*}
+That is, $x_1 = -x_2$ and they can be any value. So our second principal component is:
+\begin{gather*}
+\begin{split}
+&\begin{bmatrix}
+    x_1 \\
+    x_2  \\
+\end{bmatrix} =
+\begin{bmatrix} 
+   1\\
+   -1\\
+\end{bmatrix}
+\end{split}
+\end{gather*}
+
+\section*{Question 2} To project the points onto the two principle components, we start by creating a matrix with the eigenvectors: 
+\begin{gather*}
+\begin{split}
+E =
+&\begin{bmatrix}
+    1 & 1 \\
+    1 & -1\\
+\end{bmatrix}
+\end{split}
+\end{gather*}
+The first and second components correspond, respectively, to the first and second lines of $E$. We now obtain the projections by 
+multiplying $E$ by $X^T$:
+\begin{gather*}
+\begin{split}
+P =
+&\begin{bmatrix}
+    1 & 1 \\
+    1 & -1\\
+\end{bmatrix} \times
+\begin{bmatrix} 
+   -2 & 0 & 2 & -0.5 & 0.5\\
+   -2 & 0 & 2 & 0.5 & -0.5\\
+\end{bmatrix} =
+\begin{bmatrix} 
+   -4 & 0 & 4 & 0 & 0\\
+   0 & 0 & 0 & -1 & 1\\
+\end{bmatrix} =
+\end{split}
+\end{gather*}
+So the projected points are, in the order given in Question 1: $\{(-4, 0), (0, 0), (4, 0), (0, -1), (0, 1)\}$.
+\textbf{CHECK CALCULATIONS!}
 
 \hfill
 
-\section*{Question 2} TODO 
 
-\hfill
-
-
-\section*{Question 3} Let's start with the entropy criterion. Suppose class1 = $A$ and class0 = $B$. 
+\section*{Question 3} Let's start with the entropy criterion. Suppose $class_1 = A$ and $class_0 = B$. 
 There are then 4 $A$ and 2 $B$ training examples. If we choose feature $x_1$, we have two 
 subsets of examples: one to which $x_1 = 1$ ($S_l$) and one to which $x_1 = 0$ ($S_r$). The entropy for these 
 subsets is 
