@@ -178,10 +178,49 @@ which is equivalent to the solution we would have found had we used $x_2 = -0.72
 
 \hfill
 
-\section*{Question 7}
+\section*{Question 7} \textbf{(a)} First, let's compute the sample means for each column.
+\begin{equation*}
+\begin{split}
+&s_1 = \frac{5 + 9 + 7 + 2}{4} = 5.75 \\
+&s_2 = \frac{2+6+1+5}{4} = 3.5\\
+&s_3 = \frac{4+4+0+6}{4} = 3.5\\
+\end{split}
+\end{equation*}
+Consequently, T=the mean centered matrix $B$ is
+\begin{gather*}
+\begin{split}
+\begin{bmatrix} 
+   -0.75 & -1.5 & 0.5\\
+   4 & 2.5 & 0.5\\
+   1.25 & -2.5 & -3.5\\
+   -3.75 & 1.5 & 2.5\\
+\end{bmatrix}
+\end{split}
+\end{gather*}
+
+\noindent \textbf{(b)} The sample covariance of $x_1$ and $x_3$ in $B$ is
+\begin{equation*}
+\begin{split}
+&\frac{\sum_t(x_1^t - s_1)*(x_3^t - s_3)}{N - 1} = \frac{-0.75*0.5 + 3.25*0.5 + 1.25*(-3.5) + (-3.75)*2.5}{4 - 1}\\
+&\frac{\sum_t(x_1^t - s_1)*(x_3^t - s_3)}{N - 1} = -4.167
+\end{split}
+\end{equation*}
+
+\noindent \textbf{(c)} The largest eigenvalue of the sample covariance matrix of $B$ is 12.9788. \textbf{CHECK}
+
+\noindent \textbf{(d)} The first two columns of $Z$ are \textbf{CHECK}
+\begin{gather*}
+\begin{split}
+\begin{bmatrix} 
+   0.26018674 & -1.41900435\\
+   -0.87353472 & 4.03721245\\
+   -4.04749635 & -1.8486773\\
+   4.66084433 & -0.7695308\\
+\end{bmatrix}
+\end{split}
+\end{gather*}
 
 \hfill
-
 \section*{Question 5}
 
 \hfill
