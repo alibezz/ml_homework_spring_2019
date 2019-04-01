@@ -16,7 +16,165 @@
 \maketitle %This command prints the title based on information entered above
 
 %Section and subsection automatically number unless you put the asterisk next to them.
-\section*{Question 6}
+\section*{Question 6} \textbf{(a)} The characteristic polynomial of matrix $A$ corresponds to the
+determinant $det(A - \lambda I)$, where
+\[
+A - \lambda I=
+  \begin{bmatrix}
+  -\lambda & 14 \\
+  6 & 9 -\lambda\\ 
+  \end{bmatrix}
+\]
+Consequently,
+\begin{equation*}
+\begin{split}
+&det(A - \lambda I) = (-\lambda)*(9 - \lambda) - 14*6\\
+&det(A - \lambda I) = -9\lambda + \lambda^2 - 84\\  
+\end{split}
+\end{equation*} 
+
+\noindent \textbf{(b)} To get the eigenvalues of $A$, we have to find the roots of the characteristic polynomial,
+that is
+\begin{equation*}
+\begin{split}
+&\lambda^2 -9\lambda - 84 = 0\\
+&\lambda = \frac{9 \pm \sqrt{(-9)^2 - 4*1*(-84)}}{2*1}\\
+&\lambda = \frac{9 \pm \sqrt{81 + 336}}{2}\\
+&\lambda = \frac{9 \pm 20.420577857}{2}\\
+&\lambda = 14.710288929\mbox{ or }\lambda = -5.710288928  
+\end{split}
+\end{equation*} 
+
+\noindent \textbf{(c)} To get the first eigenvactor, using $\lambda = 14.710288929$, we do
+\begin{gather*}
+\begin{split}
+&\begin{bmatrix}
+    -14.710288929 & 14 \\
+    6 & 9 - 14.710288929\\  
+\end{bmatrix} \times \begin{bmatrix}
+   x_1\\
+   x_2\\
+\end{bmatrix} =
+\begin{bmatrix}
+   0\\
+   0
+\end{bmatrix}
+\\
+&\begin{bmatrix}
+    -14.710288929 & 14 \\
+    6 & -5.710288929\\  
+\end{bmatrix} \times \begin{bmatrix}
+   x_1\\
+   x_2\\
+\end{bmatrix} =
+\begin{bmatrix}
+   0\\
+   0
+\end{bmatrix}
+\\
+&\begin{bmatrix}
+    -14.710288929x_1 + 14x_2 \\
+    6x_1  -5.710288929x_2\\  
+\end{bmatrix} =
+\begin{bmatrix}
+   0\\
+   0\\
+\end{bmatrix}
+\end{split}
+\end{gather*}
+This leads to the following linear system of equations, which has infinite solutions:
+\begin{equation*}
+\begin{split}
+&-14.710288929x_1 + 14x_2 = 0\\
+&6x_1  -5.710288929x_2 = 0\\  
+\end{split}
+\end{equation*}
+Given that we want the $L_2$ norm of the eigenvector to be 1, we additionally want
+\begin{equation*}
+\begin{split}
+&x_1^2 + x_2^2 = 1\\  
+\end{split}
+\end{equation*}
+By setting $x_1 = \frac{5.710288929x_2}{6} = 0.9517148215x_2$, we have
+\begin{equation*}
+\begin{split}
+& 0.9057611014627768x_2^2+ x_2^2 = 1\\
+& 1.9057611014627768x_2^2 = 1\\
+& x_2^2 = 0.5247247408043142\\
+& x_2 = \pm 0.72437886551466579\\  
+\end{split}
+\end{equation*}
+If $x_2 = 0.72437886551466579$, $x_1 = 0.68940210269166269$ and we have the following eigenvector:
+\begin{gather*}
+\begin{split}
+&\begin{bmatrix}
+    x_1 \\
+    x_2  \\
+\end{bmatrix} =
+\begin{bmatrix} 
+   0.68940210269166269\\
+   0.72437886551466579\\
+\end{bmatrix}
+\end{split}
+\end{gather*}
+As for $\lambda = -5.710288928$, we have the following linear system, for which there are infinite solutions
+as well:
+\begin{equation*}
+\begin{split}
+&5.710288928x_1 + 14x_2 = 0\\
+&6x_1 + 14.710288928x_2 = 0\\  
+\end{split}
+\end{equation*}
+Given that we want the $L_2$ norm of the eigenvector to be 1, we additionally want
+\begin{equation*}
+\begin{split}
+&x_1^2 + x_2^2 = 1\\  
+\end{split}
+\end{equation*}
+By setting $x_1 = \frac{-14.710288928x_2}{6} = -2.4517148213333333x_2$, we have
+\begin{equation*}
+\begin{split}
+& 6.0109055651455385x_2^2+ x_2^2 = 1\\
+& 7.0109055651455385x_2^2 = 1\\
+& x_2^2 = 0.14263492650242837\\
+& x_2 = \pm 0.37767039399776675\\  
+\end{split}
+\end{equation*}
+If $x_2 = 0.37767039399776675$, $x_1 = -0.92594010254312431$ and we have the following eigenvector:
+\begin{gather*}
+\begin{split}
+&\begin{bmatrix}
+    x_1 \\
+    x_2  \\
+\end{bmatrix} =
+\begin{bmatrix} 
+   0.37767039399776675\\
+   -0.92594010254312431\\
+\end{bmatrix}
+\end{split}
+\end{gather*}
+
+\noindent \textbf{(d)} In Python, numpy's linalg.eig($A$) returns eigenvalues -5.71028893 and  14.71028893,
+which correspond to the ones calculated in \textbf{(b)}, and their respective eigenvectors
+\begin{gather*}
+\begin{split}
+\begin{bmatrix} 
+   -0.9259401\\
+   0.37767039\\
+\end{bmatrix}
+\end{split}
+\end{gather*}
+which is equivalent to the one we found, and
+\begin{gather*}
+\begin{split}
+\begin{bmatrix} 
+   -0.6894021\\
+   -0.72437887\\
+\end{bmatrix}
+\end{split}
+\end{gather*}
+which is equivalent to the solution we would have found had we used $x_2 = -0.72437886551466579$ instead.
+
 
 \hfill
 
