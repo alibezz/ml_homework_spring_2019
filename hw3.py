@@ -40,31 +40,41 @@ def plt_face(x):
 	global h,w
 	plt.imshow(x.reshape((h, w)), cmap=plt.cm.gray)
 	plt.xticks([])
-plt.figure(figsize=(10,20))
-nplt = 4
-
-print plt_face(fea[3])
-
+#plt.figure(figsize=(10,20))
+#nplt = 4
 #for i in range(nplt):
 	#plt.subplot(1,nplt,i+1)
 	#plt_face(fea[i])
 #plt.show()
+
+plt_face(fea[3])
+#plt.show() #UNCOMMENT THIS LINE TO GET ANSWER FOR 5A
+
+plt_face(np.mean(fea,axis=0))
+#plt.show() #UNCOMMENT THIS LINE TO GET ANSWER FOR 5B
 
 pca = skd.PCA(n_components = 5)
 skd.PCA.fit(pca,fea)
 W1 = pca.components_
 W = W1.transpose()
 Z = pca.transform(fea)
+print '5C - Values of the associated 5 attributes of image 4'
 print Z[3]
+
+pca = skd.PCA(n_components = 5)
+skd.PCA.fit(pca,fea)
+W1 = pca.components_
+W = W1.transpose()
+Z = pca.transform(fea)
+A=np.dot(W, Z[3])+np.mean(fea,axis=0)
+plt_face(A)
+#plt.show() #UNCOMMENT THIS LINE TO GET ANSWER FOR 5D
 
 pca = skd.PCA(n_components = 50)
 skd.PCA.fit(pca,fea)
 W1 = pca.components_
 W = W1.transpose()
 Z = pca.transform(fea)
-#plt_face(fea[3])
-#plt_face(np.mean(fea,axis=0))
-A=np.dot(W, Z[3])+np.mean(fea,axis=0)
 B=np.dot(W, Z[3])+np.mean(fea,axis=0)
 plt_face(B)
-plt.show()
+plt.show()  #UNCOMMENT THIS LINE TO GET ANSWER FOR 5D

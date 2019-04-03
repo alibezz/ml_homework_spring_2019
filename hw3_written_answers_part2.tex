@@ -227,10 +227,31 @@ Figure 1.
 
 \begin{figure}[h!]
 \includegraphics[width=0.5\textwidth]{face3}  
-\caption{Image obtained with plt\_face(fea[3]).}
+\caption{Image obtained with plt\_face(fea[3]). \textbf{FIX IT INCLUDE MINE}}
 \end{figure}
 
-\noindent \textbf{(b)}
+\noindent \textbf{(b)} \textbf{INCLUDE RAO'S}
+
 \hfill
-   
+
+\noindent \textbf{(c)} The commands we used were
+
+\noindent pca = skd.PCA(n\_components = 5)
+
+\noindent skd.PCA.fit(pca,fea)
+
+\noindent W1 = pca.components\_
+
+\noindent W = W1.transpose()
+
+\noindent Z = pca.transform(fea)
+
+\noindent print Z[3]
+
+\noindent And the values of the associated 5 attributes of the fourth image in the dataset (Z[3]) are 
+$[-218.53874207, -326.849823,   -390.62661743,   31.4393959,     7.26655579]$.
+ 
+\hfill
+
+\noindent \textbf{(d)} \textbf{INCLUDE MY IMAGES}  
 \end{document}
