@@ -68,6 +68,7 @@ W = W1.transpose()
 Z = pca.transform(fea)
 A=np.dot(W, Z[3])+np.mean(fea,axis=0)
 plt_face(A)
+print 'Some values for image A', A
 #plt.show() #UNCOMMENT THIS LINE TO GET ANSWER FOR 5D
 
 pca = skd.PCA(n_components = 50)
@@ -77,4 +78,5 @@ W = W1.transpose()
 Z = pca.transform(fea)
 B=np.dot(W, Z[3])+np.mean(fea,axis=0)
 plt_face(B)
-plt.show()  #UNCOMMENT THIS LINE TO GET ANSWER FOR 5D
+print 'Some values for image B', B
+#plt.show()  #UNCOMMENT THIS LINE TO GET ANSWER FOR 5D

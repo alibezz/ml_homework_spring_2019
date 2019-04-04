@@ -222,15 +222,31 @@ Consequently, T=the mean centered matrix $B$ is
 \end{gather*}
 
 \hfill
-\section*{Question 5} \textbf{(a)} By using the commands for $t = 3$, we get
-Figure 1.
+\section*{Question 5} \textbf{(a)} By using the commands
+
+\noindent plt\_face(fea[3])
+
+\noindent plt.show()
+
+\noindent we get Figure 1.
 
 \begin{figure}[h!]
 \includegraphics[width=0.5\textwidth]{face3}  
-\caption{Image obtained with plt\_face(fea[3]). \textbf{FIX IT INCLUDE MINE}}
+%\caption{}
 \end{figure}
 
-\noindent \textbf{(b)} \textbf{INCLUDE RAO'S}
+\noindent \textbf{(b)} By using the commands 
+
+\noindent plt\_face(np.mean(fea,axis=0))
+
+\noindent plt.show()
+
+\noindent we get Figure 2.
+
+\begin{figure}[h!]
+\includegraphics[width=0.5\textwidth]{mean_face}  
+%\caption{}
+\end{figure}
 
 \hfill
 
@@ -253,5 +269,61 @@ $[-218.53874207, -326.849823,   -390.62661743,   31.4393959,     7.26655579]$.
  
 \hfill
 
-\noindent \textbf{(d)} \textbf{INCLUDE MY IMAGES}  
+\noindent \textbf{(d)} For the first 5 principal components, we use commands 
+
+\noindent pca = skd.PCA(n\_components = 5)
+
+\noindent skd.PCA.fit(pca,fea)
+
+\noindent W1 = pca.components\_
+
+\noindent W = W1.transpose()
+
+\noindent Z = pca.transform(fea)
+
+\noindent A=np.dot(W, Z[3])+np.mean(fea,axis=0)
+
+\noindent plt\_face(A)
+
+\noindent plt.show()
+
+\noindent and get Figure 3.
+
+\begin{figure}[h!]
+\includegraphics[width=0.5\textwidth]{figure_5d1}  
+%\caption{}
+\end{figure}
+
+\noindent Some values for image $A$ are $[  76.93467712   79.4756012    84.73275757 ...,  114.92474365  110.96463013 105.49328613]$.
+
+\hfill 
+
+\noindent For the first 50 principal components, we use commands
+
+\noindent pca = skd.PCA(n\_components = 50)
+
+\noindent skd.PCA.fit(pca,fea)
+
+\noindent W1 = pca.components\_
+
+\noindent W = W1.transpose()
+
+\noindent Z = pca.transform(fea)
+
+\noindent B=np.dot(W, Z[3])+np.mean(fea,axis=0)
+
+\noindent plt\_face(B)
+
+\noindent plt.show()
+
+\noindent and get Figure 4.
+
+\begin{figure}[h!]
+\includegraphics[width=0.5\textwidth]{figure_5d2}  
+%\caption{}
+\end{figure}
+
+\noindent Some values for image $B$ are $[ 30.67712402  39.63285828  58.74524307 ...,  75.35990143  48.71765137 26.99260712]$.
+
+
 \end{document}
