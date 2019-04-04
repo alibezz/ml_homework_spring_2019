@@ -7,7 +7,7 @@
 \usepackage{amsmath}
 \usepackage[]{amssymb} %gives us the character \varnothing
 
-\title{Homework 3}
+\title{Homework 3 -- Part I}
 \author{Aline Bessa and Rao Li}
 \date\today
 %This information doesn't actually show up on your document unless you use the maketitle command below
