@@ -112,8 +112,16 @@ To get the first eigenvactor, using $\lambda = 4$, we do
 \end{bmatrix}
 \end{split}
 \end{gather*}
-That is, $x_1 = x_2$ and they can be any value. So our first eigenvector, which is our first principal component because it is 
-associated to the largest eigenvalue, is
+That is, $x_1 = x_2$ and they can be any value. For our first principal component, however, we want the $L_2$ norm of the eigenvector to be 1, i.e.,
+\begin{equation*}
+\begin{split}
+&x_1^2 + x_2^2 = 1\\
+&x_1^2 + x_1^2 = 1\\
+&2x_1^2 = 1\\
+&x_1 = \pm \sqrt{\frac{1}{2}}  
+\end{split}
+\end{equation*}
+If we use $x_1 = \sqrt{\frac{1}{2}}$, our first principal component, associated to the largest eigenvalue, is
 \begin{gather*}
 \begin{split}
 &\begin{bmatrix}
@@ -121,8 +129,8 @@ associated to the largest eigenvalue, is
     x_2  \\
 \end{bmatrix} =
 \begin{bmatrix} 
-   1\\
-   1\\
+   \sqrt{\frac{1}{2}}\\
+   \sqrt{\frac{1}{2}}\\
 \end{bmatrix}
 \end{split}
 \end{gather*}
@@ -163,7 +171,16 @@ As for $\lambda = 0.25$, we have our second principal component:
 \end{bmatrix}
 \end{split}
 \end{gather*}
-That is, $x_1 = -x_2$ and they can be any value. So our second principal component is:
+That is, $x_1 = -x_2$ and they can be any value. For our second principal component, however, we want the $L_2$ norm to be 1, i.e., 
+\begin{equation*}
+\begin{split}
+&x_1^2 + (-x_1)^2 = 1\\
+&x_1^2 + x_1^2 = 1\\
+&2x_1^2 = 1\\
+&x_1 = \pm \sqrt{\frac{1}{2}}  
+\end{split}
+\end{equation*}
+If we $x_1 = \sqrt{\frac{1}{2}}$, our second principal component is:
 \begin{gather*}
 \begin{split}
 &\begin{bmatrix}
@@ -171,19 +188,21 @@ That is, $x_1 = -x_2$ and they can be any value. So our second principal compone
     x_2  \\
 \end{bmatrix} =
 \begin{bmatrix} 
-   1\\
-   -1\\
+   \sqrt{\frac{1}{2}}\\
+   -\sqrt{\frac{1}{2}}\\
 \end{bmatrix}
 \end{split}
 \end{gather*}
+
+\hfill
 
 \section*{Question 2} To project the points onto the two principle components, we start by creating a matrix with the eigenvectors: 
 \begin{gather*}
 \begin{split}
 E =
 &\begin{bmatrix}
-    1 & 1 \\
-    1 & -1\\
+    \sqrt{\frac{1}{2}} & \sqrt{\frac{1}{2}} \\
+    \sqrt{\frac{1}{2}} & -\sqrt{\frac{1}{2}}\\
 \end{bmatrix}
 \end{split}
 \end{gather*}
@@ -193,21 +212,20 @@ multiplying $E$ by $X^T$:
 \begin{split}
 P =
 &\begin{bmatrix}
-    1 & 1 \\
-    1 & -1\\
+    \sqrt{\frac{1}{2}} & \sqrt{\frac{1}{2}} \\
+    \sqrt{\frac{1}{2}} & -\sqrt{\frac{1}{2}}\\
 \end{bmatrix} \times
 \begin{bmatrix} 
    -2 & 0 & 2 & -0.5 & 0.5\\
    -2 & 0 & 2 & 0.5 & -0.5\\
-\end{bmatrix} =
+\end{bmatrix} \approx
 \begin{bmatrix} 
-   -4 & 0 & 4 & 0 & 0\\
-   0 & 0 & 0 & -1 & 1\\
-\end{bmatrix} =
+   -2.828 &  0 & 2.828 &  0 &  0\\
+   0 & 0 & 0 & -0.707 & 0.707\\
+\end{bmatrix}
 \end{split}
 \end{gather*}
-So the projected points are, in the order given in Question 1: $\{(-4, 0), (0, 0), (4, 0), (0, -1), (0, 1)\}$.
-\textbf{CHECK CALCULATIONS!}
+So the projected points are, in the order given in Question 1: $\{(-2.828, 0), (0, 0), (-2.828, 0), (0, -0.707), (0, 0.707)\}$.
 
 \hfill
 
