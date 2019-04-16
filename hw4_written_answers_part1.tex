@@ -1,0 +1,75 @@
+%This is my super simple Real Analysis Homework template
+
+\documentclass[leqno]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage[]{amsthm} %lets us use \begin{proof}
+\usepackage{amsmath}
+\usepackage[]{amssymb} %gives us the character \varnothing
+
+\title{Homework 4 -- Part I}
+\author{Aline Bessa and Rao Li}
+\date\today
+%This information doesn't actually show up on your document unless you use the maketitle command below
+
+\begin{document}
+\maketitle %This command prints the title based on information entered above
+
+%Section and subsection automatically number unless you put the asterisk next to them.
+\section*{Question 1} \textbf{(a)} By using scipy's package \textit{optimize}, we found that, at the local
+minimum, $x = 1.93496079283$ and, at the global minimum, $x = -0.27922951$.
+
+\hfill
+
+\noindent \textbf{(b)} When we run gradient descent for 6 iterations starting with $x = -1$, the values we get are:
+\begin{itemize}
+\item $1^{st}$ iteration --- before, $x = -1$ and $f(x) = 22$; after, $x = -0.927$ and $f(x) = 17.085374066$
+\item $2^{nd}$ iteration --- before, $x = -0.927$ and $f(x) = 17.085374066$; after, $x = -0.865190627272$ and $f(x) = 13.5381732809$
+\item $3^{rd}$ iteration --- before, $x = -0.865190627272$ and $f(x) = 13.5381732809$; after, $x = -0.812109184654$ and $f(x) = 10.9075662033$
+\item $4^{th}$ iteration --- before, $x = -0.812109184654$ and $f(x) = 10.9075662033$; after, $x = -0.765994669596$ and  $f(x) = 8.9130572554$
+\item $5^{th}$ iteration --- before, $x = -0.765994669596$ and  $f(x) = 8.9130572554$; after, $x = -0.725548002932$ and $f(x) = 7.37275424133$
+\item $6^{th}$ iteration --- before, $x = -0.725548002932$ and $f(x) = 7.37275424133$; after, $x = -0.689785964595$ and $f(x) = 6.16460298372$  
+\end{itemize}  
+The 6 last values we obtain when we run gradient descent with 1200 iterations are all the same:
+$x = -0.279229509019$ and $f(x) = 0.416251130503$. Value $x$ has thus converged --- in this case, to the global minimum.
+
+\hfill
+
+\noindent \textbf{(c)} When we run gradient descent for 6 iterations starting with $x = 3$, the values we get are:
+\begin{itemize}
+\item $1^{st}$ iteration --- before, $x = 3$ and $f(x) = 50$; after, $x = 2.897$ and $f(x) = 40.3314182125$
+\item $2^{nd}$ iteration --- before, $x = 2.897$ and $f(x) = 40.3314182125$; after, $x = 2.81191919263$ and $f(x) = 33.6675690732$
+\item $3^{rd}$ iteration --- before, $x = 2.81191919263$ and $f(x) = 33.6675690732$; after, $x = 2.74013044847$ and $f(x) = 28.8855040619$
+\item $4^{th}$ iteration --- before, $x = 2.74013044847$ and $f(x) = 28.8855040619$; after, $x = 2.67854155269$ and $f(x) = 25.3431652813$
+\item $5^{th}$ iteration --- before, $x = 2.67854155269$ and $f(x) = 25.3431652813$; after, $x = 2.62499117847$ and $f(x) = 22.6509518911$
+\item $6^{th}$ iteration --- before, $x = 2.62499117847$ and $f(x) = 22.6509518911$; after, $x = 2.57791408117$ and $f(x) = 20.5609965832$  
+\end{itemize}  
+The 6 last values we obtain when we run gradient descent with 1200 iterations are all the same:
+$x = 1.93496079203$ and $f(x) = 9.93722775631$. Value $x$ has thus converged to a local minimum.
+
+\hfill
+
+\noindent \textbf{(d)} When we run gradient descent for 6 iterations starting with $x = -1$, but with $\eta = 0.01$ instead, the values we get are:
+\begin{itemize}
+\item $1^{st}$ iteration --- before, $x = -1$ and $f(x) = 22$; after, $x = -0.27$ and $f(x) = 0.41840264$
+\item $2^{nd}$ iteration --- before, $x = -0.27$ and $f(x) = 0.41840264$; after, $x = -0.27464572$ and $f(x) = 0.416783708548$
+\item $3^{rd}$ iteration --- before, $x = -0.27464572$ and $f(x) = 0.416783708548$; after, $x = -0.276965383222$ and $f(x) = 0.416381299356$
+\item $4^{th}$ iteration --- before, $x = -0.276965383222$ and $f(x) = 0.416381299356$; after, $x = -0.27811422383$ and $f(x) = 0.416282743082$
+\item $5^{th}$ iteration --- before, $x = -0.27811422383$ and $f(x) = 0.416282743082$; after, $x = -0.278680878569$ and $f(x) = 0.416258783583$
+\item $6^{th}$ iteration --- before, $x = -0.278680878569$ and $f(x) = 0.416258783583$; after, $x = -0.278959808526$ and $f(x) = 0.416252980336$  
+\end{itemize}  
+The 6 last values we obtain when we run gradient descent with 1200 iterations are all the same:
+$x = -0.279229509019$ and $f(x) = 0.416251130503$. Value $x$ has thus converged --- in this case, to the global minimum.
+With $\eta = 0.01$, the optimization converged much faster than with $\eta = 0.001$, and to the same minimum.
+
+\hfill
+
+\noindent \textbf{(e)} The learning rate $\eta = 0.1$ is too large, and the optimization jumped over the minimum it was attempting to reach (overshooting). To
+illustrate, these are the results we got for the first iterations:
+\begin{itemize}
+\item $1^{st}$ iteration --- before, $x = -1$ and $f(x) = 22$; after, $x = 6.3$ and $f(x) = 3052.0694$
+\item $2^{nd}$ iteration --- before, $x = 6.3$ and $f(x) = 3052.0694$; after, $x = -230.0302$ and $f(x) = 11382676907.5$
+\item $3^{rd}$ iteration --- before, $x = -230.0302$ and $f(x) = 11382676907.5$; after, $x = 19713256.9453$ and $f(x) = 6.04078583818e+29$
+\end{itemize}  
+
+\end{document}
