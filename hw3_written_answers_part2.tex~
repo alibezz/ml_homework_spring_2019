@@ -6,8 +6,9 @@
 \usepackage[]{amsthm} %lets us use \begin{proof}
 \usepackage{amsmath}
 \usepackage[]{amssymb} %gives us the character \varnothing
+\usepackage{graphicx}
 
-\title{Homework 3}
+\title{Homework 3 -- Part II}
 \author{Aline Bessa and Rao Li}
 \date\today
 %This information doesn't actually show up on your document unless you use the maketitle command below
@@ -16,70 +17,41 @@
 \maketitle %This command prints the title based on information entered above
 
 %Section and subsection automatically number unless you put the asterisk next to them.
-\section*{Question 1} Before computing principal components, let's represent the points as a matrix, with each attribute as a column and 
-each row as a point:
+\section*{Question 6} \textbf{(a)} The characteristic polynomial of matrix $A$ corresponds to the
+determinant $det(A - \lambda I)$, where
 \[
-X=
+A - \lambda I=
   \begin{bmatrix}
-    -2 & -2 \\
-     0 & 0 \\
-     2 & 2 \\
-  -0.5 & 0.5 \\
-   0.5 & -0.5 
+  -\lambda & 14 \\
+  6 & 9 -\lambda\\ 
   \end{bmatrix}
 \]
-The mean of both columns is zero, so the data is already mean-centered. Now let's compute the covariance matrix associated to X  
-using the standard formula (denominator = $N - 1$): 
-\hfill
-\[
-Cov=
-  \begin{bmatrix}
-  \frac{-2^2 + 2^2 + (-0.5)^2 + 0.5^2}{4} & \frac{-2*-2 + 2*2 + (-0.5*0.5) + 0.5*(-0.5)}{4} \\
-  \frac{-2*-2 + 2*2 + (-0.5*0.5) + 0.5*(-0.5)}{4} & \frac{-2^2 + 2^2 + 0.5^2 + (-0.5)^2}{4}\\ 
-  \end{bmatrix}
-\]
-\[
-Cov=
-  \begin{bmatrix}
-  2.125 & 1.875 \\
-  1.875 & 2.125\\ 
-  \end{bmatrix}
-\]
-Now, let's compute the eigenvalues and eigenvectors associated to the covariance matrix:
-\[
-Cov - \lambda I=
-  \begin{bmatrix}
-  2.125 - \lambda & 1.875 \\
-  1.875 & 2.125 -\lambda\\ 
-  \end{bmatrix}
-\]
+Consequently,
 \begin{equation*}
 \begin{split}
-&det(Cov - \lambda I)= (2.125 - \lambda)^2 - 1.875^2 \\
-&det(Cov - \lambda I)= 4.515625 - 4.25\lambda + \lambda^2 - 3.515625 \\
-&det(Cov - \lambda I)= \lambda^2 - 4.25\lambda + 1 \\
-\end{split}
-\end{equation*}
-The eigenvalues are the solutions to $det(Cov - \lambda I) = 0$:
-\begin{equation*}
-\begin{split}
-&\lambda^2 - 4.25\lambda + 1 = 0\\
-&\lambda = \frac{4.25 \pm \sqrt{(-4.25)^2 - 4*1*1)}}{2*1}\\
-&\lambda = 4\mbox{ or }\lambda = 0.25
+&det(A - \lambda I) = (-\lambda)*(9 - \lambda) - 14*6\\
+&det(A - \lambda I) = -9\lambda + \lambda^2 - 84\\  
 \end{split}
 \end{equation*} 
-To get the first eigenvactor, using $\lambda = 4$, we do
-%% \[
-%%   \begin{bmatrix}
-%%   2.125 - 4 & 1.875 \\
-%%   1.875 & 2.125 - 4\\ 
-%%   \end{bmatrix}
-%% \]
+
+\noindent \textbf{(b)} To get the eigenvalues of $A$, we have to find the roots of the characteristic polynomial,
+that is
+\begin{equation*}
+\begin{split}
+&\lambda^2 -9\lambda - 84 = 0\\
+&\lambda = \frac{9 \pm \sqrt{(-9)^2 - 4*1*(-84)}}{2*1}\\
+&\lambda = \frac{9 \pm \sqrt{81 + 336}}{2}\\
+&\lambda = \frac{9 \pm 20.420577857}{2}\\
+&\lambda = 14.710288929\mbox{ or }\lambda = -5.710288928  
+\end{split}
+\end{equation*} 
+
+\noindent \textbf{(c)} To get the first eigenvactor, using $\lambda = 14.710288929$, we do
 \begin{gather*}
 \begin{split}
 &\begin{bmatrix}
-    2.125 - 4 & 1.875 \\
-    1.875 & 2.125 - 4\\  
+    -14.710288929 & 14 \\
+    6 & 9 - 14.710288929\\  
 \end{bmatrix} \times \begin{bmatrix}
    x_1\\
    x_2\\
@@ -90,8 +62,8 @@ To get the first eigenvactor, using $\lambda = 4$, we do
 \end{bmatrix}
 \\
 &\begin{bmatrix}
-    -1.875 & 1.875 \\
-    1.875 & -1.875\\  
+    -14.710288929 & 14 \\
+    6 & -5.710288929\\  
 \end{bmatrix} \times \begin{bmatrix}
    x_1\\
    x_2\\
@@ -102,8 +74,8 @@ To get the first eigenvactor, using $\lambda = 4$, we do
 \end{bmatrix}
 \\
 &\begin{bmatrix}
-    -1.875x_1 + 1.875x_2 \\
-    1.875x_1  -1.875x_2\\  
+    -14.710288929x_1 + 14x_2 \\
+    6x_1  -5.710288929x_2\\  
 \end{bmatrix} =
 \begin{bmatrix}
    0\\
@@ -111,8 +83,29 @@ To get the first eigenvactor, using $\lambda = 4$, we do
 \end{bmatrix}
 \end{split}
 \end{gather*}
-That is, $x_1 = x_2$ and they can be any value. So our first eigenvector, which is our first principal component because it is 
-associated to the largest eigenvalue, is
+This leads to the following linear system of equations, which has infinite solutions:
+\begin{equation*}
+\begin{split}
+&-14.710288929x_1 + 14x_2 = 0\\
+&6x_1  -5.710288929x_2 = 0\\  
+\end{split}
+\end{equation*}
+Given that we want the $L_2$ norm of the eigenvector to be 1, we additionally want
+\begin{equation*}
+\begin{split}
+&x_1^2 + x_2^2 = 1\\  
+\end{split}
+\end{equation*}
+By setting $x_1 = \frac{5.710288929x_2}{6} = 0.9517148215x_2$, we have
+\begin{equation*}
+\begin{split}
+& 0.9057611014627768x_2^2+ x_2^2 = 1\\
+& 1.9057611014627768x_2^2 = 1\\
+& x_2^2 = 0.5247247408043142\\
+& x_2 = \pm 0.72437886551466579\\  
+\end{split}
+\end{equation*}
+If $x_2 = 0.72437886551466579$, $x_1 = 0.68940210269166269$ and we have the following eigenvector:
 \begin{gather*}
 \begin{split}
 &\begin{bmatrix}
@@ -120,49 +113,35 @@ associated to the largest eigenvalue, is
     x_2  \\
 \end{bmatrix} =
 \begin{bmatrix} 
-   1\\
-   1\\
+   0.68940210269166269\\
+   0.72437886551466579\\
 \end{bmatrix}
 \end{split}
 \end{gather*}
-As for $\lambda = 0.25$, we have our second principal component:
-\begin{gather*}
+As for $\lambda = -5.710288928$, we have the following linear system, for which there are infinite solutions
+as well:
+\begin{equation*}
 \begin{split}
-&\begin{bmatrix}
-    2.125 - 0.25 & 1.875 \\
-    1.875 & 2.125 - 0.25\\  
-\end{bmatrix} \times \begin{bmatrix}
-   x_1\\
-   x_2\\
-\end{bmatrix} =
-\begin{bmatrix}
-   0\\
-   0
-\end{bmatrix}
-\\
-&\begin{bmatrix}
-    1.875 & 1.875 \\
-    1.875 & 1.875\\  
-\end{bmatrix} \times \begin{bmatrix}
-   x_1\\
-   x_2\\
-\end{bmatrix} =
-\begin{bmatrix}
-   0\\
-   0
-\end{bmatrix}
-\\
-&\begin{bmatrix}
-    1.875x_1 + 1.875x_2 \\
-    1.875x_1 + 1.875x_2\\  
-\end{bmatrix} =
-\begin{bmatrix}
-   0\\
-   0\\
-\end{bmatrix}
+&5.710288928x_1 + 14x_2 = 0\\
+&6x_1 + 14.710288928x_2 = 0\\  
 \end{split}
-\end{gather*}
-That is, $x_1 = -x_2$ and they can be any value. So our second principal component is:
+\end{equation*}
+Given that we want the $L_2$ norm of the eigenvector to be 1, we additionally want
+\begin{equation*}
+\begin{split}
+&x_1^2 + x_2^2 = 1\\  
+\end{split}
+\end{equation*}
+By setting $x_1 = \frac{-14.710288928x_2}{6} = -2.4517148213333333x_2$, we have
+\begin{equation*}
+\begin{split}
+& 6.0109055651455385x_2^2+ x_2^2 = 1\\
+& 7.0109055651455385x_2^2 = 1\\
+& x_2^2 = 0.14263492650242837\\
+& x_2 = \pm 0.37767039399776675\\  
+\end{split}
+\end{equation*}
+If $x_2 = 0.37767039399776675$, $x_1 = -0.92594010254312431$ and we have the following eigenvector:
 \begin{gather*}
 \begin{split}
 &\begin{bmatrix}
@@ -170,293 +149,88 @@ That is, $x_1 = -x_2$ and they can be any value. So our second principal compone
     x_2  \\
 \end{bmatrix} =
 \begin{bmatrix} 
-   1\\
-   -1\\
+   0.37767039399776675\\
+   -0.92594010254312431\\
 \end{bmatrix}
 \end{split}
 \end{gather*}
 
-\section*{Question 2} To project the points onto the two principle components, we start by creating a matrix with the eigenvectors: 
+\noindent \textbf{(d)} In Python, numpy's linalg.eig($A$) returns eigenvalues -5.71028893 and  14.71028893,
+which correspond to the ones calculated in \textbf{(b)}, and their respective eigenvectors
 \begin{gather*}
 \begin{split}
-E =
-&\begin{bmatrix}
-    1 & 1 \\
-    1 & -1\\
+\begin{bmatrix} 
+   -0.9259401\\
+   0.37767039\\
 \end{bmatrix}
 \end{split}
 \end{gather*}
-The first and second components correspond, respectively, to the first and second lines of $E$. We now obtain the projections by 
-multiplying $E$ by $X^T$:
+which is equivalent to the one we found, and
 \begin{gather*}
 \begin{split}
-P =
-&\begin{bmatrix}
-    1 & 1 \\
-    1 & -1\\
-\end{bmatrix} \times
 \begin{bmatrix} 
-   -2 & 0 & 2 & -0.5 & 0.5\\
-   -2 & 0 & 2 & 0.5 & -0.5\\
-\end{bmatrix} =
-\begin{bmatrix} 
-   -4 & 0 & 4 & 0 & 0\\
-   0 & 0 & 0 & -1 & 1\\
-\end{bmatrix} =
+   -0.6894021\\
+   -0.72437887\\
+\end{bmatrix}
 \end{split}
 \end{gather*}
-So the projected points are, in the order given in Question 1: $\{(-4, 0), (0, 0), (4, 0), (0, -1), (0, 1)\}$.
-\textbf{CHECK CALCULATIONS!}
+which is equivalent to the solution we would have found had we used $x_2 = -0.72437886551466579$ instead.
+
 
 \hfill
 
+\section*{Question 7} \textbf{(a)} First, let's compute the sample means for each column.
+\begin{equation*}
+\begin{split}
+&s_1 = \frac{5 + 9 + 7 + 2}{4} = 5.75 \\
+&s_2 = \frac{2+6+1+5}{4} = 3.5\\
+&s_3 = \frac{4+4+0+6}{4} = 3.5\\
+\end{split}
+\end{equation*}
+Consequently, T=the mean centered matrix $B$ is
+\begin{gather*}
+\begin{split}
+\begin{bmatrix} 
+   -0.75 & -1.5 & 0.5\\
+   4 & 2.5 & 0.5\\
+   1.25 & -2.5 & -3.5\\
+   -3.75 & 1.5 & 2.5\\
+\end{bmatrix}
+\end{split}
+\end{gather*}
 
-\section*{Question 3} Let's start with the entropy criterion. Suppose $class_1 = A$ and $class_0 = B$. 
-There are then 4 $A$ and 2 $B$ training examples. If we choose feature $x_1$, we have two 
-subsets of examples: one to which $x_1 = 1$ ($S_l$) and one to which $x_1 = 0$ ($S_r$). The entropy for these 
-subsets is 
+\noindent \textbf{(b)} The sample covariance of $x_1$ and $x_3$ in $B$ is
 \begin{equation*}
 \begin{split}
-&H(S_l) = -(\frac{3}{3}\log_2\frac{3}{3} + \frac{0}{3}\log_2\frac{0}{3}) \\
-&H(S_l) = -1\log_21 = 0\\
-&H(S_r) = -(\frac{2}{3}\log_2\frac{2}{3} + \frac{1}{3}\log_2\frac{1}{3}) \\
-&H(S_r) = 0.918
+&\frac{\sum_t(x_1^t - s_1)*(x_3^t - s_3)}{N - 1} = \frac{-0.75*0.5 + 3.25*0.5 + 1.25*(-3.5) + (-3.75)*2.5}{4 - 1}\\
+&\frac{\sum_t(x_1^t - s_1)*(x_3^t - s_3)}{N - 1} = -4.167
 \end{split}
 \end{equation*}
-Finally,
-\begin{equation*}
-\begin{split}
-&H(after) = \frac{|S_l|H(S_l) + |S_r|H(S_r)}{|S_l| + |S_r|} = \frac{3*0 + 3*0.918}{3 + 3} = 0.459
-\end{split}
-\end{equation*} 
-Analogously, for $x_2$ we have
-\begin{equation*}
-\begin{split}
-&H(S_l) = -(\frac{1}{2}\log_2\frac{1}{2} + \frac{1}{2}\log_2\frac{1}{2}) \\
-&H(S_l) = 1\\
-&H(S_r) = -(\frac{2}{2}\log_2\frac{2}{2} + \frac{0}{2}\log_2\frac{0}{2})\\
-&H(S_r) = -1\log_21 = 0\\
-&H(after) = \frac{|S_l|H(S_l) + |S_r|H(S_r)}{|S_l| + |S_r|} = \frac{4*1 + 2*0}{4 + 2} = 0.667
-\end{split}
-\end{equation*}
-Analogously, for $x_3$ we have
-\begin{equation*}
-\begin{split}
-&H(S_l) = -(\frac{3}{4}\log_2\frac{3}{4} + \frac{1}{4}\log_2\frac{1}{4}) \\
-&H(S_l) = 0.811\\
-&H(S_r) = -(\frac{1}{2}\log_2\frac{1}{2} + \frac{1}{2}\log_2\frac{1}{2})\\
-&H(S_r) = 1\\
-&H(after) = \frac{|S_l|H(S_l) + |S_r|H(S_r)}{|S_l| + |S_r|} = \frac{4*0.811 + 2*1}{4 + 2} = 0.874
-\end{split}
-\end{equation*}
-Finally,for $x_4$ we have
-\begin{equation*}
-\begin{split}
-&H(S_l) = -(\frac{1}{2}\log_2\frac{1}{2} + \frac{1}{2}\log_2\frac{1}{2}) \\
-&H(S_l) = 1\\
-&H(S_r) = -(\frac{4}{4}\log_2\frac{4}{4} + \frac{0}{4}\log_2\frac{0}{4})\\
-&H(S_r) = -1\log_21 = 0\\
-&H(after) = \frac{|S_l|H(S_l) + |S_r|H(S_r)}{|S_l| + |S_r|} = \frac{4*1 + 2*0}{4 + 2} = 0.667
-\end{split}
-\end{equation*}
-Because we want to minimize $H(after)$ to find the best split, $x_1$ will be chosen for the root.
 
-\noindent Now let's use the Gini criterion, using $S_r$ and $S_l$ as defined above for the different $x$ features. 
-For $x_1$, we have
-\begin{equation*}
-\begin{split}
-&G(S_l) = 1 - 1^2 = 0\\
-&G(S_r) = 1 - \Big(\frac{1}{3}\Big)^2 - \Big(\frac{2}{3}\Big)^2 = \frac{4}{9}\\
-&G(S) = \frac{1}{2}*0 + \frac{1}{2}*\frac{4}{9} = 0.222
-\end{split}
-\end{equation*}
-For $x_2$, we have
-\begin{equation*}
-\begin{split}
-&G(S_l) = 1 - \Big(\frac{1}{2}\Big)^2 - \Big(\frac{1}{2}\Big)^2 = \frac{1}{2}\\
-&G(S_r) = 1 - 1^2 = 0\\
-&G(S) = \frac{2}{3}*\frac{1}{2} + \frac{1}{3}*0 = 0.333
-\end{split}
-\end{equation*}
-For $x_3$, we have
-\begin{equation*}
-\begin{split}
-&G(S_l) = 1 - \Big(\frac{3}{4}\Big)^2 - \Big(\frac{1}{4}\Big)^2 = \frac{3}{8}\\
-&G(S_r) = 1 - \Big(\frac{1}{2}\Big)^2 - \Big(\frac{1}{2}\Big)^2 = \frac{1}{2}\\
-&G(S) = \frac{2}{3}*\frac{3}{8} + \frac{1}{3}*\frac{1}{2} = 0.417
-\end{split}
-\end{equation*}
-Finally, for $x_4$ we have
-\begin{equation*}
-\begin{split}
-&G(S_l) = 1 - \Big(\frac{1}{2}\Big)^2 - \Big(\frac{1}{2}\Big)^2 = \frac{1}{2}\\
-&G(S_r) = 1 - 1^2 = 0\\
-&G(S) = \frac{2}{3}*\frac{1}{2} + \frac{1}{3}*0 = 0.333
-\end{split}
-\end{equation*}
-Because the Gini criterion calculates how frequently a randomly chosen element will be wrongly identified, we want to minimize it to find the best split. 
-Consequently, $x_1$ will be chosen for the root.
+\noindent \textbf{(c)} The largest eigenvalue of the sample covariance matrix of $B$ is 12.9788. 
 
-\noindent Now let's use the Misclassification criterion, using $S_r$ and $S_l$ as defined above for the different $x$ features. 
-For $x_1$, we have
-\begin{equation*}
+\noindent \textbf{(d)} The first two columns of $Z$ are 
+\begin{gather*}
 \begin{split}
-&J(S_l) = 0\\
-&J(S_r) = 1\\
-&J(S) = 0 + 1 = 1
+  \begin{bmatrix}
+   0.26018674 & -1.41900435\\
+   -0.87353472 & 4.03721245\\
+   -4.04749635 & -1.8486773\\
+   4.66084433 & -0.7695308\\
+\end{bmatrix}
 \end{split}
-\end{equation*}
-For $x_2$, we have
-\begin{equation*}
-\begin{split}
-&J(S_l) = 2\\
-&J(S_r) = 0\\
-&J(S) = 2 + 0 = 2
-\end{split}
-\end{equation*}
-For $x_3$, we have
-\begin{equation*}
-\begin{split}
-&J(S_l) = 1\\
-&J(S_r) = 1\\
-&J(S) = 1 + 1 = 2
-\end{split}
-\end{equation*}
-Finally, for $x_4$ we have
-\begin{equation*}
-\begin{split}
-&J(S_l) = 2\\
-&J(S_r) = 0\\
-&J(S) = 2 + 0 = 2
-\end{split}
-\end{equation*}
-Because this criterion should minimize the number of points that are incorrectly classified, $x_1$ will be chosen for the root.
+\end{gather*}
 
 \hfill
+\section*{Question 5} \textbf{(a)} By using the commands for $t = 3$, we get
+Figure 1.
 
-\section*{Question 4} Let the discriminant functions be
-\begin{equation*}
-\begin{split}
-&g_1(x_1, x_2) = 5x_2 + 3x_1 - 4\\
-&g_2(x_1, x_2) = -3x_2 + 2x_1 - 6\\
-\end{split}
-\end{equation*}
-We assign an example $(x_1, x_2)$ to class $C_1$ when $g_1(x_1, x_2) > g_2(x_1, x_2)$, that is
-\begin{equation*}
-\begin{split}
-&g_1(x_1, x_2) > g_2(x_1, x_2)\\
-&5x_2 + 3x_1 - 4 > -3x_2 + 2x_1 - 6\\
-&8x_2 - x_1 + 2 > 0\\
-&g(x_1, x_2) = 8x_2 - x_1 + 2
-\end{split}
-\end{equation*}
-So if $g(x_1, x_2) > 0$, the example is assigned to class $C_1$; otherwise, to class $C_2$. 
+\begin{figure}[h!]
+\includegraphics[width=0.5\textwidth]{face3}  
+\caption{Image obtained with plt\_face(fea[3]).}
+\end{figure}
 
+\noindent \textbf{(b)}
 \hfill
-
-\section*{Question 5} \textbf{(a)} When there are two classes, the maximum entropy occurs when they are equaly likely, i.e., 
-when \textit{half} of the examples are positive and \textit{half} are negative. The closer the proportions are to $\frac{1}{2}$, 
-the higher the entropy. In the first dataset, we have that the proportions for positive and negative class are, respectively, 
-$\frac{4}{9}$ and $\frac{5}{9}$. Consequently, the difference between these proportions and $\frac{1}{2}$ are the same, and can 
-be calculated as
-\begin{equation*}
-\begin{split}
-&|\frac{4}{9} - \frac{1}{2}| = \frac{|2*4 - 9*1|}{18} = \frac{1}{18} \\
-\end{split}
-\end{equation*}
-As for the second dataset, the proportions for positive and negative class are, respectively, $\frac{1}{3}$ and $\frac{2}{3}$. 
-The difference between these proportions and $\frac{1}{2}$ are the same, and can be calculates as 
-\begin{equation*}
-\begin{split}
-&|\frac{1}{3} - \frac{1}{2}| = \frac{|2*1 - 3*1|}{6} = \frac{1}{6} \\
-\end{split}
-\end{equation*}
-Given that the difference for the first dataset is smaller, its entropy is higher (this dataset has more 
-\textit{impurity}). In other words, the entropy for the dataset with 4 positive and 
-5 negative examples is higher.
-
-\hfill
-
-\noindent \textbf{(b)} First, let's compute the entropy of the entire dataset, namely $S$:
-\begin{equation*}
-\begin{split}
-&Entropy(S) = -(\frac{3}{7}\log_2\frac{3}{7} + \frac{3}{7}\log_2\frac{3}{7}) \\
-&Entropy(S) = 0.98522813603425152 \\
-\end{split}
-\end{equation*}
-Now, let's compute the entropy associated to the examples where $x_1 = F$ and where $x_1 = F$.
-\begin{equation*}
-\begin{split}
-&Entropy(S_{x_1 = F}) = -(\frac{2}{4}\log_2\frac{2}{4} + \frac{2}{4}\log_2\frac{2}{4}) \\
-&Entropy(S_{x_1 = F}) = 1.0 \\
-&Entropy(S_{x_1 = T}) = -(\frac{1}{3}\log_2\frac{1}{3} + \frac{2}{3}\log_2\frac{2}{3}) \\
-&Entropy(S_{x_1 = T}) = 0.91829583405448956 \\
-\end{split}
-\end{equation*} 
-Consequently, the second term of the Information Gain formula is
-\begin{equation*}
-\begin{split}
-&Y = \sum_{v \in \{F, T\}}\frac{|S_{x_1 = v}|}{|S|}Entropy(S_{x_1 = v}) \\ 
-&Y = \frac{4}{7}1.0 + \frac{3}{7}0.91829583405448956 \\
-&Y = 0.9649839288804954 \\
-\end{split}
-\end{equation*} 
-The final value for $x_1$ is thus
-\begin{equation*}
-\begin{split}
-&Information-Gain(S) = 0.98522813603425152 - 0.9649839288804954 \\
-&Information-Gain(S) = 0.020244207153756077 \\
-\end{split}
-\end{equation*} 
-
-\hfill
-
-\noindent \textbf{(c)} WILL TYPE SOON
-
-\hfill
-
-\noindent \textbf{(d)} First, let's compute $H(Y)$. 
-\begin{equation*}
-\begin{split}
-&H(Y) = -(P[Y = +]\log_2P[Y = +] + P[Y = -]\log_2P[Y = -]) \\
-&H(Y) = -(\frac{3}{7}\log_2\frac{3}{7} + \frac{4}{7}\log_2\frac{4}{7}) \\
-&H(Y) = 0.98522813603425152 \\
-\end{split}
-\end{equation*} 
-Now, let's compute $H(Y|X)$.
-\begin{equation*}
-\begin{split}
-&H(Y|X) = \sum_xP[X = x] * \Big(\sum_y-P[Y = y| X = x]*\log_2P[Y = y| X = x]\Big) \\
-%&H(Y|X) = P[X = F]*(-P[Y = +| X = F]*\log_2P[Y = +| X = F] - P[Y = -| X = F]* \log_2P[Y = -| X = F]) + P[X = T]*(-P[Y = +| X = T]*\log_2P[Y = +| X = T] - P[Y = -| X = T]*\log_2P[Y = -| X = T]) \\
-&H(Y|X) = \frac{4}{7}(-\frac{1}{2}\log_2\frac{1}{2} - \frac{1}{2}\log_2\frac{1}{2}) + \frac{3}{7}(-\frac{1}{3}\log_2\frac{1}{3} - \frac{2}{3}\log_2\frac{2}{3})\\
-&H(Y|X) = \frac{4}{7}*1.0 + \frac{3}{7}* 0.91829583405448956\\
-&H(Y|X) = 0.9649839288804954\\
-\end{split}
-\end{equation*} 
-Finally,
-\begin{equation*}
-\begin{split}
-&H(Y) - H(Y|X) = 0.98522813603425152 - 0.9649839288804954 \\
-&H(Y) - H(Y|X) = 0.020244207153756077
-\end{split}
-\end{equation*} 
-
-\hfill
-
-\noindent \textbf{(e)} Using the entropy formula for a dataset $S$, we have that
-\begin{equation*}
-\begin{split}
-&Entropy(S) = -\sum_{i \in z}\frac{N_i}{N}\log_2\frac{N_i}{N}
-\end{split}
-\end{equation*} 
-If each label is equally likely, we can write $\frac{N_i}{N} = \frac{1}{|z|}$ for any $i$. Consequently,
-\begin{equation*}
-\begin{split}
-&Entropy(S) = -\sum_{i \in z}\frac{1}{|z|}\log_2\frac{1}{|z|}\\
-&Entropy(S) = -|z|\frac{1}{|z|}\log_2\frac{1}{|z|}\\
-&Entropy(S) = -\log_2\frac{1}{|z|}\\
-&Entropy(S) = \log_2|z|\\
-\end{split}
-\end{equation*}
-where $|z|$ is the number of different labels.  
+   
 \end{document}

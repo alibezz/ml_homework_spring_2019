@@ -6,6 +6,7 @@
 \usepackage[]{amsthm} %lets us use \begin{proof}
 \usepackage{amsmath}
 \usepackage[]{amssymb} %gives us the character \varnothing
+\usepackage{graphicx}
 
 \title{Homework 3 -- Part I}
 \author{Aline Bessa and Rao Li}
@@ -111,8 +112,16 @@ To get the first eigenvactor, using $\lambda = 4$, we do
 \end{bmatrix}
 \end{split}
 \end{gather*}
-That is, $x_1 = x_2$ and they can be any value. So our first eigenvector, which is our first principal component because it is 
-associated to the largest eigenvalue, is
+That is, $x_1 = x_2$ and they can be any value. For our first principal component, however, we want the $L_2$ norm of the eigenvector to be 1, i.e.,
+\begin{equation*}
+\begin{split}
+&x_1^2 + x_2^2 = 1\\
+&x_1^2 + x_1^2 = 1\\
+&2x_1^2 = 1\\
+&x_1 = \pm \sqrt{\frac{1}{2}}  
+\end{split}
+\end{equation*}
+If we use $x_1 = \sqrt{\frac{1}{2}}$, our first principal component, associated to the largest eigenvalue, is
 \begin{gather*}
 \begin{split}
 &\begin{bmatrix}
@@ -120,8 +129,8 @@ associated to the largest eigenvalue, is
     x_2  \\
 \end{bmatrix} =
 \begin{bmatrix} 
-   1\\
-   1\\
+   \sqrt{\frac{1}{2}}\\
+   \sqrt{\frac{1}{2}}\\
 \end{bmatrix}
 \end{split}
 \end{gather*}
@@ -162,7 +171,16 @@ As for $\lambda = 0.25$, we have our second principal component:
 \end{bmatrix}
 \end{split}
 \end{gather*}
-That is, $x_1 = -x_2$ and they can be any value. So our second principal component is:
+That is, $x_1 = -x_2$ and they can be any value. For our second principal component, however, we want the $L_2$ norm to be 1, i.e., 
+\begin{equation*}
+\begin{split}
+&x_1^2 + (-x_1)^2 = 1\\
+&x_1^2 + x_1^2 = 1\\
+&2x_1^2 = 1\\
+&x_1 = \pm \sqrt{\frac{1}{2}}  
+\end{split}
+\end{equation*}
+If we $x_1 = \sqrt{\frac{1}{2}}$, our second principal component is:
 \begin{gather*}
 \begin{split}
 &\begin{bmatrix}
@@ -170,19 +188,21 @@ That is, $x_1 = -x_2$ and they can be any value. So our second principal compone
     x_2  \\
 \end{bmatrix} =
 \begin{bmatrix} 
-   1\\
-   -1\\
+   \sqrt{\frac{1}{2}}\\
+   -\sqrt{\frac{1}{2}}\\
 \end{bmatrix}
 \end{split}
 \end{gather*}
+
+\hfill
 
 \section*{Question 2} To project the points onto the two principle components, we start by creating a matrix with the eigenvectors: 
 \begin{gather*}
 \begin{split}
 E =
 &\begin{bmatrix}
-    1 & 1 \\
-    1 & -1\\
+    \sqrt{\frac{1}{2}} & \sqrt{\frac{1}{2}} \\
+    \sqrt{\frac{1}{2}} & -\sqrt{\frac{1}{2}}\\
 \end{bmatrix}
 \end{split}
 \end{gather*}
@@ -192,21 +212,20 @@ multiplying $E$ by $X^T$:
 \begin{split}
 P =
 &\begin{bmatrix}
-    1 & 1 \\
-    1 & -1\\
+    \sqrt{\frac{1}{2}} & \sqrt{\frac{1}{2}} \\
+    \sqrt{\frac{1}{2}} & -\sqrt{\frac{1}{2}}\\
 \end{bmatrix} \times
 \begin{bmatrix} 
    -2 & 0 & 2 & -0.5 & 0.5\\
    -2 & 0 & 2 & 0.5 & -0.5\\
-\end{bmatrix} =
+\end{bmatrix} \approx
 \begin{bmatrix} 
-   -4 & 0 & 4 & 0 & 0\\
-   0 & 0 & 0 & -1 & 1\\
-\end{bmatrix} =
+   -2.828 &  0 & 2.828 &  0 &  0\\
+   0 & 0 & 0 & -0.707 & 0.707\\
+\end{bmatrix}
 \end{split}
 \end{gather*}
-So the projected points are, in the order given in Question 1: $\{(-4, 0), (0, 0), (4, 0), (0, -1), (0, 1)\}$.
-\textbf{CHECK CALCULATIONS!}
+So the projected points are, in the order given in Question 1: \{(-2.828, 0), (0, 0), (2.828, 0), (0, -0.707), (0, 0.707)\}.
 
 \hfill
 
@@ -411,7 +430,72 @@ The final value for $x_1$ is thus
 
 \hfill
 
-\noindent \textbf{(c)} WILL TYPE SOON
+\noindent \textbf{(c)} Using Information Gain as a criterion to choose the best initial splitting feature, we have that, for 
+$x_1$, the value is 0.020244207153756077 (as calculated in \textbf{(b)}). For $x_2$, the value is
+\begin{equation*}
+\begin{split}
+&Information-Gain(S) = Entropy(S) - \Big(\frac{4}{7}Entropy(S_{x_2 = F}) + \frac{3}{7}Entropy(S_{x_2 = T})\Big)\\
+&Entropy(S_{x_2 = F}) = -(\frac{2}{4}\log_2\frac{2}{4} + \frac{2}{4}\log_2\frac{2}{4}) = 1.0\\
+&Entropy(S_{x_2 = T}) = -(\frac{1}{3}\log_2\frac{1}{3} + \frac{2}{3}\log_2\frac{2}{3})) = 0.91829583405448956\\
+&Information-Gain(S) = 0.98522813603425152 -\Big(\frac{4}{7}1.0 + \frac{3}{7}0.91829583405448956\Big) \\
+&Information-Gain(S) = 0.020244207153756077
+\end{split}
+\end{equation*}
+For $x_3$, the value is
+\begin{equation*}
+\begin{split}
+&Information-Gain(S) = Entropy(S) - \Big(\frac{4}{7}Entropy(S_{x_3 = F}) + \frac{3}{7}Entropy(S_{x_3 = T})\Big)\\
+&Entropy(S_{x_3 = F}) = -(\frac{2}{4}\log_2\frac{2}{4} + \frac{2}{4}\log_2\frac{2}{4}) = 1.0\\
+&Entropy(S_{x_3 = T}) = -(\frac{1}{3}\log_2\frac{1}{3} + \frac{2}{3}\log_2\frac{2}{3})) = 0.91829583405448956\\
+&Information-Gain(S) = 0.98522813603425152 -\Big(\frac{4}{7}1.0 + \frac{3}{7}0.91829583405448956\Big) \\
+&Information-Gain(S) = 0.020244207153756077
+\end{split}
+\end{equation*}
+The information gain is thus the same for all three attributes, so let's use $x_1$ as our root and create two sets 
+$S1 = \{x^{(2)}, x^{(5)}, x^{(6)}\}$ and $S2 = \{x^{(1)}, x^{(3)}, x^{(4)}, x^{(7)}\}$, 
+with examples having $x_1 = T$ and $x_1 = F$ respectively. The examples in $S1$ have mixed labels and they are not all 
+equal, so we still have to split its corresponding node. Let's see which attribute gives the best information gain (either 
+$x_2$ or $x_3$) here, starting with $x_2$:
+\begin{equation*}
+\begin{split}
+&Information-Gain(S1) = Entropy(S1) - \Big(\frac{2}{3}Entropy(S1_{x_2 = T}) + \frac{1}{3}Entropy(S1_{x_2 = F})\Big)\\
+&Entropy(S1) = -(\frac{1}{3}\log_2\frac{1}{3} + \frac{2}{3}\log_2\frac{2}{3}) = 0.91829583405448956 \\
+&Entropy(S1_{x_2 = T}) = -(\frac{2}{2}\log_2\frac{2}{2} + \frac{0}{2}\log_2\frac{0}{2}) = 0\\
+&Entropy(S1_{x_2 = F}) = -(\frac{1}{1}\log_2\frac{1}{1} + \frac{0}{1}\log_2\frac{0}{1})) = 0\\
+&Information-Gain(S1) = 0.91829583405448956 -\Big(\frac{2}{3}0 + \frac{1}{3}0\Big) = 0.91829583405448956 \\
+\end{split}
+\end{equation*}
+By using $x_2$, we get maximum information gain, so we can simply use it to split $S_1$, ending up with subsets 
+$S3 = \{x^{(2)}\}$ and $S4 = \{x^{(5)}, x^{(6)}\}$. Now let's do the same analysis for $S2$, starting by calculating the information 
+gain we may get with $x_2$:
+\begin{equation*}
+\begin{split}
+&Information-Gain(S2) = Entropy(S2) - \Big(\frac{1}{4}Entropy(S2_{x_2 = T}) + \frac{3}{4}Entropy(S2_{x_2 = F})\Big)\\
+&Entropy(S2) = -(\frac{2}{4}\log_2\frac{2}{4} + \frac{2}{4}\log_2\frac{2}{4}) = 1 \\
+&Entropy(S2_{x_2 = T}) = -(\frac{1}{1}\log_2\frac{1}{1} + \frac{0}{1}\log_2\frac{0}{1}) = 0\\
+&Entropy(S2_{x_2 = F}) = -(\frac{1}{3}\log_2\frac{1}{3} + \frac{2}{3}\log_2\frac{2}{3})) = 0.91829583405448956\\
+&Information-Gain(S2) = 1 -\Big(\frac{1}{4}0 + \frac{3}{4}0.918295834054489560\Big) = 0.68872187554086717\\
+\end{split}
+\end{equation*}
+With $x_3$ we have:
+\begin{equation*}
+\begin{split}
+&Information-Gain(S2) = Entropy(S2) - \Big(\frac{1}{4}Entropy(S2_{x_3 = T}) + \frac{3}{4}Entropy(S2_{x_3 = F})\Big)\\
+&Entropy(S2_{x_3 = T}) = -(\frac{1}{1}\log_2\frac{1}{1} + \frac{0}{1}\log_2\frac{0}{1}) = 0\\
+&Entropy(S2_{x_3 = F}) = -(\frac{1}{3}\log_2\frac{1}{3} + \frac{2}{3}\log_2\frac{2}{3})) = 0.91829583405448956\\
+&Information-Gain(S2) = 1 -\Big(\frac{1}{4}0 + \frac{3}{4}0.918295834054489560\Big) = 0.68872187554086717\\
+\end{split}
+\end{equation*}
+Given that the information gain is the same with $x_2$ and $x_3$, we split $S2$ with $x_2$ and get sets 
+$S5 = \{x^{(1)}, x^{(3)}, x^{(7)}\}$ and $S6 = \{x^{(4)}\}$. Set $S6$ is clean, but $S5$ is not, nor are all its 
+elements equal. Consequently, we have to split it again, and the only feature left is $x_3$. By doing so, we end up 
+with sets $S7 =  x^{(3)}$ and $S8 = \{x^{(1)}, x^{(7)}\}$. $S7$ is trivially clean and the elements of $S8$ are equal, so the 
+algorithm stops. Figure 1 shows a graphic representation of this execution.
+
+\begin{figure}[h!]
+\includegraphics[width=\textwidth]{tree}  
+%\caption{}
+\end{figure}
 
 \hfill
 
