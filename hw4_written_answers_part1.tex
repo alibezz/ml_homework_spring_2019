@@ -72,4 +72,38 @@ illustrate, these are the results we got for the first iterations:
 \item $3^{rd}$ iteration --- before, $x = -230.0302$ and $f(x) = 11382676907.5$; after, $x = 19713256.9453$ and $f(x) = 6.04078583818e+29$
 \end{itemize}  
 
+\hfill
+
+\section*{Question 2} \textbf{Waiting for Rao's answer}
+
+\hfill
+
+\section*{Question 3} \textbf{(a)} NeuralNetRK is the only network that can output negative values because scores $z$ can be negative. The other 
+networks output probabilities, which are naturally in the interval $[0,1]$.
+
+\hfill
+
+\noindent \textbf{(b)} The outputs $y_1, \ldots, y_K$ of NeuralNetCK sum to 1 because of the way the activation functions for the output layer are defined. 
+
+\hfill
+
+\noindent \textbf{(c)} I would use NeuralNetCK with $K = 3$ classes. Given an example $x$, the outputs of this network correspond to the probabilities of $x$ belonging to 
+ each one of the $K$ classes. Consequently, if $x$ is an input image and the $K = 3$ classes correspond, respectively, to \textit{face}, \textit{cat}, and \textit{tree}, the 
+outputs of NeuralNetCK will be the probabilities $p_1 = P[face|x]$, $p_2 = P[cat|x]$, and $p_3 = P[tree|x]$, i.e., the probabilities required in this question. 
+
+\hfill
+
+\noindent \textbf{(d)} In this case, different configurations can be used. A possibility is to have two NeuralNetCB networks. Given a document $x$, the first 
+network outputs $p_1 = P[politics|x]$, and if $p_1 > 0.5$ the output of this network is 1, i.e., we predict that document $x$ is on politics (otherwise we predict it is not 
+on this topic). Similarly, the 
+second network outputs $p_2 = P[formal|x]$, and if $p_2 > 0.5$ the output of this network is 1, i.e., we predict that document $x$ is formal (otherwise we predict it is 
+informal). A different strategy would be to use a single NeuralNetCK and have $K = 4$ classes for a document $x$: class 1 if $x$ is on politics AND is formal, 
+class 2 if $x$ is on politics AND is informal, class 3 if $x$ is not on politics AND is formal, and class 4 if $x$ is not on politics AND is informal. The output of this 
+network would be the probability of each class, and the prediction would correspond to the highest probability, tackling both the topic and the formality of a document at 
+once. 
+
+\hfill
+
+\section*{Question 4} Waiting for Rao
+
 \end{document}
