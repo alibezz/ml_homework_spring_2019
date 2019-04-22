@@ -562,6 +562,41 @@ once.
 
 \hfill
 
-\section*{Question 4} Waiting for Rao
+\section*{Question 4} \textbf{(a)} Directly converting nominal values to numerical values is fine for random forests because the values just need to be 
+\textit{different} in order to be split into different categories. However, for neural networks, each attribute is associated to one weight. Consequently, 
+if we use label encoding, higher numerical values will have higher prediction values, meaning that the model would wrongly assume that there is an order across these 
+values. In other words, directly assigning numerical values
+to nominal values might introduce wrong information. 
+
+\hfill
+
+\noindent \textbf{(b) i.} If we create two binary variables $s_1$ and $s_2$ such that $s_1 = 1$ if and only if \textit{stalk shape = tapering} and 
+$s_2 = 1$ if and only if \textit{stalk shape = enlarging}, we have
+\begin{center}
+\begin{tabular}{ |c|c|c|c|c|c|c|c| } 
+ \hline
+ & $z_1$ & $z_2$ & $z_3$ & $z_4$ & $s_1$ & $s_2$ & label \\ \hline
+ $x^{(1)}$ & 0 & 0 & 0 & 1 & 1 & 0 & 0 \\ 
+ $x^{(2)}$ & 0 & 0 & 1 & 0 & 0 & 1 & 0 \\
+ \hline
+\end{tabular}
+\end{center}
+
+\hfill
+
+\noindent \textbf{(b) ii.} Ordinal attributes, as the name implies, have an \textit{order over their values}, different from nominal attributes. 
+Consequently, higher numerical values could be assigned to higher ordinal values, naturally preserving the order information. Then, in the neural net model, 
+ higher numerical values would correctly be linked to higher prediction values. On the other hand, one-hot-encoding does not reflect the order between different 
+ordinal values, and this important information ends up not learned by the model. 
+
+\hfill 
+
+\noindent \textbf{(b) iii.} When using the neural net model, our goal is to manipulate the input's numerical values so that their output values can be assigned 
+to one of the possible categories. If we use label encoding on nominal attributes with more than two values, it is hard to isolate the data well. As discussed in 
+ question 2.(a), higher numerical values could have higher prediction values, making the model wrongly include order information. Also, 
+the model may have difficulties predicting the correct category of an example if the prediction values are too close to each other (this can 
+happen if the model uses certain activation functions, such as the sigmoid). That said, label encoding on nominal attributes with two values, assigning 0 and 1 
+(or -1 and 1) to them for example, can isolate the data well. As an example, the model can use large positive weights and a negative intercept so that the  
+nominal attribute with value 0 is predicted as category 0, and the attribute with value 1 is predicted as 1 by applying the sigmoid function.
 
 \end{document}
