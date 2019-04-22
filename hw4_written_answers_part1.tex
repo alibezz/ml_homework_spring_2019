@@ -75,8 +75,9 @@ illustrate, these are the results we got for the first iterations:
 \hfill
 
 \section*{Question 2} Given the following parameters for the input layer:
-\[
-W^{(1)} =
+\begin{gather*}
+\begin{split}
+&W^{(1)} =
   \begin{bmatrix}
   W_{11}^{(1)} & W_{12}^{(1)}\\
   W_{21}^{(1)} & W_{22}^{(1)}\\ 
@@ -86,9 +87,8 @@ W^{(1)} =
   1 & 2\\
   3 & 4\\ 
   \end{bmatrix}
-\]
-\[
-b^{(1)} =
+\\
+&b^{(1)} =
    \begin{bmatrix}
   b_1^{(1)} \\
   b_2^{(1)}\\ 
@@ -98,15 +98,18 @@ b^{(1)} =
   1 \\
   -1\\ 
   \end{bmatrix}
-\]
+\end{split}
+\end{gather*}
 We start by computing $z^{(2)}$ and $a^{(2)}$ for training example 
-\[
-x_1 =
+\begin{gather*}
+\begin{split}
+&x_1 =
   \begin{bmatrix}
   1\\
   0\\ 
   \end{bmatrix}
-\]
+\end{split}
+\end{gather*}
 That is: 
 \begin{gather*}
 \begin{split}
@@ -160,8 +163,9 @@ That is:
 \end{split}
 \end{gather*}
 Given the following parameters for the hidden layer:
-\[
-W^{(2)} =
+\begin{gather*}
+\begin{split}
+&W^{(2)} =
   \begin{bmatrix}
   W_{11}^{(2)} & W_{12}^{(2)}\\
   \end{bmatrix}
@@ -169,9 +173,8 @@ W^{(2)} =
   \begin{bmatrix}
   1 & 2\\
   \end{bmatrix}
-\]
-\[
-b^{(2)} =
+\\
+&b^{(2)} =
    \begin{bmatrix}
   b_1^{(2)} \\
   \end{bmatrix}
@@ -179,7 +182,8 @@ b^{(2)} =
   \begin{bmatrix}
   1 \\
   \end{bmatrix}
-\]
+\end{split}
+\end{gather*}
 We can compute $z^{(3)}$ and $a^{(3)}$:
 \begin{gather*}
 \begin{split}
@@ -284,18 +288,20 @@ Now we can backpropagate the errors for example $x_1$, starting with the calcula
 \end{split}
 \end{gather*}
 \textbf{Where do values $a^{(1)}$ above come from?}
-As for example
-\[
-x_2 =
+As for example 
+\begin{gather*}
+\begin{split}
+&x_2 =
   \begin{bmatrix}
   0\\
   1\\ 
   \end{bmatrix}
-\]
-values $z_2^{(2)}$, $a_2^{(2)}$, $z_2^{(3)}$, and $a_2^{(3)}$ are:
+\end{split}
+\end{gather*}
+We have: 
 \begin{gather*}
 \begin{split}
-&z_2^{(2)} = W^{(1)}x_2 + b^{(1)} =
+&z^{(2)} = W^{(1)}x_1 + b^{(1)} =
   \begin{bmatrix}
   1 & 2\\
   3 & 4\\ 
@@ -310,7 +316,7 @@ values $z_2^{(2)}$, $a_2^{(2)}$, $z_2^{(3)}$, and $a_2^{(3)}$ are:
   -1\\ 
   \end{bmatrix}
 \\
-&z_2^{(2)} = 
+&z^{(2)} = 
   \begin{bmatrix}
   1*0 + 2*1\\
   3*0 + 4*1\\ 
@@ -322,17 +328,27 @@ values $z_2^{(2)}$, $a_2^{(2)}$, $z_2^{(3)}$, and $a_2^{(3)}$ are:
   \end{bmatrix}
 =
  \begin{bmatrix}
+  z_1^{(2)}\\
+  z_2^{(2)}\\ 
+  \end{bmatrix}
+=
+ \begin{bmatrix}
   3\\
   3\\ 
   \end{bmatrix}
 \\
-&a_2^{(2)} = f(z_2^{(2)}) = \frac{1}{1 + e^{-z_2{(2)}}} =
+&a^{(2)} = f(z^{(2)}) = \frac{1}{1 + e^{-z{(2)}}} =
+ \begin{bmatrix}
+   a_1^{(2)}\\
+   a_2^{(2)}\\ 
+  \end{bmatrix}
+=
  \begin{bmatrix}
    0.953\\
    0.953\\ 
   \end{bmatrix}
 \\
-&z_2^{(3)} = W^{(2)}a_2^{(2)} + b^{(2)} =
+&z^{(3)} = W^{(2)}a_2^{(2)} + b^{(2)} =
  \begin{bmatrix}
    1 & 2\\
   \end{bmatrix}
@@ -349,22 +365,175 @@ values $z_2^{(2)}$, $a_2^{(2)}$, $z_2^{(3)}$, and $a_2^{(3)}$ are:
    3.858\\ 
   \end{bmatrix}
 \\
-&a_2^{(3)} = f(z_2^{(3)}) = \frac{1}{1 + e^{-z_2{(3)}}} =
+&a^{(3)} = f(z^{(3)}) = \frac{1}{1 + e^{-z{(3)}}} =
  \begin{bmatrix}
    0.979\\ 
   \end{bmatrix}
 \end{split}
 \end{gather*}
-Now let's backpropagate the errors for example $x_2$:
+Now, let's compute partial derivatives with respect to example $x_2$:
+\textbf{Talk to Rao about the mix between matrices and scalars in notation...}
 \begin{gather*}
 \begin{split}
-&\delta_{x_2}^{(3)} = -(y - f(z_2^{(3)}))f'(z_2^{(3)}) = -(y - f(z_2^{(3)}))f(z_2^{(3)})(1 - f(z_2^{(3)}))\\
-&\delta_{x_2}^{(3)} = -(0 - 0.979)0.979(1 - 0.979) = 0.020\\
-&\delta_{x_2}^{(2)} = \delta_{x_2}^{(3)}W_{11}^{(2)}f'(z_2^{(2)}) = \delta_{x_2}^{(3)}W_{11}^{(2)}f(z_2^{(2)})(1 - f(z_2^{(2)}))\\
-&\delta_{x_2}^{(2)} = 0.020*1* = -6.664*10^{-5}
+&\delta_1^{(3)} = -(y - f(z_1{(3)}))f'(z_1^{(3)}) = -(y - f(z_1^{(3)}))f(z_1^{(3)})(1 - f(z_1^{(3)}))\\
+&\delta_1^{(3)} = -(0 - 0.979)0.979(1 - 0.979) = 0.020\\
+&\delta_1^{(2)} = \delta_1^{(3)}W_{11}^{(2)}f'(z_1^{(2)}) = \delta_1^{(3)}W_{11}^{(2)}f(z_1^{(2)})(1 - f(z_1^{(2)}))\\
+&\delta_1^{(2)} = 0.020*1*0.953*(1 - 0.953) = 8.958*10^{-4}\\
+&\delta_2^{(2)} = \delta_1^{(3)}W_{12}^{(2)}f'(z_2^{(2)}) = \delta_1^{(3)}W_{12}^{(2)}f(z_2^{(2)})(1 - f(z_2^{(2)}))\\
+&\delta_2^{(2)} = 0.020 * 2 * 0.953*(1- 0.953) = 1.792*10^{-3}\\
+&\frac{\partial J}{\partial W^{(1)}} = 
+ \begin{bmatrix}
+   \frac{\partial J}{\partial W_{11}^{(1)}} & \frac{\partial J}{\partial W_{12}^{(1)}}\\ 
+  \frac{\partial J}{\partial W_{21}^{(1)}} & \frac{\partial J}{\partial W_{22}^{(1)}}\\
+  \end{bmatrix}
+   =
+ \begin{bmatrix}
+   a_1^{(1)}\delta_1^{(2)} & a_2^{(1)}\delta_1^{(2)}\\ 
+   a_1^{(1)}\delta_2^{(2)} & a_2^{(1)}\delta_2^{(2)}\\
+  \end{bmatrix}\\
+& \frac{\partial J}{\partial W^{(1)}} =
+  \begin{bmatrix}
+   0*8.958*10^{-4} & 1*8.958*10^{-4}\\ 
+   0*1.792*10^{-3} & 1*1.792*10^{-3}\\
+  \end{bmatrix}
+ =
+  \begin{bmatrix}
+   0 & 8.958*10^{-4}\\ 
+   0 & 1.792*10^{-3}\\
+  \end{bmatrix}
+\\
+&\frac{\partial J}{\partial b^{(1)}} = 
+ \begin{bmatrix}
+   \frac{\partial J}{\partial b_1^{(1)}}\\ 
+  \frac{\partial J}{\partial b_2^{(1)}}\\
+  \end{bmatrix}
+  =
+ \begin{bmatrix}
+   \delta_1^{(2)}\\ 
+   \delta_2^{(2)}\\
+  \end{bmatrix}
+  =
+  \begin{bmatrix}
+   8.958*10^{-4}\\ 
+   1.792*10^{-3}\\
+  \end{bmatrix}
+\\
+&\frac{\partial J}{\partial W^{(2)}} = 
+ \begin{bmatrix}
+   \frac{\partial J}{\partial W_{11}^{(2)}} & \frac{\partial J}{\partial W_{12}^{(2)}}\\ 
+  \end{bmatrix}
+  =
+ \begin{bmatrix}
+   a_1^{(2)}\delta_1^{(3)} & a_2^{(2)}\delta_1^{(3)}\\ 
+  \end{bmatrix}
+\\
+&\frac{\partial J}{\partial W^{(2)}}   =
+  \begin{bmatrix}
+   0.953*0.020 & 0.953*0.020\\ 
+  \end{bmatrix}
+  =
+  \begin{bmatrix}
+   0.019 & 0.019\\
+  \end{bmatrix}
+\\
+&\frac{\partial J}{\partial b^{(2)}} = [\delta_1^{(3)}] = [0.020]\\
 \end{split}
 \end{gather*}
-
+With these values, we can compute one step of gradient descent for all parameters in all layers.
+\begin{gather*}
+\begin{split}
+&\Delta W^{(1)} = \sum_{i = 1}^N \frac{\partial J}{\partial W^{(1)}} =
+  \begin{bmatrix}
+    -6.903*10^{-5} + 0 & 0 + 8.958*10^{-4}\\
+   -1.381*10^{-4} + 0 & 0 + 1.792*10^{-3}\\
+  \end{bmatrix}
+=
+  \begin{bmatrix}
+  -6.903*10^{-5} & 8.958*10^{-4}\\
+  -1.381*10^{-4} & 1.792*10^{-3}\\
+  \end{bmatrix}
+  \\
+&W_{new}^{(1)} = W^{(1)} - \alpha\frac{1}{N}\Delta W^{(1)}\\
+&W_{new}^{(1)} = 
+\begin{bmatrix}
+1 & 2\\
+3 & 4\\
+\end{bmatrix}
+- 0.2 * \frac{1}{2} *
+\begin{bmatrix}
+-6.903*10^{-5} & 8.958*10^{-4}\\
+-1.381*10^{-4} & 1.792*10^{-3}\\
+\end{bmatrix}\\
+&W_{new}^{(1)} = 
+\begin{bmatrix}
+1.000 & 1.999\\
+3.000 & 3.999\\
+\end{bmatrix}\\
+&\Delta b^{(1)} = \sum_{i = 1}^N \frac{\partial J}{\partial b^{(1)}} =
+\begin{bmatrix}
+-6.903*10^{-5} + 8.958*10^{-4} \\
+-1.381*10^{-4} + 1.792*10^{-3}\\
+\end{bmatrix}\\
+&\Delta b^{(1)} =
+\begin{bmatrix}
+8.958*10^{-4} \\
+1.792*10^{-3}\\
+\end{bmatrix}\\
+&b_{new}^{(1)} = b^{(1)} - \alpha\frac{1}{N}\Delta b^{(1)} = 
+\begin{bmatrix}
+1\\
+-1\\
+\end{bmatrix} 
+- 0.2*\frac{1}{2} *
+\begin{bmatrix}
+8.958*10^{-4} \\
+1.792*10^{-3}\\
+\end{bmatrix}\\
+&b_{new}^{(1)} = 
+\begin{bmatrix}
+0.999 \\
+-1.000\\
+\end{bmatrix}\\
+&\Delta W^{(2)} = \sum_{i = 1}^N \frac{\partial J}{\partial W^{(2)}} =
+  \begin{bmatrix}
+    -5.801*10^{-4} + 0.019 +  & -5.801*10^{-4} + 0.019\\
+  \end{bmatrix}\\
+&\Delta W^{(2)} =
+  \begin{bmatrix}
+    0.018 & 0.018\\
+  \end{bmatrix}\\
+&W_{new}^{(2)} = W^{(2)} - \alpha\frac{1}{N}\Delta W^{(2)}\\
+&W_{new}^{(2)} = 
+  \begin{bmatrix}
+    1 & 2\\
+  \end{bmatrix}
+- 0.2*\frac{1}{2}*
+  \begin{bmatrix}
+    0.018 & 0.018\\
+  \end{bmatrix} =
+  \begin{bmatrix}
+    0.998 & 1.998\\
+  \end{bmatrix}\\
+&\Delta b^{(2)} = \sum_{i = 1}^N \frac{\partial J}{\partial b^{(2)}} =
+\begin{bmatrix}
+-6.584*10^{-4} + 0.020\\
+\end{bmatrix} =
+\begin{bmatrix}
+0.0193416\\
+\end{bmatrix}\\
+&b_{new}^{(2)} = b^{(2)} - \alpha\frac{1}{N}\Delta b^{(2)} = 
+\begin{bmatrix}
+1\\
+\end{bmatrix} - 0.2*\frac{1}{2}*
+\begin{bmatrix}
+0.0193416\\
+\end{bmatrix}
+=
+\begin{bmatrix}
+ 0.998\\
+\end{bmatrix}\\
+\end{split}
+\end{gather*}
 
 \hfill
 \section*{Question 3} \textbf{(a)} NeuralNetRK is the only network that can output negative values because scores $z$ can be negative. The other 
