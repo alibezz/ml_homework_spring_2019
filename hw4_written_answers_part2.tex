@@ -1,0 +1,63 @@
+%This is my super simple Real Analysis Homework template
+
+\documentclass[leqno]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage[]{amsthm} %lets us use \begin{proof}
+\usepackage{amsmath}
+\usepackage[]{amssymb} %gives us the character \varnothing
+
+\title{Homework 4 -- Part II}
+\author{Aline Bessa and Rao Li}
+\date\today
+%This information doesn't actually show up on your document unless you use the maketitle command below
+
+\begin{document}
+\maketitle %This command prints the title based on information entered above
+
+%Section and subsection automatically number unless you put the asterisk next to them.
+\section*{Question 5} \textbf{(a)} For this question, we added the regularization term, replacing line
+\begin{gather*}
+\begin{split}
+&W[l] += -alpha * (1.0/N * tri_W[l])
+\end{split}
+\end{gather*}
+with line
+\begin{gather*}
+\begin{split}
+&W[l] += -alpha * (1.0/N * tri_W[l] + 0.5 * lamb * W[l])
+\end{split}
+\end{gather*}
+We analyzed these $lamb$ values: $\{0, 0.0001, 0.0005, 0.001, 0.005, 0.01\}$.
+We randomly initialized the weights of the network 5 times and, for each set of weights, executed the code for each $lamb$ value, ending up with the following 
+prediction accuracies:
+\begin{itemize}
+\item $lamb = 0$ - 89.4297635605\%, 87.3435326843\%, 87.4826147427\%, 88.1780250348\%, 88.8734353268\%
+\item $lamb = 0.0001$ - 88.4561891516\%, 89.0125173853\%, 85.3963838665\%, 88.59527121\%, 89.2906815021\%
+\item $lamb = 0.0005$ - 90.9596662031\%, 89.4297635605\%, 86.7872044506\%, 89.1515994437\%, 90.6815020862\%
+\item $lamb = 0.001$ - 91.5159944367\%, 93.7413073713\%, 88.7343532684\%, 92.9068150209\%, 92.2114047288\%
+\item $lamb = 0.005$ - 94.5757997218\%, 94.297635605\%, 94.1585535466\%, 94.9930458971\%, 95.1321279555\%
+\item $lamb = 0.01$ - 93.1849791377\%, 85.1182197497\%, 89.7079276773\%, 86.3699582754\%, 94.5757997218\% 
+\end{itemize} 
+The best results are consistently obtained for $lamb = 0.005$. Overall, the accuracies get better as we increase the amount of regularization --- up to $lamb = 0.005$.
+After that, the quality  deteriorates in all executions.  
+
+\hfill 
+
+\noindent \textbf{(b)} For this question, we implemented the ReLU function and its derivative, following the given suggestions. \textit{Without doing any other change to 
+the code aside from using ReLU instead of the sigmoid}, we obtained the following prediction accuracies for 5 randomly initialized runs: 
+10.2920723227\%, 9.45757997218\%, 8.48400556328\%, 8.90125173853\%, and 9.5966620306\%. These values are significantly worse than the ones obtained with the 
+sigmoid. \textbf{TALK TO T.A.. are these values supposed to be much worse?}
+
+\hfill
+
+\noindent \textbf{(c)} For this question, we implemented the tanh function and its derivative. \textit{Without doing any other change to 
+the code aside from using ReLU instead of the sigmoid}, we obtained the following prediction accuracies for 5 randomly initialized runs:
+86.230876217\%, 84.7009735744\%, 85.1182197497\%, 86.5090403338\%, and 86.3699582754\%. From these results, which are comparable to the 
+ones in (a) with $lamb = 0$, it looks like the sigmoid function is still a better option. \textbf{should I compare them more carefully? 
+The results are similar after all.} 
+
+
+
+
+\end{document}
