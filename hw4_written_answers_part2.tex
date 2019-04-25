@@ -39,15 +39,26 @@ prediction accuracies:
 \item $lamb = 0.005$ - 94.5757997218\%, 94.297635605\%, 94.1585535466\%, 94.9930458971\%, 95.1321279555\%
 \item $lamb = 0.01$ - 93.1849791377\%, 85.1182197497\%, 89.7079276773\%, 86.3699582754\%, 94.5757997218\% 
 \end{itemize} 
-The best results are consistently obtained for $lamb = 0.005$. Overall, the accuracies get better as we increase the amount of regularization --- up to $lamb = 0.005$.
-After that, the quality  deteriorates in all executions.  
+On average, with 95\% confidence, we have:
+\begin{itemize}
+\item $lamb = 0$ - 88.261\% $\pm$ 1.110\%
+\item $lamb = 0.0001$ - 88.150\% $\pm$ 1.956\% 
+\item $lamb = 0.0005$ - 89.401\% $\pm$ 2.056\% 
+\item $lamb = 0.001$ - 91.822\% $\pm$ 2.375\%
+\item $lamb = 0.005$ - 94.631\% $\pm$ 0.527\%
+\item $lamb = 0.01$ - 89.791\% $\pm$ 5.118\% 
+\end{itemize} 
+Although some of these results share confidence intervals, it is likely that $lamb = 0.005$ is the best option. An evidence is the significantly 
+tighter confidence interval, which is linked to more stable results, and the higher average. 
+ Overall, it looks like the accuracies get better as we increase the amount of regularization --- up to $lamb = 0.005$.
+After that, the quality probably deteriorates. % in all executions.  
 
 \hfill 
 
 \noindent \textbf{(b)} For this question, we implemented the ReLU function and its derivative, following the given suggestions. \textit{Without doing any other change to 
 the code aside from using ReLU instead of the sigmoid}, we obtained the following prediction accuracies for 5 randomly initialized runs: 
 10.2920723227\%, 9.45757997218\%, 8.48400556328\%, 8.90125173853\%, and 9.5966620306\%. These values are significantly worse than the ones obtained with the 
-sigmoid. \textbf{TALK TO T.A.. are these values supposed to be much worse?}
+sigmoid. \textbf{now with sigmoid in the end: 88.3171070932 89.0125173853\% 84.0055632823\% 89.4297635605\% 91.5159944367\%} %\textbf{TALK TO T.A.. are these values supposed to be much worse?}
 
 \hfill
 
