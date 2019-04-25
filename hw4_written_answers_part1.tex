@@ -105,6 +105,11 @@ We start by computing $z^{(2)}$ and $a^{(2)}$ for training example
 \begin{split}
 &x_1 =
   \begin{bmatrix}
+  a_1^{(1)}\\
+  a_2^{(1)}\\ 
+  \end{bmatrix}
+  =
+  \begin{bmatrix}
   1\\
   0\\ 
   \end{bmatrix}
@@ -218,16 +223,19 @@ We can compute $z^{(3)}$ and $a^{(3)}$:
   \end{bmatrix}
 \end{split}
 \end{gather*}
-Now we can backpropagate the errors for example $x_1$, starting with the calculation of partial derivatives:
-\textbf{EXPLAIN NOTATION SHORTCUT FOR F APPLIED FOR SINGLE ELEMENT. also: always use same number of floating points}
+Now we can backpropagate the errors for example $x_1$, starting with the calculation of partial derivatives. 
+%%\textbf{EXPLAIN NOTATION SHORTCUT FOR F APPLIED FOR SINGLE ELEMENT. also: always use same number of floating points}
 \begin{gather*}
 \begin{split}
-&\delta_1^{(3)} = \frac{\partial J}{\partial z^{(3)}} = -(y - f(z_1^{(3)}))f'(z_1^{(3)}) \\ 
-&\delta_1^{(3)} =  -(y - f(z_1^{(3)}))f(z_1^{(3)})(1 - f(z_1^{(3)}))\\
+&\delta_1^{(3)} = \frac{\partial J}{\partial z^{(3)}} = %% -(y - f(z_1^{(3)}))f'(z_1^{(3)}) \\ 
+%% &\delta_1^{(3)} =
+  -(y - a_1^{(3)})a_1^{(3)}(1 - a_1^{(3)})\\
 &\delta_1^{(3)} = -(1 - 0.974)*0.974*(1 - 0.974) = -6.584*10^{-4}\\
-&\delta_1^{(2)} = \delta_1^{(3)}W_{11}^{(2)}f'(z_1^{(2)}) = \delta_1^{(3)}W_{11}^{(2)}f(z_1^{(2)})(1 - f(z_1^{(2)}))\\
+&\delta_1^{(2)} = %% \delta_1^{(3)}W_{11}^{(2)}f'(z_1^{(2)}) =
+  \delta_1^{(3)}W_{11}^{(2)}a_1^{(2)}(1 - a_1^{(2)})\\
 &\delta_1^{(2)} = -6.584*10^{-4}*1*0.881*(1 - 0.881) = -6.903*10^{-5}\\
-&\delta_2^{(2)} = \delta_1^{(3)}W_{12}^{(2)}f'(z_2^{(2)}) = \delta_1^{(3)}W_{12}^{(2)}f(z_2^{(2)})(1 - f(z_2^{(2)}))\\
+&\delta_2^{(2)} = %% \delta_1^{(3)}W_{12}^{(2)}f'(z_2^{(2)}) =
+  \delta_1^{(3)}W_{12}^{(2)}a_2^{(2)}(1 - a_2^{(2)})\\
 &\delta_2^{(2)} = -6.584*10^{-4}*2*0.881*(1 - 0.881) = -1.381*10^{-4}\\ 
 &\frac{\partial J}{\partial W^{(1)}} = 
  \begin{bmatrix}
@@ -287,11 +295,16 @@ Now we can backpropagate the errors for example $x_1$, starting with the calcula
 &\frac{\partial J}{\partial b^{(2)}} = [\delta_1^{(3)}] = [-6.584*10^{-4}]\\
 \end{split}
 \end{gather*}
-\textbf{Where do values $a^{(1)}$ above come from?}
+%\textbf{Where do values $a^{(1)}$ above come from?}
 As for example 
 \begin{gather*}
 \begin{split}
 &x_2 =
+  \begin{bmatrix}
+  a_1^{(1)}\\
+  a_2^{(1)}\\ 
+  \end{bmatrix}
+  =
   \begin{bmatrix}
   0\\
   1\\ 
@@ -301,7 +314,7 @@ As for example
 We have: 
 \begin{gather*}
 \begin{split}
-&z^{(2)} = W^{(1)}x_1 + b^{(1)} =
+&z^{(2)} = W^{(1)}x_2 + b^{(1)} =
   \begin{bmatrix}
   1 & 2\\
   3 & 4\\ 
@@ -372,14 +385,17 @@ We have:
 \end{split}
 \end{gather*}
 Now, let's compute partial derivatives with respect to example $x_2$:
-\textbf{Talk to Rao about the mix between matrices and scalars in notation...}
+%\textbf{Talk to Rao about the mix between matrices and scalars in notation...}
 \begin{gather*}
 \begin{split}
-&\delta_1^{(3)} = -(y - f(z_1{(3)}))f'(z_1^{(3)}) = -(y - f(z_1^{(3)}))f(z_1^{(3)})(1 - f(z_1^{(3)}))\\
+&\delta_1^{(3)} = %% -(y - f(z_1{(3)}))f'(z_1^{(3)}) =
+  -(y - a_1^{(3)})a_1^{(3)}(1 - a_1^{(3)})\\
 &\delta_1^{(3)} = -(0 - 0.979)0.979(1 - 0.979) = 0.020\\
-&\delta_1^{(2)} = \delta_1^{(3)}W_{11}^{(2)}f'(z_1^{(2)}) = \delta_1^{(3)}W_{11}^{(2)}f(z_1^{(2)})(1 - f(z_1^{(2)}))\\
+&\delta_1^{(2)} = %% \delta_1^{(3)}W_{11}^{(2)}f'(z_1^{(2)}) =
+  \delta_1^{(3)}W_{11}^{(2)}a_1^{(2)}(1 - a_1^{(2)})\\
 &\delta_1^{(2)} = 0.020*1*0.953*(1 - 0.953) = 8.958*10^{-4}\\
-&\delta_2^{(2)} = \delta_1^{(3)}W_{12}^{(2)}f'(z_2^{(2)}) = \delta_1^{(3)}W_{12}^{(2)}f(z_2^{(2)})(1 - f(z_2^{(2)}))\\
+&\delta_2^{(2)} = %% \delta_1^{(3)}W_{12}^{(2)}f'(z_2^{(2)}) =
+  \delta_1^{(3)}W_{12}^{(2)}a_2^{(2)}(1 - a_2^{(2)})\\
 &\delta_2^{(2)} = 0.020 * 2 * 0.953*(1- 0.953) = 1.792*10^{-3}\\
 &\frac{\partial J}{\partial W^{(1)}} = 
  \begin{bmatrix}
